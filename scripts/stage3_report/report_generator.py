@@ -3325,26 +3325,17 @@ class HVDCExcelReporterFinal:
             encoding="utf-8-sig",
         )
 
+        # Stage 3 SQM 관련 시트 사전 계산
+        sqm_cumulative_sheet = self.create_sqm_cumulative_sheet(stats)
+        sqm_invoice_sheet = self.create_sqm_invoice_sheet(stats)
+        sqm_pivot_sheet = self.create_sqm_pivot_sheet(stats)
+
         # Excel 파일 생성 (수정 버전)
         excel_filename = (
             self.report_output_dir
             / f"HVDC_입고로직_종합리포트_{self.timestamp}_v3.0-corrected.xlsx"
         )
-        with pd.ExcelWriter(excel_filename, engine="xlsxwriter") as writer:
-            warehouse_monthly_with_headers.to_excel(
-                writer, sheet_name="창고_월별_입출고", index=True
-            )
-            site_monthly_with_headers.to_excel(writer, sheet_name="현장_월별_입고재고", index=True)
-            flow_analysis.to_excel(writer, sheet_name="Flow_Code_분석", index=False)
-            transaction_summary.to_excel(writer, sheet_name="전체_트랜잭션_요약", index=False)
-            kpi_validation_df.to_excel(writer, sheet_name="KPI_검증_결과", index=False)
-            sqm_cumulative_sheet = self.create_sqm_cumulative_sheet(stats)
-            sqm_cumulative_sheet.to_excel(writer, sheet_name="SQM_누적재고", index=False)
-            sqm_invoice_sheet = self.create_sqm_invoice_sheet(stats)
-            sqm_invoice_sheet.to_excel(writer, sheet_name="SQM_Invoice과금", index=False)
-            sqm_pivot_sheet = self.create_sqm_pivot_sheet(stats)
-            sqm_pivot_sheet.to_excel(writer, sheet_name="SQM_피벗테이블", index=False)
-            sample_data.to_excel(writer, sheet_name="원본_데이터_샘플", index=False)
+        
         # ✅ Stage 3 헤더명 정규화 및 표준 순서 적용
         logger.info(" 통합_원본데이터_Fixed 시트 생성 - 유연한 헤더 검색 및 표준 순서 적용")
 
@@ -3456,47 +3447,74 @@ class HVDCExcelReporterFinal:
         if problem_cols:
             logger.warning(f"[WARN] 문제가 될 수 있는 컬럼명: {problem_cols}")
 
-        #  FIX: 수정된 원본 데이터 시트들 (표준 헤더 순서 적용)
-        hitachi_reordered.to_excel(writer, sheet_name="HITACHI_원본데이터_Fixed", index=False)
-        siemens_reordered.to_excel(writer, sheet_name="SIEMENS_원본데이터_Fixed", index=False)
+        # ✅ 모든 시트를 단일 ExcelWriter 컨텍스트 안에서 저장
+        with pd.ExcelWriter(excel_filename, engine="xlsxwriter") as writer:
+            warehouse_monthly_with_headers.to_excel(
+                writer, sheet_name="창고_월별_입출고", index=True
+            )
+            site_monthly_with_headers.to_excel(
+                writer, sheet_name="현장_월별_입고재고", index=True
+            )
+            flow_analysis.to_excel(writer, sheet_name="Flow_Code_분석", index=False)
+            transaction_summary.to_excel(writer, sheet_name="전체_트랜잭션_요약", index=False)
+            kpi_validation_df.to_excel(writer, sheet_name="KPI_검증_결과", index=False)
+            sqm_cumulative_sheet.to_excel(writer, sheet_name="SQM_누적재고", index=False)
+            sqm_invoice_sheet.to_excel(writer, sheet_name="SQM_Invoice과금", index=False)
+            sqm_pivot_sheet.to_excel(writer, sheet_name="SQM_피벗테이블", index=False)
+            sample_data.to_excel(writer, sheet_name="원본_데이터_샘플", index=False)
 
-        # 🔍 디버그: combined_reordered 저장 전 최종 확인
-        logger.info(f"\n[DEBUG] combined_reordered Excel 저장 직전:")
-        logger.info(f"  - 컬럼 수: {len(combined_reordered.columns)}")
-        logger.info(
-            f"  - Total sqm 위치: {list(combined_reordered.columns).index('Total sqm') if 'Total sqm' in combined_reordered.columns else 'NOT FOUND'}"
-        )
-        logger.info(
-            f"  - Stack_Status 위치: {list(combined_reordered.columns).index('Stack_Status') if 'Stack_Status' in combined_reordered.columns else 'NOT FOUND'}"
-        )
+            #  FIX: 수정된 원본 데이터 시트들 (표준 헤더 순서 적용)
+            hitachi_reordered.to_excel(
+                writer, sheet_name="HITACHI_원본데이터_Fixed", index=False
+            )
+            siemens_reordered.to_excel(
+                writer, sheet_name="SIEMENS_원본데이터_Fixed", index=False
+            )
 
-        # 🔍 디버그: Excel 저장 전 최종 컬럼 검증
-        logger.info(f"\n[DEBUG] Excel 저장 전 최종 컬럼 검증:")
-        logger.info(f"  - combined_reordered 컬럼 수: {len(combined_reordered.columns)}")
-        logger.info(f"  - Total sqm 존재: {'Total sqm' in combined_reordered.columns}")
-        logger.info(f"  - Stack_Status 존재: {'Stack_Status' in combined_reordered.columns}")
-        logger.info(
-            f"  - Total sqm 위치: {list(combined_reordered.columns).index('Total sqm') if 'Total sqm' in combined_reordered.columns else 'NOT FOUND'}"
-        )
-        logger.info(
-            f"  - Stack_Status 위치: {list(combined_reordered.columns).index('Stack_Status') if 'Stack_Status' in combined_reordered.columns else 'NOT FOUND'}"
-        )
+            # 🔍 디버그: combined_reordered 저장 전 최종 확인
+            logger.info(f"\n[DEBUG] combined_reordered Excel 저장 직전:")
+            logger.info(f"  - 컬럼 수: {len(combined_reordered.columns)}")
+            logger.info(
+                f"  - Total sqm 위치: {list(combined_reordered.columns).index('Total sqm') if 'Total sqm' in combined_reordered.columns else 'NOT FOUND'}"
+            )
+            logger.info(
+                f"  - Stack_Status 위치: {list(combined_reordered.columns).index('Stack_Status') if 'Stack_Status' in combined_reordered.columns else 'NOT FOUND'}"
+            )
 
-        # 🔍 디버그: Excel 저장 시도
-        try:
-            # Excel 저장 시 컬럼 제한 확인
-            logger.info(f"[DEBUG] Excel 저장 시도: {len(combined_reordered.columns)}개 컬럼")
-            combined_reordered.to_excel(writer, sheet_name="통합_원본데이터_Fixed", index=False)
-            logger.info("[SUCCESS] Excel 저장 완료")
-        except Exception as e:
-            logger.error(f"[ERROR] Excel 저장 실패: {e}")
-            # 컬럼명 문제일 수 있으므로 컬럼명을 안전하게 변경
-            safe_df = combined_reordered.copy()
-            safe_df.columns = [
-                str(col).replace(" ", "_").replace(".", "_") for col in safe_df.columns
-            ]
-            safe_df.to_excel(writer, sheet_name="통합_원본데이터_Fixed", index=False)
-            logger.info("[FALLBACK] 안전한 컬럼명으로 Excel 저장 완료")
+            # 🔍 디버그: Excel 저장 전 최종 컬럼 검증
+            logger.info(f"\n[DEBUG] Excel 저장 전 최종 컬럼 검증:")
+            logger.info(f"  - combined_reordered 컬럼 수: {len(combined_reordered.columns)}")
+            logger.info(f"  - Total sqm 존재: {'Total sqm' in combined_reordered.columns}")
+            logger.info(f"  - Stack_Status 존재: {'Stack_Status' in combined_reordered.columns}")
+            logger.info(
+                f"  - Total sqm 위치: {list(combined_reordered.columns).index('Total sqm') if 'Total sqm' in combined_reordered.columns else 'NOT FOUND'}"
+            )
+            logger.info(
+                f"  - Stack_Status 위치: {list(combined_reordered.columns).index('Stack_Status') if 'Stack_Status' in combined_reordered.columns else 'NOT FOUND'}"
+            )
+
+            # 🔍 디버그: Excel 저장 시도
+            try:
+                # Excel 저장 시 컬럼 제한 확인
+                logger.info(
+                    f"[DEBUG] Excel 저장 시도: {len(combined_reordered.columns)}개 컬럼"
+                )
+                combined_reordered.to_excel(
+                    writer, sheet_name="통합_원본데이터_Fixed", index=False
+                )
+                logger.info("[SUCCESS] Excel 저장 완료")
+            except Exception as e:
+                logger.error(f"[ERROR] Excel 저장 실패: {e}")
+                # 컬럼명 문제일 수 있으므로 컬럼명을 안전하게 변경
+                safe_df = combined_reordered.copy()
+                safe_df.columns = [
+                    str(col).replace(" ", "_").replace(".", "_")
+                    for col in safe_df.columns
+                ]
+                safe_df.to_excel(
+                    writer, sheet_name="통합_원본데이터_Fixed", index=False
+                )
+                logger.info("[FALLBACK] 안전한 컬럼명으로 Excel 저장 완료")
 
         # 🔍 디버그: Excel 저장 후 검증
         logger.info(f"\n[DEBUG] Excel 저장 후 검증:")

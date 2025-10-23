@@ -5,6 +5,28 @@ All notable changes to the HVDC Pipeline project will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.23] - 2025-10-23
+
+### 🐛 Fixed
+
+#### Stage 3 Excel 컬럼 누락 문제 해결
+- **Problem**: Stage 3 실행 시 `Stack_Status`, `Total sqm` 컬럼이 DataFrame에는 존재하지만 Excel 파일에서 누락됨
+  - DataFrame: 66개 컬럼 (Total sqm, Stack_Status 포함)
+  - Excel 출력: 64개 컬럼 (Total sqm, Stack_Status 누락)
+  - 근본 원인: 닫힌 ExcelWriter 컨텍스트 밖에서 `combined_reordered.to_excel()` 호출
+
+- **Solution**: 모든 시트를 단일 ExcelWriter 컨텍스트 안에서 저장
+  - `scripts/stage3_report/report_generator.py` 재구성
+  - SQM 관련 시트를 사전 계산 (writer 컨텍스트 밖)
+  - 모든 `to_excel()` 호출을 단일 `with pd.ExcelWriter()` 블록 안으로 이동
+  - HITACHI, SIEMENS, 통합 원본 데이터 시트 모두 동일한 컨텍스트에서 저장
+
+- **Benefits**:
+  - DataFrame과 Excel 파일 간 데이터 무결성 보장
+  - 모든 66개 컬럼이 Excel 파일에 정상 저장
+  - 창고 적재 효율 분석 가능 (`Total sqm = SQM × PKG`)
+  - 적재 가능 층수 정보 보존 (`Stack_Status`)
+
 ## [4.0.22] - 2025-10-23
 
 ### ✨ Added
