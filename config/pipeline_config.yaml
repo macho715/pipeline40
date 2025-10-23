@@ -1,0 +1,58 @@
+logging:
+  file: logs/pipeline.log
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  level: INFO
+paths:
+  config_root: config
+  data_root: data
+  derived_dir: data/processed/derived
+  docs_root: docs
+  logs_root: logs
+  scripts_root: scripts
+  synced_dir: data/processed/synced
+  temp_root: temp
+pipeline:
+  description: HVDC 통합 파이프라인 - 데이터 동기화부터 이상치 탐지까지
+  name: HVDC_Pipeline_v2
+  version: 2.0.0
+stages:
+  stage1:
+    description: 원본 데이터 동기화 및 정제
+    enabled: true
+    io:
+      master_file: data/raw/Case List.xlsx
+      output_file: data/processed/synced/HVDC WAREHOUSE_HITACHI(HE).synced_v3.6.xlsx
+      warehouse_file: data/raw/HVDC Hitachi.xlsx
+    name: Data Synchronization
+    sorting:
+      enabled: true
+      no_sorting_suffix: _v2.9.4_no_sorting
+      output_suffix: _v2.9.4
+      sort_by_master_no: true
+  stage2:
+    description: 13개 파생 컬럼 계산 및 추가
+    enabled: true
+    name: Derived Columns
+  stage3:
+    description: 종합 보고서 생성
+    enabled: true
+    io:
+      data_root: data/processed/derived
+      hitachi_file: data/processed/derived/HVDC WAREHOUSE_HITACHI(HE).xlsx
+      invoice_file: data/processed/derived/HVDC WAREHOUSE_INVOICE.xlsx
+      report_directory: data/processed/reports
+      siemens_file: data/processed/derived/HVDC WAREHOUSE_SIMENSE(SIM).xlsx
+    name: Report Generation
+  stage4:
+    description: 이상치 탐지 및 분석
+    enabled: true
+    io:
+      excel_output: data/anomaly/HVDC_anomaly_report.xlsx
+      input_file: data/processed/reports/HVDC_입고로직_종합리포트_20251020_051118_v3.0-corrected.xlsx
+      json_output: data/anomaly/HVDC_anomaly_report.json
+      sheet_name: 통합_원본데이터_Fixed
+      visualization:
+        backup_enabled: true
+        case_column: Case No.
+        enable_by_default: true
+    name: Anomaly Detection

@@ -1,0 +1,65 @@
+# Stage 2: Derived Columns (파생 컬럼) 설정
+# Stage 2: Derived Columns Configuration
+
+stage:
+  name: "Derived Columns"
+  version: "2.0.0"
+  description: "13개 파생 컬럼 계산 및 처리"
+
+input:
+  synced_file: "data/processed/synced/HVDC WAREHOUSE_HITACHI(HE).synced_v3.6.xlsx"
+  backup_enabled: true
+
+output:
+  derived_file: "data/processed/derived/HVDC WAREHOUSE_HITACHI(HE).xlsx"
+  preserve_colors: true
+  backup_enabled: true
+
+columns:
+  # 13개 파생 컬럼 정의
+  status_columns:
+    - Status_SITE
+    - Status_WAREHOUSE
+    - Status_Current
+    - Status_Location
+    - Status_Location_Date
+    - Status_Storage
+
+  handling_columns:
+    - Site_AGI_handling
+    - WH_AGI_handling
+    - Total_AGI_handling
+    - Minus
+    - Final_AGI_handling
+
+  analysis_columns:
+    - Stack_Status
+    - SQM
+
+warehouse_definitions:
+  - DHL Warehouse
+  - DSV Indoor
+  - DSV Al Markaz
+  - Hauler Indoor
+  - DSV Outdoor
+  - DSV MZP
+  - HAULER
+  - JDN MZD
+  - MOSB
+  - AAA Storage
+
+site_definitions:
+  - MIR
+  - SHU
+  - AGI
+  - DAS
+
+processing:
+  vectorization_enabled: true
+  performance_optimization: true
+  error_handling: "strict"
+
+validation:
+  required_columns_check: true
+  data_type_validation: true
+  null_value_handling: "skip"

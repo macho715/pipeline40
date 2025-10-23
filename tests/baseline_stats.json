@@ -1,0 +1,154 @@
+{
+  "total_inbound": 114,
+  "total_outbound": 100,
+  "calculation_time": 1.0142738819122314,
+  "data_rows": 100,
+  "direct_result": {
+    "total_direct_delivery": 0,
+    "direct_deliveries": []
+  },
+  "inventory_result": {
+    "inventory_by_month": {
+      "2024-07": {
+        "DAS": {
+          "status_location_inventory": 5.0,
+          "physical_location_inventory": 5,
+          "verified_inventory": 5.0
+        }
+      },
+      "2024-08": {
+        "DAS": {
+          "status_location_inventory": 2.0,
+          "physical_location_inventory": 2,
+          "verified_inventory": 2.0
+        }
+      },
+      "2025-02": {
+        "DAS": {
+          "status_location_inventory": 1.0,
+          "physical_location_inventory": 1,
+          "verified_inventory": 1.0
+        }
+      },
+      "2025-05": {
+        "DAS": {
+          "status_location_inventory": 37.0,
+          "physical_location_inventory": 37,
+          "verified_inventory": 37.0
+        },
+        "MOSB": {
+          "status_location_inventory": 0.0,
+          "physical_location_inventory": 6,
+          "verified_inventory": 0.0
+        }
+      },
+      "2025-06": {
+        "DAS": {
+          "status_location_inventory": 54.0,
+          "physical_location_inventory": 54,
+          "verified_inventory": 54.0
+        }
+      },
+      "2025-07": {
+        "DAS": {
+          "status_location_inventory": 1.0,
+          "physical_location_inventory": 1,
+          "verified_inventory": 1.0
+        }
+      },
+      "2024-01": {
+        "DSV Indoor": {
+          "status_location_inventory": 0.0,
+          "physical_location_inventory": 41,
+          "verified_inventory": 0.0
+        },
+        "DSV Outdoor": {
+          "status_location_inventory": 0.0,
+          "physical_location_inventory": 51,
+          "verified_inventory": 0.0
+        }
+      },
+      "2024-02": {
+        "DSV Indoor": {
+          "status_location_inventory": 0.0,
+          "physical_location_inventory": 8,
+          "verified_inventory": 0.0
+        }
+      },
+      "2024-05": {
+        "MOSB": {
+          "status_location_inventory": 0.0,
+          "physical_location_inventory": 8,
+          "verified_inventory": 0.0
+        }
+      }
+    },
+    "inventory_by_location": {
+      "DAS": 100.0,
+      "DSV Indoor": 0.0,
+      "DSV Outdoor": 0.0,
+      "MOSB": 0.0
+    },
+    "total_inventory": 100.0,
+    "discrepancy_items": [
+      {
+        "level_0": "DSV Indoor",
+        "level_1": "2024-01-31 00:00:00",
+        "status_inventory": 0.0,
+        "physical_inventory": 41,
+        "verified_inventory": 0.0,
+        "diff": -41.0
+      },
+      {
+        "level_0": "DSV Outdoor",
+        "level_1": "2024-01-31 00:00:00",
+        "status_inventory": 0.0,
+        "physical_inventory": 51,
+        "verified_inventory": 0.0,
+        "diff": -51.0
+      }
+    ],
+    "discrepancy_count": 2,
+    "inventory_matrix": "        level_0    level_1  ...  verified_inventory  diff\n0           DAS 2024-07-31  ...                 5.0   0.0\n1           DAS 2024-08-31  ...                 2.0   0.0\n2           DAS 2025-02-28  ...                 1.0   0.0\n3           DAS 2025-05-31  ...                37.0   0.0\n4           DAS 2025-06-30  ...                54.0   0.0\n5           DAS 2025-07-31  ...                 1.0   0.0\n6    DSV Indoor 2024-01-31  ...                 0.0 -41.0\n7    DSV Indoor 2024-02-29  ...                 0.0  -8.0\n8   DSV Outdoor 2024-01-31  ...                 0.0 -51.0\n9          MOSB 2024-05-31  ...                 0.0  -8.0\n10         MOSB 2025-05-31  ...                 0.0  -6.0\n\n[11 rows x 6 columns]"
+  },
+  "sqm_inbound": {
+    "2024-01": {
+      "DSV Outdoor": 76.5,
+      "DSV Indoor": 61.5
+    },
+    "2024-05": {
+      "MOSB": 12.0
+    },
+    "2025-05": {
+      "MOSB": 9.0
+    },
+    "2024-02": {
+      "DSV Indoor": 12.0
+    }
+  },
+  "sqm_outbound": {
+    "2025-05": {
+      "DSV Outdoor": 55.5
+    },
+    "2024-07": {
+      "DSV Outdoor": 7.5,
+      "MOSB": 7.5
+    },
+    "2025-06": {
+      "DSV Outdoor": 9.0,
+      "MOSB": 9.0,
+      "DSV Indoor": 72.0
+    },
+    "2025-07": {
+      "DSV Indoor": 1.5
+    },
+    "2025-02": {
+      "DSV Outdoor": 1.5,
+      "MOSB": 1.5
+    },
+    "2024-08": {
+      "DSV Outdoor": 3.0,
+      "MOSB": 3.0
+    }
+  }
+}

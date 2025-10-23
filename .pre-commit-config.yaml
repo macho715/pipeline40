@@ -1,0 +1,26 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 24.8.0
+    hooks:
+      - id: black
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: ["--fix"]
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.17.0
+    hooks:
+      - id: pyupgrade
+        args: ["--py313-plus"]
+  - repo: local
+    hooks:
+      - id: context-guard
+        name: Context Guard (session summary required)
+        entry: python tools/session_guard.py --mode=commit --summary docs/SESSION_SUMMARY.md --pointer temp/LAST_OUTPUT.pointer
+        language: system
+        pass_filenames: false

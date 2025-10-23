@@ -1,0 +1,11 @@
+domain: logistics
+python: "3.13"
+ci:
+  coverage_min: 85.00
+  lint_zero_warn: true
+  security:
+    bandit_high_zero: true
+    pip_audit_strict: true
+branch_policy:
+  approvals: 2
+  protected: ["main"]

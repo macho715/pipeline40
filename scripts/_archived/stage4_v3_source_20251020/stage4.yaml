@@ -1,0 +1,16 @@
+
+# Stage 4(default) configuration example
+stage4:
+  io:
+    input_file: reports/HVDC_입고로직_종합리포트_latest.xlsx
+    sheet_name: 통합_원본데이터_Fixed
+    excel_output: reports/anomalies/anomaly_list.xlsx
+    json_output: reports/anomalies/anomaly_list.json
+  visualization:
+    enable_by_default: false
+    case_column: Case No.
+    backup_enabled: true
+  model:
+    contamination: 0.02
+    random_state: 42
+    use_pyod_first: true

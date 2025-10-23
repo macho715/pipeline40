@@ -1,0 +1,6671 @@
+[
+  {
+    "Case_ID": "207721",
+    "Anomaly_Type": "데이터 품질",
+    "Severity": "보통",
+    "Description": "CASE_NO 중복 181건",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.707352",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279750",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-07) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.791236",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279755",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-07) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.791425",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279759",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-04-01) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.791582",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279760",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-07) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.791737",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279761",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-07) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.791890",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279762",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-07) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.792046",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279763",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.792203",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279764",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.792356",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279765",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.792513",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279766",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-07) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.792667",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279767",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-05) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.792820",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279768",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-07) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.792978",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279772",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.793131",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279774",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-04-01) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.793282",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279776",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.793434",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279799",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-04-01) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.793585",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279801",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-07) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.793737",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279802",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.793887",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279803",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-30) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.794089",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279804",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-09) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.794366",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279806",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-09) → DSV_INDOOR(2024-03-30) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.794554",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279807",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-29) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.794728",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279808",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-30) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.794896",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279809",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-05) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.795066",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190521",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-27) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.795227",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190522",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.795386",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190523",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-27) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.795548",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190524",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.795705",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190525",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.795861",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190526",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-27) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.796014",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190527",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-27) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.796170",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190528",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.796326",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190529",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.796480",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190530",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.796639",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190531",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.796790",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190532",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.797064",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190533",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.797643",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190534",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.797863",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190535",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.798033",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190536",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-27) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.798193",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190537",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.798350",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190538",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.798503",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190541",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.798659",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190542",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.798810",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190543",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.798968",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190544",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-27) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.799121",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190548",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.799272",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190549",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-29) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.799422",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190539",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-19) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.816412",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190540",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-19) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.816551",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190545",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-19) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.816681",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190546",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-19) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.816810",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190547",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-19) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.816937",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190550",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-19) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.817065",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190551",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-19) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.817192",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190552",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-03-19) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.817318",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279795",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-01) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.819007",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279786",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-31) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.819135",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279791",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-05) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.819261",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279787",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.819387",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279757",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.819512",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279756",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-07) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.819637",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279790",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-09) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.819762",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279785",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.819887",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279778",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-07) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.820013",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279783",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.820140",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279742",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.820264",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279738",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-07) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.820388",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279739",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-07) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.820512",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279741",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.820636",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279743",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-07) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.820761",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279737",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-01) → DSV_INDOOR(2024-03-27) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.824602",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279740",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-01) → DSV_INDOOR(2024-03-27) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.824730",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279769",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-01) → DSV_INDOOR(2024-03-27) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.824857",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279771",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-01) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.824982",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279775",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-01) → DSV_INDOOR(2024-03-27) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.825107",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279777",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-01) → DSV_INDOOR(2024-03-27) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.825237",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279780",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-01) → DSV_INDOOR(2024-03-27) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.825361",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279781",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-03) → DSV_INDOOR(2024-03-27) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.825487",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279800",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-06) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.825611",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279810",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-05) → DSV_INDOOR(2024-03-27) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.825735",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279811",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-26) → DSV_INDOOR(2024-03-28) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.825860",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279812",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-29) → DSV_INDOOR(2024-03-27) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.825987",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279813",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-05) → DSV_INDOOR(2024-03-27) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.826110",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279817",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-26) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.826536",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279825",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-26) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.826954",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279827",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-05) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.827107",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279828",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-26) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.827246",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279831",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-01) → DSV_INDOOR(2024-03-27) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.827380",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279843",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.827512",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279844",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.827643",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279845",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.827773",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279846",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.827906",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279847",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.828055",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279849",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.828191",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279850",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.828319",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279852",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.828446",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279853",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.828574",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279854",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-01) → DSV_INDOOR(2024-03-27) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.828703",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279858",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.828831",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279860",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-03-26) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.828957",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279796",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.829915",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279794",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-29) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.830050",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279792",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-09) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.830191",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279793",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-06) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.830509",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279797",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-29) → DSV_INDOOR(2024-04-06) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.830862",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279773",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-29) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.831132",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279758",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-06) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.831360",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279754",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.831540",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279752",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.831703",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279753",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.831861",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279788",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-29) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.832015",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279789",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.832167",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279784",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-31) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.832319",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279782",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-29) → DSV_INDOOR(2024-04-06) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.832471",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279746",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.832620",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279744",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-31) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.832770",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279745",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-31) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.832920",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279751",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-06) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.833110",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279749",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.833277",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279747",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.833408",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279748",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-31) → DSV_INDOOR(2024-04-15) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.833535",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190553",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.837776",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190554",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.837902",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190555",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.838029",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190556",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-28) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.838154",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "207987",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.839897",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "207988",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.840022",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "207989",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-31) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.840149",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "207990",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-04) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.840277",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "207991",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-06) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.840402",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "207992",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-04-04) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.840526",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "207993",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.840650",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "207994",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-04-04) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.840774",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "207995",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.840898",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "207996",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.841022",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "207997",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-04-04) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.841145",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "207998",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-04) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.841268",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279770",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-04-04) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.841392",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279779",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.841519",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279798",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-31) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.841643",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279805",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-05) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.841766",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279814",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-26) → DSV_INDOOR(2024-04-05) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.841889",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279815",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-26) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.842016",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279816",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-26) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.842140",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279818",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-05) → DSV_INDOOR(2024-04-04) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.842263",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279819",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-26) → DSV_INDOOR(2024-04-06) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.842387",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279821",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.842511",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279824",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-29) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.842639",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279826",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-09) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.842764",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279829",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-29) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.842894",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279830",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-06) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.843019",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279832",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-31) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.843325",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279823",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-29) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.843603",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279834",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-04-04) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.843754",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279835",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.843893",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279836",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-29) → DSV_INDOOR(2024-04-05) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.844029",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279837",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.844164",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279838",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-31) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.844295",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279839",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-31) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.844425",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279840",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.844555",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279841",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.844683",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279842",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.844817",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279848",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.844963",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279851",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-31) → DSV_INDOOR(2024-04-03) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.845091",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279855",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-29) → DSV_INDOOR(2024-04-06) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.845217",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279856",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-30) → DSV_INDOOR(2024-04-06) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.845346",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279857",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-29) → DSV_INDOOR(2024-04-06) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.845473",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279859",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-04-04) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.845599",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279861",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-04) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.845727",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279862",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-31) → DSV_INDOOR(2024-04-02) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.845854",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279863",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-29) → DSV_INDOOR(2024-04-05) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.845981",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279864",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-04-04) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.846114",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279865",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-29) → DSV_INDOOR(2024-04-05) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.846241",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279866",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-29) → DSV_INDOOR(2024-04-05) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.846366",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279867",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-05-29) → DSV_INDOOR(2024-04-05) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.846494",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279868",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-05) → DSV_INDOOR(2024-04-04) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.846620",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279820",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-26) → DSV_INDOOR(2024-04-24) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.847152",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279822",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-05) → DSV_INDOOR(2024-04-24) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.847504",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "279833",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-06-04) → DSV_INDOOR(2024-04-24) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.847749",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208015",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "MOSB(2024-05-10) → DAS(2024-02-22) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.864309",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190324",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-12) → DSV_INDOOR(2024-06-24) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.957802",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190325",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-11-30) → DSV_INDOOR(2024-06-24) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.957950",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190333",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-12) → DSV_INDOOR(2024-06-24) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.958080",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190334",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-12) → DSV_INDOOR(2024-06-22) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.958210",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190332",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-09) → DSV_INDOOR(2024-07-10) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.966187",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "190337",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_AL_MARKAZ(2024-12-09) → DSV_INDOOR(2024-07-10) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:16.966339",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208066",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_OUTDOOR(2024-09-20) → MOSB(2024-09-12) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:17.045172",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "280051",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR(2025-05-24) → MIR(2025-05-16) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:17.383668",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "280050",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR(2025-05-24) → MIR(2025-05-16) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:17.383804",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "GC0820",
+    "Anomaly_Type": "시간 역전",
+    "Severity": "치명적",
+    "Description": "DAS(2025-09-23) → MIR(2025-09-20) 시간 역전",
+    "Detected_Value": null,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:17.539699",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208704",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20105일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20105.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900646",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208622",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20290일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20290.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900728",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208623",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20290일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20290.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900735",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208747",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20236일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20236.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900739",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208748",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20236일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20236.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900745",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208749",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20236일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20236.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900749",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208750",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20236일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20236.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900753",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208751",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20236일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20236.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900756",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208752",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20237일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20237.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900759",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208753",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20237일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20237.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900762",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208754",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20237일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20237.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900765",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208755",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20237일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20237.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900767",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208756",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20237일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20237.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900770",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208757",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20236일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20236.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900773",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208758",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20236일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20236.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900777",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208759",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20236일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20236.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900780",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208760",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20236일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20236.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900782",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208761",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20236일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20236.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900786",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208762",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20237일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20237.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900788",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208763",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20237일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20237.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900791",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208764",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20237일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20237.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900794",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208765",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20237일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20237.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900797",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208766",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20237일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20237.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900800",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "209266",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20242일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20242.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900803",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "209267",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20242일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20242.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900806",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "209268",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20242일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20242.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900808",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "209269",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "DSV_INDOOR에서 20242일 체류 (정상≈-564.5~1127.5일)",
+    "Detected_Value": 20242.0,
+    "Expected_Range": [
+      -564.5,
+      1127.5
+    ],
+    "Location": "DSV_INDOOR",
+    "Timestamp": "2025-10-23T18:48:18.900811",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207849",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 67일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 67.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904575",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207850",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 67일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 67.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904585",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207851",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 67일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 67.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904589",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207852",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 67일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 67.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904592",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207699",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 55일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 55.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904599",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207821",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 278일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 278.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904602",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207822",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 86일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 86.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904606",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207823",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 86일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 86.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904609",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207605",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 249일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 249.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904622",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207606",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 249일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 249.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904625",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207650",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 277일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 277.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904628",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207793",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 277일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 277.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904641",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207794",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 277일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 277.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904646",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208246",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 192일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 192.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904652",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208247",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 192일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 192.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904654",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208248",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 192일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 192.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904657",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208249",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 192일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 192.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904660",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208250",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 192일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 192.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904662",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207797",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 308일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 308.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904668",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207798",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 308일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 308.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904671",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208251",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 180일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 180.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904676",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208252",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 180일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 180.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904679",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208253",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 180일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 180.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904682",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208254",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 173일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 173.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904685",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208255",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 173일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 173.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904687",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208256",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 173일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 173.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904690",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208263",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 109일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 109.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904694",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208264",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 360일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 360.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904697",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208265",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 360일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 360.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904700",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208268",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 61일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 61.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904704",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208272",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 61일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 61.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904708",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208274",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 190일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 190.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904712",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208275",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 278일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 278.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904715",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208276",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 190일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 190.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904718",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208277",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 190일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 190.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904721",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208278",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 278일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 278.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904724",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208279",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 190일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 190.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904726",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208266",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 90일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 90.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904729",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208280",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 54일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 54.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904734",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208002",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 289일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 289.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904737",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208003",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 300일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 300.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904740",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208004",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 65일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 65.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904743",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208005",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 88일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 88.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904746",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208006",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "보통",
+    "Description": "MOSB에서 24일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 24.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904751",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208007",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 108일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 108.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904754",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208008",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 200일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 200.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904757",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208009",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 199일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 199.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904760",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208010",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 89일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 89.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904763",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208011",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 108일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 108.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904765",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208012",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 108일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 108.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904768",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208014",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 114일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 114.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904774",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208017",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 273일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 273.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904777",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208018",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 88일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 88.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904780",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208019",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "보통",
+    "Description": "MOSB에서 25일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 25.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904783",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208029",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 201일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 201.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904787",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208030",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 201일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 201.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904790",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208031",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 65일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 65.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904793",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208032",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 88일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 88.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904796",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208033",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 272일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 272.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904799",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208034",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 271일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 271.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904802",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208035",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 108일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 108.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904805",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208036",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 271일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 271.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904807",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208037",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 89일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 89.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904810",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208038",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 108일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 108.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904813",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208039",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 108일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 108.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904816",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208042",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 288일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 288.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904819",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208044",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 272일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 272.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904824",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208045",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 89일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 89.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904827",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208047",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "보통",
+    "Description": "MOSB에서 26일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 26.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904830",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208208",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 65일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 65.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904833",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208209",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 88일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 88.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904836",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208210",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 288일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 288.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904839",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208212",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 288일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 288.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904842",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208213",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 88일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 88.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904844",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208001",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 441일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 441.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904858",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208028",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 441일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 441.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904862",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208174",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 350일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 350.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904865",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208175",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 350일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 350.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904868",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208176",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 350일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 350.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904871",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208177",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 350일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 350.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904874",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208178",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 350일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 350.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904883",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208179",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 350일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 350.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904887",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208180",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 190일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 190.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904891",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364381",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904894",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364382",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904905",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364383",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904908",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364384",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904911",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364385",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904914",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364386",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904917",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364387",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904920",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364388",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904923",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364389",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904926",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364390",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904929",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364391",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904932",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364392",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904935",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364393",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904938",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364394",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 328일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 328.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904941",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279301",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904944",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279302",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904947",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279303",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904950",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279304",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904954",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279305",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904957",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279306",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904962",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279307",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904965",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279308",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904968",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279309",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904971",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279310",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904974",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279311",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904977",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279312",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904980",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279313",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904983",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279314",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 130일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 130.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904986",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279196",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 142일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 142.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904993",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279220",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 142일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 142.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.904996",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "190075",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 129일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 129.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905000",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "190101",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 129일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 129.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905002",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "190127",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 129일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 129.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905006",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "190153",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 129일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 129.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905009",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "190179",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 77일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 77.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905018",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "190205",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 77일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 77.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905021",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "190250",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 77일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 77.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905024",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207560",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 83일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 83.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905030",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207524",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 238일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 238.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905038",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207527",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 239일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 239.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905043",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207532",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 83일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 83.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905046",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279244",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 69일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 69.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905058",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279268",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 69일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 69.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905061",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "279292",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 69일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 69.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905064",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208055",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 302일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 302.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905068",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208060",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "높음",
+    "Description": "MOSB에서 36일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 36.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905073",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208061",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "높음",
+    "Description": "MOSB에서 36일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 36.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905076",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208062",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "보통",
+    "Description": "MOSB에서 29일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 29.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905079",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208063",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "보통",
+    "Description": "MOSB에서 33일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 33.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905082",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208065",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 117일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 117.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905085",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208068",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 55일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 55.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905089",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208069",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 60일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 60.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905092",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208070",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 87일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 87.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905095",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208082",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 302일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 302.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905099",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208087",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "높음",
+    "Description": "MOSB에서 35일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 35.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905102",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208088",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "높음",
+    "Description": "MOSB에서 34일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 34.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905106",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208089",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "높음",
+    "Description": "MOSB에서 34일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 34.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905109",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208092",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 117일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 117.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905113",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208093",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 95일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 95.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905116",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208095",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 60일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 60.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905119",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208096",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 60일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 60.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905122",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208097",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 90일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 90.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905125",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208109",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 302일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 302.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905129",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208114",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "높음",
+    "Description": "MOSB에서 34일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 34.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905137",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208115",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "높음",
+    "Description": "MOSB에서 34일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 34.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905140",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208116",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "보통",
+    "Description": "MOSB에서 29일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 29.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905143",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208117",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "높음",
+    "Description": "MOSB에서 35일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 35.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905146",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208119",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 117일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 117.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905149",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208120",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 95일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 95.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905152",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208122",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 60일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 60.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905155",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208123",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 60일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 60.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905157",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208124",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 87일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 87.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905160",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208136",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 302일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 302.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905164",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208141",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "보통",
+    "Description": "MOSB에서 33일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 33.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905167",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208142",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 41일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 41.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905170",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208143",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 41일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 41.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905173",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208144",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 42일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 42.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905176",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208146",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 96일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 96.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905179",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208147",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 95일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 95.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905182",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208149",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 60일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 60.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905185",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208150",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 61일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 61.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905189",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208151",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 96일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 96.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905192",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208183",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 302일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 302.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905196",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208188",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "높음",
+    "Description": "MOSB에서 35일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 35.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905199",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208189",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "높음",
+    "Description": "MOSB에서 35일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 35.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905202",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208190",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "높음",
+    "Description": "MOSB에서 35일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 35.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905205",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208191",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "높음",
+    "Description": "MOSB에서 36일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 36.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905208",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208193",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 96일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 96.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905211",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208194",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 90일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 90.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905214",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208196",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 60일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 60.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905217",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208197",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 60일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 60.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905220",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208198",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 90일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 90.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905226",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364835",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "보통",
+    "Description": "MOSB에서 25일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 25.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905230",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364836",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "보통",
+    "Description": "MOSB에서 25일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 25.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905233",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "364352",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 168일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 168.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905276",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208308",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 49일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 49.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905279",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "208332",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 49일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 49.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905283",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "209418",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "보통",
+    "Description": "MOSB에서 25일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 25.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905475",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "209419",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "보통",
+    "Description": "MOSB에서 25일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 25.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905477",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "209517",
+    "Anomaly_Type": "과도 체류",
+    "Severity": "치명적",
+    "Description": "MOSB에서 43일 체류 (정상≈-4.5~23.5일)",
+    "Detected_Value": 43.0,
+    "Expected_Range": [
+      -4.5,
+      23.5
+    ],
+    "Location": "MOSB",
+    "Timestamp": "2025-10-23T18:48:18.905483",
+    "Risk_Score": null
+  },
+  {
+    "Case_ID": "207652",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.981)",
+    "Detected_Value": 0.981468724166437,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358796",
+    "Risk_Score": 0.9815
+  },
+  {
+    "Case_ID": "207653",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.981)",
+    "Detected_Value": 0.981468724166437,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358826",
+    "Risk_Score": 0.9815
+  },
+  {
+    "Case_ID": "207654",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.981)",
+    "Detected_Value": 0.981468724166437,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358839",
+    "Risk_Score": 0.9815
+  },
+  {
+    "Case_ID": "207655",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.981)",
+    "Detected_Value": 0.981468724166437,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358852",
+    "Risk_Score": 0.9815
+  },
+  {
+    "Case_ID": "207656",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.981)",
+    "Detected_Value": 0.981468724166437,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358861",
+    "Risk_Score": 0.9815
+  },
+  {
+    "Case_ID": "207657",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.983)",
+    "Detected_Value": 0.9825020666850373,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358869",
+    "Risk_Score": 0.9825
+  },
+  {
+    "Case_ID": "207658",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.984)",
+    "Detected_Value": 0.9838109672085974,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358877",
+    "Risk_Score": 0.9838
+  },
+  {
+    "Case_ID": "207659",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.983)",
+    "Detected_Value": 0.9825020666850373,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358884",
+    "Risk_Score": 0.9825
+  },
+  {
+    "Case_ID": "207660",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.980)",
+    "Detected_Value": 0.9801598236428768,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358891",
+    "Risk_Score": 0.9802
+  },
+  {
+    "Case_ID": "207661",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.980)",
+    "Detected_Value": 0.9801598236428768,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358897",
+    "Risk_Score": 0.9802
+  },
+  {
+    "Case_ID": "207662",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.980)",
+    "Detected_Value": 0.9801598236428768,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358904",
+    "Risk_Score": 0.9802
+  },
+  {
+    "Case_ID": "207663",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.980)",
+    "Detected_Value": 0.9801598236428768,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358911",
+    "Risk_Score": 0.9802
+  },
+  {
+    "Case_ID": "207664",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.980)",
+    "Detected_Value": 0.9801598236428768,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358917",
+    "Risk_Score": 0.9802
+  },
+  {
+    "Case_ID": "207665",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.980)",
+    "Detected_Value": 0.9801598236428768,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358924",
+    "Risk_Score": 0.9802
+  },
+  {
+    "Case_ID": "207666",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.980)",
+    "Detected_Value": 0.9801598236428768,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358930",
+    "Risk_Score": 0.9802
+  },
+  {
+    "Case_ID": "207667",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.980)",
+    "Detected_Value": 0.9801598236428768,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358936",
+    "Risk_Score": 0.9802
+  },
+  {
+    "Case_ID": "207668",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.981)",
+    "Detected_Value": 0.981468724166437,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358942",
+    "Risk_Score": 0.9815
+  },
+  {
+    "Case_ID": "207669",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.981)",
+    "Detected_Value": 0.981468724166437,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358948",
+    "Risk_Score": 0.9815
+  },
+  {
+    "Case_ID": "207670",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.983)",
+    "Detected_Value": 0.9825020666850373,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358954",
+    "Risk_Score": 0.9825
+  },
+  {
+    "Case_ID": "207671",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.981)",
+    "Detected_Value": 0.981468724166437,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358960",
+    "Risk_Score": 0.9815
+  },
+  {
+    "Case_ID": "207672",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.980)",
+    "Detected_Value": 0.9801598236428768,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358966",
+    "Risk_Score": 0.9802
+  },
+  {
+    "Case_ID": "207673",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.981)",
+    "Detected_Value": 0.981468724166437,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358972",
+    "Risk_Score": 0.9815
+  },
+  {
+    "Case_ID": "207674",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.981)",
+    "Detected_Value": 0.981468724166437,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358977",
+    "Risk_Score": 0.9815
+  },
+  {
+    "Case_ID": "207675",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.983)",
+    "Detected_Value": 0.9825020666850373,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358983",
+    "Risk_Score": 0.9825
+  },
+  {
+    "Case_ID": "207676",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.983)",
+    "Detected_Value": 0.9831220721961973,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358989",
+    "Risk_Score": 0.9831
+  },
+  {
+    "Case_ID": "207677",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.983)",
+    "Detected_Value": 0.9831220721961973,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.358995",
+    "Risk_Score": 0.9831
+  },
+  {
+    "Case_ID": "207678",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.983)",
+    "Detected_Value": 0.9831220721961973,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.359001",
+    "Risk_Score": 0.9831
+  },
+  {
+    "Case_ID": "207679",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.983)",
+    "Detected_Value": 0.9831220721961973,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.359007",
+    "Risk_Score": 0.9831
+  },
+  {
+    "Case_ID": "207680",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.984)",
+    "Detected_Value": 0.9838109672085974,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.359012",
+    "Risk_Score": 0.9838
+  },
+  {
+    "Case_ID": "207681",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.984)",
+    "Detected_Value": 0.9838109672085974,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.359018",
+    "Risk_Score": 0.9838
+  },
+  {
+    "Case_ID": "207682",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.984)",
+    "Detected_Value": 0.9843620832185175,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.359023",
+    "Risk_Score": 0.9844
+  },
+  {
+    "Case_ID": "207683",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.984)",
+    "Detected_Value": 0.9838109672085974,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.359029",
+    "Risk_Score": 0.9838
+  },
+  {
+    "Case_ID": "207684",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.984)",
+    "Detected_Value": 0.9843620832185175,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.359034",
+    "Risk_Score": 0.9844
+  },
+  {
+    "Case_ID": "207685",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.983)",
+    "Detected_Value": 0.9825020666850373,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.359039",
+    "Risk_Score": 0.9825
+  },
+  {
+    "Case_ID": "207686",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.984)",
+    "Detected_Value": 0.9838109672085974,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.359045",
+    "Risk_Score": 0.9838
+  },
+  {
+    "Case_ID": "207687",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.984)",
+    "Detected_Value": 0.9838109672085974,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.359050",
+    "Risk_Score": 0.9838
+  },
+  {
+    "Case_ID": "208704",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.359779",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208622",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360401",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208623",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360409",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208747",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360417",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208748",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360423",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208749",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360428",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208750",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360434",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208751",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360439",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208752",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360444",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208753",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360450",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208754",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360455",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208755",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360461",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208756",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360466",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208757",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360471",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208758",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360477",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208759",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360483",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208760",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360489",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208761",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360494",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208762",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360500",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208763",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360506",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208764",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360512",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208765",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360518",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "208766",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360523",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "209266",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360532",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "209267",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360537",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "209268",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360542",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "209269",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.999)",
+    "Detected_Value": 0.999,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360548",
+    "Risk_Score": 0.999
+  },
+  {
+    "Case_ID": "EXFU562524-3",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360584",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "EXFU562584-0",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360590",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "FLNU680544-5",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360595",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "FLNU680572-2",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360601",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "GMCU316089-2",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360606",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLZU260106-3",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360611",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLZU260707-7",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360617",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLZU262004-2",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360622",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLXU260617-3",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360627",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLZU261987-0",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360633",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLZU260578-9",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360638",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLZU260391-3",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360644",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "FLNU601464-0",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360649",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "FLNU502296-0",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360654",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SWIU126377-1",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360659",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SEGU816119-2",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360664",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLZU 665004-5",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360670",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLZU 665003-0",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360675",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLZU 665015-3",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360680",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLZU 665031-7",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360685",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLZU 260402-0",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360691",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLZU 260803-1",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360696",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SLZU 260606-5",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360701",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "SEGU 809058-7",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360706",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000789/1 ",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360711",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000789/2 ",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360717",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000789/3",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360722",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000789/4 ",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360727",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000789/5 ",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360733",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000789/6 ",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360738",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000790/1 ",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360744",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000790/2 ",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360749",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000790/3",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360755",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000790/4",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360760",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000790/5 ",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360766",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000790/6",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360771",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000787/1",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.985)",
+    "Detected_Value": 0.9853265362358776,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360776",
+    "Risk_Score": 0.9853
+  },
+  {
+    "Case_ID": "3000000787/2",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.985)",
+    "Detected_Value": 0.9853265362358776,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360781",
+    "Risk_Score": 0.9853
+  },
+  {
+    "Case_ID": "3000000787/3",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.985)",
+    "Detected_Value": 0.9853265362358776,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360787",
+    "Risk_Score": 0.9853
+  },
+  {
+    "Case_ID": "3000000787/4",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.985)",
+    "Detected_Value": 0.9853265362358776,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360792",
+    "Risk_Score": 0.9853
+  },
+  {
+    "Case_ID": "3000000787/5",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.985)",
+    "Detected_Value": 0.9853265362358776,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360798",
+    "Risk_Score": 0.9853
+  },
+  {
+    "Case_ID": "3000000787/6",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.985)",
+    "Detected_Value": 0.9853265362358776,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360803",
+    "Risk_Score": 0.9853
+  },
+  {
+    "Case_ID": "3000000788/1",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.985)",
+    "Detected_Value": 0.9853265362358776,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360808",
+    "Risk_Score": 0.9853
+  },
+  {
+    "Case_ID": "3000000788/2",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.985)",
+    "Detected_Value": 0.9853265362358776,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360814",
+    "Risk_Score": 0.9853
+  },
+  {
+    "Case_ID": "3000000788/3 ",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.985)",
+    "Detected_Value": 0.9853265362358776,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360819",
+    "Risk_Score": 0.9853
+  },
+  {
+    "Case_ID": "3000000788/4",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.985)",
+    "Detected_Value": 0.9853265362358776,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360824",
+    "Risk_Score": 0.9853
+  },
+  {
+    "Case_ID": "3000000788/5",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.985)",
+    "Detected_Value": 0.9853265362358776,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360829",
+    "Risk_Score": 0.9853
+  },
+  {
+    "Case_ID": "3000000788/6 ",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.985)",
+    "Detected_Value": 0.9853265362358776,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360835",
+    "Risk_Score": 0.9853
+  },
+  {
+    "Case_ID": "3000000791/1",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360840",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000791/2",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360845",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000791/3",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360850",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000791/4",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360856",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000791/5",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360861",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000791/6",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360867",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000792/1",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360872",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000792/2",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360877",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000792/3",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360883",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000792/4",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360888",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000792/5",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360893",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000792/6",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360898",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000785/1",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360905",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000785/2",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360910",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000785/3",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360915",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000785/4",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360921",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000785/5",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360926",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000785/6",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360931",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000786/1",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360937",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000786/2",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360942",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000786/3 ",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360947",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000786/4",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360952",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000786/5",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360957",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "3000000786/6 ",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360962",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "K08059-D13 ",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360967",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "280994",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360973",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "366503",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360978",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "366830",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360983",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "366831",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360988",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "366832",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360994",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "366833",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.360999",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "366834",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.361004",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "366835",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.361009",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "366836",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.361014",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "366837",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.361020",
+    "Risk_Score": 0.9911
+  },
+  {
+    "Case_ID": "366838",
+    "Anomaly_Type": "머신러닝 이상치",
+    "Severity": "치명적",
+    "Description": "ML 이상치(위험도 0.991)",
+    "Detected_Value": 0.9911132543400386,
+    "Expected_Range": null,
+    "Location": null,
+    "Timestamp": "2025-10-23T18:48:19.361025",
+    "Risk_Score": 0.9911
+  }
+]

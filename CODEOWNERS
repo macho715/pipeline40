@@ -1,0 +1,4 @@
+# Require 2 approvals on protected branches
+*   @org/core-owner @org/reviewer
+src/**  @org/python-lead @org/qa
+tests/** @org/qa @org/python-lead

@@ -1,0 +1,51 @@
+# HVDC Anomaly Detector v4.0 Requirements
+# Windows 11 + Python 3.8+ 최적화
+
+# Core Dependencies
+numpy>=1.21.0,<2.0.0
+pandas>=1.3.0
+openpyxl>=3.0.0
+xlsxwriter>=3.0.0
+
+# Machine Learning Core
+scikit-learn>=1.0.0
+pyod>=2.0.5
+
+# Deep Learning (Optional - CPU 최적화)
+tensorflow>=2.13.0,<2.16.0  # CPU version for i7-1165G7
+keras>=2.13.0
+
+# Boosting Algorithms
+xgboost>=1.7.0
+lightgbm>=3.3.0
+catboost>=1.2.0
+
+# Explainability
+shap>=0.42.0
+
+# Hyperparameter Optimization (Optional)
+optuna>=3.0.0
+
+# Model Versioning (Optional)
+mlflow>=2.0.0
+
+# Visualization
+plotly>=5.0.0
+dash>=2.0.0
+
+# Progress bars & CLI
+tqdm>=4.60.0
+click>=8.0.0
+
+# 오프라인 설치 방법:
+# 1. 온라인 환경에서 휠 파일 다운로드:
+#    pip download -r requirements_v4.txt -d ./wheels
+#
+# 2. 오프라인 환경으로 wheels 폴더 복사 후:
+#    pip install --no-index --find-links=./wheels -r requirements_v4.txt
+#
+# 3. GPU 가속 필요 시 (NVIDIA GPU가 있는 경우):
+#    pip install tensorflow-gpu>=2.13.0
+#
+# 4. 최소 설치 (DL/Boost 제외):
+#    pip install numpy pandas openpyxl scikit-learn pyod
