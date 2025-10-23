@@ -1,10 +1,34 @@
-# HVDC Pipeline v4.0.20
+# HVDC Pipeline v4.0.22
 
 **Samsung C&T Logistics | ADNOC·DSV Partnership**
 
 통합된 HVDC 파이프라인으로 데이터 동기화부터 이상치 탐지까지 전체 프로세스를 자동화합니다.
 
-## 🚀 최근 업데이트 (v4.0.20 - 헤더 관리 통합)
+## 🚀 최근 업데이트 (v4.0.22 - Stage 3 Total sqm 계산)
+
+### 📊 Stage 3 Total sqm 계산 로직 추가 (2025-10-23)
+- **신규 컬럼 추가**: Stage 3 통합_원본데이터_Fixed 시트에 `Stack_Status`, `Total sqm` 추가
+- **Stack_Status 파싱**: 기존 "Stack" 컬럼 텍스트 파싱 (core.data_parser 활용)
+- **Total sqm 계산**: PKG × SQM × Stack_Status 공식으로 실제 적재 면적 계산
+- **헤더 순서**: SQM → Stack_Status → Total sqm
+- **core 통합**: 헤더 순서 및 데이터 파싱 로직 core 모듈에서 중앙 관리
+
+**주요 기능**:
+- **Stack_Status**: "X2" → 2, "Stackable / 3" → 3, "Not stackable" → 0
+- **Total sqm**: 실제 적재 시 차지하는 총 면적 (창고 공간 계획 활용)
+- **엣지 케이스**: Pkg=0, SQM=None, Stack_Status=None → None 처리
+
+**예시**:
+```
+통합_원본데이터_Fixed 시트:
+... | SQM | Stack_Status | Total sqm | ...
+... | 9.84 | 2 | 196.80 | ...  (PKG=10, SQM=9.84, Stack=2)
+... | 5.20 | 3 | 156.00 | ...  (PKG=10, SQM=5.20, Stack=3)
+```
+
+**테스트 결과**: 8개 테스트 모두 통과 ✅
+
+### 이전 업데이트 (v4.0.20 - 헤더 관리 통합)
 
 ### 🔧 헤더 관리 로직 Core 통합 (2025-10-23)
 - **중앙 집중식 관리**: 헤더 정규화 로직을 core 모듈로 통합

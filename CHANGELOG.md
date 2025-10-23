@@ -5,6 +5,64 @@ All notable changes to the HVDC Pipeline project will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.22] - 2025-10-23
+
+### ✨ Added
+
+#### Stage 3에 Total sqm 계산 로직 추가
+- **Problem**: Stage 3에 Stack_Status 및 Total sqm 컬럼 누락
+  - Stack 텍스트 파싱 로직 없음
+  - PKG × SQM × Stack_Status 계산 없음
+  - 창고 적재 효율 분석 불가
+  - 실제 사용 공간 추적 불가능
+
+- **Solution**: core.data_parser 통합 및 Total sqm 계산
+  - **Stack_Status 파싱**: core.data_parser.parse_stack_status 사용
+  - **Total sqm 계산**: PKG × SQM × Stack_Status
+  - **헤더 순서**: SQM → Stack_Status → Total sqm
+  - **core 중앙 관리**: 헤더 순서 및 데이터 파싱 로직 core에서 관리
+
+- **Implementation Details**:
+  - `scripts/core/standard_header_order.py`:
+    - STANDARD_HEADER_ORDER에 "Total sqm" 추가 (SQM, Stack_Status 다음)
+  - `scripts/stage3_report/report_generator.py`:
+    - `from core.data_parser import parse_stack_status` import 추가
+    - `_calculate_stack_status()`: Stack 컬럼 파싱 함수
+    - `_calculate_total_sqm()`: Total sqm 계산 함수 (PKG × SQM × Stack_Status)
+    - 통합_원본데이터_Fixed 시트에 적용
+  - `tests/test_stage3_total_sqm.py`:
+    - Stack_Status 파싱 테스트 (기본, 다양한 패턴, 컬럼 누락)
+    - Total sqm 계산 테스트 (기본, 엣지 케이스, 컬럼 누락, 0/음수 처리)
+    - 통합 워크플로우 테스트
+
+- **Files Modified**:
+  - `scripts/core/standard_header_order.py`: "Total sqm" 컬럼 추가
+  - `scripts/stage3_report/report_generator.py`: Stack_Status 및 Total sqm 계산 로직 추가
+
+- **Files Created**:
+  - `tests/test_stage3_total_sqm.py`: 포괄적 테스트 스위트 (8개 테스트, 모두 통과)
+
+- **Benefits**:
+  - **적재 효율 분석**: 실제 적재 가능한 총 면적 계산
+  - **재사용성**: core.data_parser 활용으로 코드 중복 제거
+  - **정확도**: 개선된 Stack_Status 파싱 로직 사용
+  - **창고 공간 계획**: Total sqm 기반 실제 사용 공간 추적
+  - **중앙 관리**: core 모듈에서 헤더 순서 및 파싱 로직 일괄 관리
+
+- **Test Results**:
+  - Stack_Status 파싱: "X2" → 2, "Stackable / 3" → 3, "Not stackable" → 0
+  - Total sqm 계산: PKG=10, SQM=2.5, Stack_Status=2 → 50.0
+  - 엣지 케이스: Pkg=0, SQM=None, Stack_Status=None → None
+  - 모든 테스트 통과 (8/8)
+
+- **Example Usage**:
+  ```python
+  # Stage 3 통합_원본데이터_Fixed 시트
+  # ... | SQM | Stack_Status | Total sqm | ...
+  # ... | 9.84 | 2 | 196.80 | ...  (PKG=10, SQM=9.84, Stack=2)
+  # ... | 5.20 | 3 | 156.00 | ...  (PKG=10, SQM=5.20, Stack=3)
+  ```
+
 ## [4.0.21] - 2025-10-23
 
 ### ✨ Added

@@ -39,6 +39,7 @@ from core.standard_header_order import (
     normalize_header_names_for_stage3,
     analyze_header_compatibility,
 )
+from core.data_parser import parse_stack_status
 
 import numpy as np
 import pandas as pd
@@ -221,6 +222,65 @@ def _get_sqm_with_source(row):
     pkg_value = _get_pkg(row)
     estimated_sqm = pkg_value * 1.5
     return estimated_sqm, "ESTIMATED", "PKG_BASED"
+
+
+def _calculate_stack_status(df: pd.DataFrame, stack_col: str = "Stack") -> pd.Series:
+    """
+    Stack 컬럼 텍스트를 파싱하여 Stack_Status 반환
+    
+    Args:
+        df: 입력 DataFrame
+        stack_col: Stack 컬럼명 (기본: "Stack")
+        
+    Returns:
+        Stack_Status Series (정수 또는 None)
+    """
+    if stack_col not in df.columns:
+        logger.warning(f"[WARN] '{stack_col}' 컬럼이 없습니다. Stack_Status를 None으로 설정합니다.")
+        return pd.Series([None] * len(df), index=df.index)
+    
+    # core.data_parser 사용
+    return df[stack_col].apply(parse_stack_status)
+
+
+def _calculate_total_sqm(df: pd.DataFrame) -> pd.Series:
+    """
+    Total sqm = PKG × SQM × Stack_Status 계산
+    
+    Args:
+        df: PKG, SQM, Stack_Status 컬럼이 있는 DataFrame
+        
+    Returns:
+        Total sqm Series
+    """
+    result = pd.Series([None] * len(df), index=df.index, dtype=float)
+    
+    # 필수 컬럼 확인
+    required_cols = ["Pkg", "SQM", "Stack_Status"]
+    missing_cols = [col for col in required_cols if col not in df.columns]
+    
+    if missing_cols:
+        logger.warning(f"[WARN] Total sqm 계산에 필요한 컬럼 누락: {missing_cols}")
+        return result
+    
+    # 계산: PKG × SQM × Stack_Status
+    for idx in df.index:
+        try:
+            pkg = df.loc[idx, "Pkg"]
+            sqm = df.loc[idx, "SQM"]
+            stack_status = df.loc[idx, "Stack_Status"]
+            
+            # 모든 값이 유효한 경우에만 계산
+            if (pd.notna(pkg) and pd.notna(sqm) and pd.notna(stack_status) and
+                pkg > 0 and sqm > 0 and stack_status > 0):
+                result.loc[idx] = round(pkg * sqm * stack_status, 2)
+            else:
+                result.loc[idx] = None
+        except Exception as e:
+            logger.debug(f"[DEBUG] Total sqm 계산 오류 (idx={idx}): {e}")
+            result.loc[idx] = None
+    
+    return result
 
 
 # KPI 임계값 (수정 버전 검증 완료)
@@ -3304,6 +3364,20 @@ class HVDCExcelReporterFinal:
 
         # 통합 데이터 처리
         combined_normalized = normalize_header_names_for_stage3(combined_original)
+        
+        # ✅ Stage 3 신규 컬럼 추가 (통합 데이터에만)
+        logger.info("\n[INFO] Stage 3 신규 컬럼 계산 중...")
+        
+        # Stack_Status 계산
+        combined_normalized["Stack_Status"] = _calculate_stack_status(combined_normalized, "Stack")
+        stack_parsed = combined_normalized["Stack_Status"].notna().sum()
+        logger.info(f"  - Stack_Status 파싱 완료: {stack_parsed}개")
+        
+        # Total sqm 계산
+        combined_normalized["Total sqm"] = _calculate_total_sqm(combined_normalized)
+        total_sqm_calculated = combined_normalized["Total sqm"].notna().sum()
+        logger.info(f"  - Total sqm 계산 완료: {total_sqm_calculated}개")
+        
         combined_reordered = reorder_dataframe_columns(
             combined_normalized, is_stage2=False, use_semantic_matching=True
         )

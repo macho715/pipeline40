@@ -89,6 +89,7 @@ STANDARD_HEADER_ORDER = [
     # SQM 및 Stack_Status (Stage 2에서 계산)
     "SQM",
     "Stack_Status",
+    "Total sqm",  # Stage 3: PKG × SQM × Stack_Status
     # Stage 3에서 추가되는 메타 컬럼
     "Vendor",
     "Source_File",

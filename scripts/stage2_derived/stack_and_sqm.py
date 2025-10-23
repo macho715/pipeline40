@@ -125,7 +125,7 @@ def compute_sqm_from_dims(
 def parse_stack_status(text: Union[str, None]) -> Optional[int]:
     """
     Stack 텍스트에서 tier 수 파싱 (Core 모듈 위임)
-    
+
     이 함수는 하위 호환성을 위해 유지되며, 실제 파싱은 core.data_parser.parse_stack_status에 위임합니다.
     Core 모듈의 개선된 로직을 사용하여 더 정확한 파싱을 제공합니다.
 

@@ -37,7 +37,7 @@ class TestParseStackStatus:
             ("No stacking", 0),
             ("Not satckable", 0),  # 오타 케이스
         ]
-        
+
         for text, expected in test_cases:
             assert parse_stack_status(text) == expected, f"Failed for: '{text}'"
 
@@ -50,7 +50,7 @@ class TestParseStackStatus:
             ("only on top", 1),
             ("ON TOP ONLY", 1),
         ]
-        
+
         for text, expected in test_cases:
             assert parse_stack_status(text) == expected, f"Failed for: '{text}'"
 
@@ -66,7 +66,7 @@ class TestParseStackStatus:
             ("Stackable X2", 2),
             ("Stackable 2X", 2),
         ]
-        
+
         for text, expected in test_cases:
             assert parse_stack_status(text) == expected, f"Failed for: '{text}'"
 
@@ -80,7 +80,7 @@ class TestParseStackStatus:
             ("Stackable 2 pcs", 2),
             ("Stackable 3 pieces", 3),
         ]
-        
+
         for text, expected in test_cases:
             assert parse_stack_status(text) == expected, f"Failed for: '{text}'"
 
@@ -93,7 +93,7 @@ class TestParseStackStatus:
             ("Stackable 2 tier", 2),
             ("Stackable 3 tiers", 3),
         ]
-        
+
         for text, expected in test_cases:
             assert parse_stack_status(text) == expected, f"Failed for: '{text}'"
 
@@ -105,7 +105,7 @@ class TestParseStackStatus:
             ("Stackable / 4", 4),
             ("/ 5", 5),
         ]
-        
+
         for text, expected in test_cases:
             assert parse_stack_status(text) == expected, f"Failed for: '{text}'"
 
@@ -114,10 +114,10 @@ class TestParseStackStatus:
         test_cases = [
             ("Stackable 600kg/m2", 1),  # 하중 표기 제거 후 숫자 없음 → 1
             ("Stackable 500kg/㎡", 1),  # 하중 표기 제거 후 숫자 없음 → 1
-            ("Stackable 400kg/m^2", 1), # 하중 표기 제거 후 숫자 없음 → 1
-            ("Stackable 300kg", 1),     # 단독 kg 표기 제거 후 숫자 없음 → 1
+            ("Stackable 400kg/m^2", 1),  # 하중 표기 제거 후 숫자 없음 → 1
+            ("Stackable 300kg", 1),  # 단독 kg 표기 제거 후 숫자 없음 → 1
         ]
-        
+
         for text, expected in test_cases:
             assert parse_stack_status(text) == expected, f"Failed for: '{text}'"
 
@@ -125,10 +125,10 @@ class TestParseStackStatus:
         """Test complex patterns with multiple numbers"""
         test_cases = [
             ("Stackable 600kg/m2 / 2 pcs", 2),  # 하중 제거 후 / 2 → 2
-            ("Stackable X3 500kg/m2", 3),       # 하중 제거 후 X3 → 3
-            ("Stackable 2 tier 400kg/m2", 2),   # 하중 제거 후 2 tier → 2
+            ("Stackable X3 500kg/m2", 3),  # 하중 제거 후 X3 → 3
+            ("Stackable 2 tier 400kg/m2", 2),  # 하중 제거 후 2 tier → 2
         ]
-        
+
         for text, expected in test_cases:
             assert parse_stack_status(text) == expected, f"Failed for: '{text}'"
 
@@ -136,21 +136,21 @@ class TestParseStackStatus:
         """Test that maximum number is selected when multiple numbers exist"""
         test_cases = [
             ("Stackable 2 pcs 3 tier", 3),  # 2, 3 중 최대값 3
-            ("Stackable X2 4 pcs", 4),      # 2, 4 중 최대값 4
+            ("Stackable X2 4 pcs", 4),  # 2, 4 중 최대값 4
             ("Stackable 1 tier 5 pcs", 5),  # 1, 5 중 최대값 5
         ]
-        
+
         for text, expected in test_cases:
             assert parse_stack_status(text) == expected, f"Failed for: '{text}'"
 
     def test_default_values(self):
         """Test default values for various cases"""
         test_cases = [
-            ("Stackable", 1),           # 숫자 없음 → 1
-            ("Stackability", 1),        # 숫자 없음 → 1
-            ("Stackable text", 1),      # 숫자 없음 → 1
+            ("Stackable", 1),  # 숫자 없음 → 1
+            ("Stackability", 1),  # 숫자 없음 → 1
+            ("Stackable text", 1),  # 숫자 없음 → 1
         ]
-        
+
         for text, expected in test_cases:
             assert parse_stack_status(text) == expected, f"Failed for: '{text}'"
 
@@ -161,18 +161,18 @@ class TestParseStackStatus:
             ("", None),
             ("   ", None),
         ]
-        
+
         for text, expected in test_cases:
             assert parse_stack_status(text) == expected, f"Failed for: '{text}'"
 
     def test_numeric_input(self):
         """Test numeric input"""
         test_cases = [
-            (2, 2),      # 숫자 2 → 2
-            (3, 3),      # 숫자 3 → 3
-            (0, 0),      # 숫자 0 → 0
+            (2, 2),  # 숫자 2 → 2
+            (3, 3),  # 숫자 3 → 3
+            (0, 0),  # 숫자 0 → 0
         ]
-        
+
         for text, expected in test_cases:
             assert parse_stack_status(text) == expected, f"Failed for: '{text}'"
 
@@ -213,10 +213,10 @@ class TestMapStackStatus:
     def test_pandas_series(self):
         """Test with pandas Series"""
         import pandas as pd
-        
+
         series = pd.Series(["Not stackable", "X2", "Stackable / 3", ""])
         result = map_stack_status(series)
-        
+
         expected = pd.Series([0, 2, 3, None])
         pd.testing.assert_series_equal(result, expected)
 
@@ -225,13 +225,13 @@ class TestMapStackStatus:
         # map_stack_status는 pandas Series만 지원하므로 이 테스트는 스킵
         # 실제 사용 시에는 pandas Series를 사용해야 함
         import pandas as pd
-        
+
         test_list = ["Not stackable", "X2", "Stackable / 3"]
         series = pd.Series(test_list)
         result = map_stack_status(series)
-        
+
         # Should return a Series-like object
-        assert hasattr(result, 'map')
+        assert hasattr(result, "map")
 
 
 if __name__ == "__main__":
