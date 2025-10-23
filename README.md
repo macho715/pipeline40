@@ -29,7 +29,7 @@
 ### SCT Ref.No 컬럼 위치 최적화 (2025-10-23)
 - **Problem**: SCT Ref.No가 65번째 위치에 있어서 찾기 어려움
 - **Solution**: STANDARD_HEADER_ORDER에서 SCT Ref.No를 4번째 위치로 이동
-- **Result**: 
+- **Result**:
   - 1. no.
   - 2. Shipment Invoice No.
   - 3. SCT Ref.No ← 이동 완료

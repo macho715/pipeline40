@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - 벡터화 입고 계산에서 Inbound_Type 필드 누락
   - create_warehouse_monthly_sheet()에서 조건 미충족
 - **Solution**: _calculate_warehouse_inbound_vectorized()에 Inbound_Type 명시적 설정
-- **Result**: 
+- **Result**:
   - 입고 데이터 정상 표시
   - 창고별/월별 집계 정확성 확보
   - 입고_DHL WH: 0 → 408
