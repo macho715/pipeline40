@@ -1,8 +1,8 @@
 # PR #1 Stage 3 Melt KeyError 수정 완료 보고서
 
-**작성일**: 2025-10-23  
-**버전**: v4.0.19  
-**작성자**: MACHO-GPT v3.4-mini  
+**작성일**: 2025-10-23
+**버전**: v4.0.19
+**작성자**: MACHO-GPT v3.4-mini
 
 ## Executive Summary
 
@@ -108,11 +108,11 @@ visits = chunk_df.melt(
 def _get_pkg(row):
     """Pkg 컬럼에서 수량을 안전하게 추출하는 헬퍼 함수"""
     pkg_value = row.get("Pkg", 1)
-    
+
     # Series인 경우 첫 번째 값 사용
     if isinstance(pkg_value, pd.Series):
         pkg_value = pkg_value.iloc[0] if len(pkg_value) > 0 else 1
-    
+
     if pd.isna(pkg_value) or pkg_value == "" or pkg_value == 0:
         return 1
     try:
@@ -211,7 +211,7 @@ def _get_pkg(row):
 
 ## 결론
 
-PR #1의 패치가 성공적으로 적용되어 Stage 3가 안정적으로 실행됩니다. 
+PR #1의 패치가 성공적으로 적용되어 Stage 3가 안정적으로 실행됩니다.
 
 **주요 성과**:
 - 벡터화 최적화를 유지하면서 KeyError를 완전히 해결
@@ -227,6 +227,6 @@ PR #1의 패치가 성공적으로 적용되어 Stage 3가 안정적으로 실�
 
 ---
 
-**문서 버전**: v1.0  
-**최종 업데이트**: 2025-10-23 20:58:00  
+**문서 버전**: v1.0
+**최종 업데이트**: 2025-10-23 20:58:00
 **다음 리뷰 예정**: 2025-11-23

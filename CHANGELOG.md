@@ -5,6 +5,53 @@ All notable changes to the HVDC Pipeline project will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.21] - 2025-10-23
+
+### ✨ Added
+
+#### Core 모듈에 데이터 파싱 유틸리티 추가
+- **Problem**: Stack_Status 파싱 로직이 Stage 2에만 존재하여 재사용 불가
+  - Stage별 중복 코드 발생 위험
+  - 개선된 파싱 로직이 일부 Stage에만 적용
+  - 유지보수 어려움: 각 Stage별로 별도 구현 필요
+
+- **Solution**: Core 모듈에 data_parser.py 추가
+  - **중앙 집중식 관리**: 모든 Stage에서 `from core.data_parser import parse_stack_status` 사용
+  - **개선된 파싱 로직**: 하중 표기 제거, 슬래시 패턴, 양방향 X 패턴 지원
+  - **하위 호환성**: 기존 stack_and_sqm.py는 core 모듈로 위임하여 유지
+
+- **Implementation Details**:
+  - `scripts/core/data_parser.py`: 새로운 데이터 파싱 모듈 생성
+  - `_strip_weights()`: 하중 표기(600kg/m2, kg/㎡ 등) 제거 함수
+  - `parse_stack_status()`: 개선된 Stack_Status 파싱 로직
+  - `calculate_sqm()`, `convert_mm_to_cm()`: 향후 확장을 위한 유틸리티 함수
+  - `scripts/core/__init__.py`: data_parser 모듈 export 추가
+
+- **Files Created**:
+  - `scripts/core/data_parser.py`: 데이터 파싱 유틸리티 (약 200줄)
+  - `tests/test_data_parser.py`: 포괄적 테스트 스위트 (약 150줄)
+
+- **Files Modified**:
+  - `scripts/core/__init__.py`: data_parser import 및 export 추가
+  - `scripts/stage2_derived/stack_and_sqm.py`: core 모듈로 위임하도록 리팩터링
+
+- **Benefits**:
+  - **재사용성**: 모든 Stage에서 동일한 파싱 로직 사용
+  - **정확도 향상**: 하중 표기 오염 방지, 슬래시 패턴 지원
+  - **유지보수성**: 한 곳만 수정하면 전체 파이프라인 적용
+  - **확장성**: 향후 다른 데이터 파싱 로직 추가 용이
+  - **하위 호환성**: 기존 코드 변경 없이 개선된 로직 적용
+
+- **Test Results**:
+  - **하중 표기 제거**: "Stackable 600kg/m2" → 1 (기존: 600으로 오인식 가능)
+  - **슬래시 패턴**: "Stackable / 2 pcs" → 2 (기존: 미지원)
+  - **양방향 X 패턴**: "2X", "X2" 모두 정확히 인식
+  - **복합 패턴**: "Stackable 600kg/m2 / 2 pcs" → 2 (하중 제거 후 슬래시 패턴)
+
+### 📚 Documentation
+- `scripts/core/data_parser.py`: 포괄적 docstring 및 사용 예시
+- `tests/test_data_parser.py`: 15개 테스트 케이스로 엣지 케이스 커버
+
 ## [4.0.20] - 2025-10-23
 
 ### 🔧 Refactoring

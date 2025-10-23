@@ -24,6 +24,9 @@ from typing import Optional, Union
 
 import pandas as pd
 
+# Core 모듈에서 Stack_Status 파싱 함수 import
+from core.data_parser import parse_stack_status as core_parse_stack_status
+
 # 정규식 패턴 사전 컴파일 (성능 최적화)
 NOT_STACK_PATTERNS = [
     re.compile(r"\bnot\s*stackable\b", re.IGNORECASE),
@@ -121,14 +124,10 @@ def compute_sqm_from_dims(
 
 def parse_stack_status(text: Union[str, None]) -> Optional[int]:
     """
-    Stack 텍스트에서 tier 수 파싱
-
-    규칙:
-    - 'not stackable'류 → 0
-    - 숫자 표현: X2, x3, '2 pcs', '3 tier' 등 → 해당 숫자
-    - 'on top only'류 → 1
-    - 숫자 전혀 없으면 → 1
-    - '600kg/m2' 등 하중 표기는 단수 지정 근거가 없으므로 1로 간주
+    Stack 텍스트에서 tier 수 파싱 (Core 모듈 위임)
+    
+    이 함수는 하위 호환성을 위해 유지되며, 실제 파싱은 core.data_parser.parse_stack_status에 위임합니다.
+    Core 모듈의 개선된 로직을 사용하여 더 정확한 파싱을 제공합니다.
 
     Args:
         text: 파싱할 텍스트
@@ -136,74 +135,7 @@ def parse_stack_status(text: Union[str, None]) -> Optional[int]:
     Returns:
         파싱된 tier 수 또는 None (파싱 실패 시)
     """
-    if text is None or (isinstance(text, float) and math.isnan(text)):
-        return None
-
-    s = str(text).lower().strip()
-    if not s:
-        return None
-
-    # 명시적 비적재 (더 포괄적인 패턴)
-    not_stackable_patterns = [
-        r"\bnot\s*stackable\b",
-        r"\bnon[-\s]*stackable\b",
-        r"\bno\s*stack(ing)?\b",
-        r"\bnot\s*satckable\b",  # 오타 포함
-    ]
-
-    for pattern_str in not_stackable_patterns:
-        if re.search(pattern_str, s, re.IGNORECASE):
-            return 0
-
-    # on top only 류
-    for pattern in TOP_ONLY_PATTERNS:
-        if pattern.search(s):
-            return 1
-
-    # 숫자 후보들 추출
-    nums = []
-
-    # X2, x3 형태 (우선순위 높음)
-    for match in XNUM_PAT.finditer(s):
-        try:
-            nums.append(int(match.group(1)))
-        except (ValueError, IndexError):
-            pass
-
-    # 2 pcs, 3 pcs 형태
-    for match in PCS_PAT.finditer(s):
-        try:
-            nums.append(int(match.group(1)))
-        except (ValueError, IndexError):
-            pass
-
-    # 2 tier, 3 tiers 형태
-    for match in TIER_PAT.finditer(s):
-        try:
-            nums.append(int(match.group(1)))
-        except (ValueError, IndexError):
-            pass
-
-    # 2X, 3X 형태 (추가 패턴)
-    x_suffix_pattern = re.compile(r"(\d+)\s*[xX]\b", re.IGNORECASE)
-    for match in x_suffix_pattern.finditer(s):
-        try:
-            nums.append(int(match.group(1)))
-        except (ValueError, IndexError):
-            pass
-
-    # 일반 숫자 (마지막)
-    for match in NUMBER_PAT.finditer(s):
-        try:
-            nums.append(int(match.group(1)))
-        except (ValueError, IndexError):
-            pass
-
-    if nums:
-        return max(nums)  # 가장 큰 숫자 반환
-
-    # 'Stackable', 'Stackability', '600kg/m2' 등 → 숫자 부재시 1단
-    return 1
+    return core_parse_stack_status(text)
 
 
 def add_sqm_and_stack(
