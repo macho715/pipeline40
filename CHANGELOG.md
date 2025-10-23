@@ -5,6 +5,22 @@ All notable changes to the HVDC Pipeline project will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.26] - 2025-10-24
+
+### 🐛 Fixed
+
+#### 창고 출고 계산 로직 개선
+- **Problem**: 벡터화 출고 계산에서 창고→현장 이동 감지가 매우 낮음 (6개)
+  - 기존 로직이 "다음 날 이동만 출고로 인정"하여 너무 엄격한 조건
+  - 창고간 이동 제외 로직이 너무 광범위하게 적용됨
+- **Solution**: 
+  - 날짜 조건을 `site_date.date() > wh_date.date()`로 완화
+  - 창고간 이동 제외 로직 제거
+- **Result**:
+  - 창고→현장 이동 감지: 6개 → 588개 (98배 개선)
+  - 창고_월별_입출고 시트의 출고 데이터 정확도 향상
+  - 벡터화 출고 계산 성능 유지
+
 ## [4.0.25] - 2025-10-24
 
 ### 🐛 Fixed

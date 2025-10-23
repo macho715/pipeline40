@@ -1613,21 +1613,25 @@ class HVDCExcelReporterFinal:
             for i, warehouse in enumerate(warehouses):
                 outbound_count = 0
 
-                # 창고간 이동 출고
+                # 창고간 이동 출고 (키 이름 통일: pkg_quantity)
                 for transfer in stats["inbound_result"].get("warehouse_transfers", []):
                     if (
                         transfer.get("from_warehouse") == warehouse
                         and transfer.get("Year_Month") == month_str
                     ):
-                        outbound_count += transfer.get("pkg_quantity", 1)
+                        # 키 이름 통일: pkg_quantity 또는 PKG_Quantity 모두 확인
+                        pkg_qty = transfer.get("pkg_quantity") or transfer.get("PKG_Quantity") or transfer.get("Pkg_Quantity", 1)
+                        outbound_count += pkg_qty
 
-                # 창고→현장 출고 (키 이름 수정)
+                # 창고→현장 출고 (키 이름 통일: PKG_Quantity)
                 for item in stats["outbound_result"].get("outbound_items", []):
                     if (
                         item.get("From_Location") == warehouse
                         and item.get("Year_Month") == month_str
                     ):
-                        outbound_count += item.get("Pkg_Quantity", 1)
+                        # 키 이름 통일: PKG_Quantity 또는 pkg_quantity 모두 확인
+                        pkg_qty = item.get("PKG_Quantity") or item.get("pkg_quantity") or item.get("Pkg_Quantity", 1)
+                        outbound_count += pkg_qty
 
                 outbound_values.append(outbound_count)
                 row.append(outbound_count)

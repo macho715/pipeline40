@@ -21,73 +21,24 @@ Samsung C&T · ADNOC · DSV Partnership
 Multi-Level Header: 창고 17열(누계 포함), 현장 9열
 """
 
-import logging
-import os
-import re
-import sys
+import pandas as pd
+import numpy as np
 from datetime import datetime, timedelta
 from pathlib import Path
+import logging
 from typing import Dict, List, Optional, Tuple
-
-# 유연한 헤더 검색 기능을 위한 import
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
-
-from core.standard_header_order import (
-    reorder_dataframe_columns,
-    validate_sqm_stack_presence,
-    normalize_header_names_for_stage3,
-    analyze_header_compatibility,
-)
-from core.data_parser import parse_stack_status
-
-import numpy as np
-import pandas as pd
-import yaml
 import warnings
-
 from .utils import normalize_columns, apply_column_synonyms
 
 warnings.filterwarnings("ignore")
-
-# Windows multiprocessing 호환성
-import platform
-
-if platform.system() == "Windows":
-    import multiprocessing as mp
-
-    mp.set_start_method("spawn", force=True)
+import os
+import re
 
 # 로깅 설정
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
-
-PIPELINE_ROOT = Path(__file__).resolve().parents[2]
-PIPELINE_CONFIG_PATH = PIPELINE_ROOT / "config" / "pipeline_config.yaml"
-STAGE2_CONFIG_PATH = PIPELINE_ROOT / "config" / "stage2_derived_config.yaml"
-DEFAULT_STAGE2_OUTPUT = "data/processed/derived/HVDC_WAREHOUSE_HITACHI_HE_derived.xlsx"
-DEFAULT_REPORTS_DIR = "data/processed/reports"
-
-
-def _load_yaml_config(config_path: Path) -> Dict:
-    """YAML 설정을 로드합니다. / Load a YAML configuration file."""
-
-    if not config_path.exists():
-        return {}
-
-    with config_path.open("r", encoding="utf-8") as handle:
-        loaded = yaml.safe_load(handle) or {}
-    return loaded
-
-
-def _resolve_path(path_value: str | Path) -> Path:
-    """상대 경로를 절대 경로로 변환합니다. / Resolve a relative path to absolute."""
-
-    candidate = Path(path_value)
-    if not candidate.is_absolute():
-        candidate = PIPELINE_ROOT / candidate
-    return candidate
-
 
 # 수정 버전 정보
 CORRECTED_VERSION = "v3.0-corrected"  #  버전 업데이트
@@ -106,11 +57,6 @@ def _check_duplicate_function(func_name: str):
 def _get_pkg(row):
     """Pkg 컬럼에서 수량을 안전하게 추출하는 헬퍼 함수"""
     pkg_value = row.get("Pkg", 1)
-
-    # Series인 경우 첫 번째 값 사용
-    if isinstance(pkg_value, pd.Series):
-        pkg_value = pkg_value.iloc[0] if len(pkg_value) > 0 else 1
-
     if pd.isna(pkg_value) or pkg_value == "" or pkg_value == 0:
         return 1
     try:
@@ -120,67 +66,40 @@ def _get_pkg(row):
 
 
 def _get_sqm(row):
-    """
-    STACK.MD 기반 SQM 추출 함수 (폴백 전략 포함)
+    """SQM 컬럼에서 면적을 안전하게 추출하는 헬퍼 함수 (개선된 버전)"""
+    #  SQM 관련 컬럼명들 시도 (더 포괄적)
+    sqm_columns = [
+        "SQM",
+        "sqm",
+        "Area",
+        "area",
+        "AREA",
+        "Size_SQM",
+        "Item_SQM",
+        "Package_SQM",
+        "Total_SQM",
+        "M2",
+        "m2",
+        "SQUARE",
+        "Square",
+        "square",
+        "Dimension",
+        "Space",
+        "Volume_SQM",
+    ]
 
-    우선순위:
-    1. Stage 2에서 계산된 SQM (가장 정확)
-    2. 치수 기반 계산 (L×W/10000)
-    3. 기존 추정 로직 (PKG×1.5)
-    """
-    # 1순위: Stage 2에서 계산된 SQM 컬럼
-    stage2_sqm_columns = ["SQM", "sqm", "Area", "area", "AREA"]
-    for col in stage2_sqm_columns:
+    # 실제 SQM 값 찾기
+    for col in sqm_columns:
         if col in row.index and pd.notna(row[col]):
             try:
                 sqm_value = float(row[col])
                 if sqm_value > 0:
+                    #  실제 SQM 값 발견
                     return sqm_value
             except (ValueError, TypeError):
                 continue
 
-    # 2순위: 치수 기반 계산 (STACK.MD 로직)
-    try:
-        # L, W 컬럼 찾기
-        l_cols = ["L(CM)", "Length (cm)", "L CM", "Length", "L(mm)", "L(MM)"]
-        w_cols = ["W(CM)", "Width (cm)", "W CM", "Width", "W(mm)", "W(MM)"]
-
-        L = None
-        W = None
-
-        for col in l_cols:
-            if col in row.index and pd.notna(row[col]):
-                try:
-                    L = float(str(row[col]).replace(",", "").strip())
-                    if L > 0:
-                        # mm 단위인 경우 cm으로 변환
-                        if "mm" in col.lower():
-                            L = L / 10.0
-                        break
-                except (ValueError, TypeError):
-                    continue
-
-        for col in w_cols:
-            if col in row.index and pd.notna(row[col]):
-                try:
-                    W = float(str(row[col]).replace(",", "").strip())
-                    if W > 0:
-                        # mm 단위인 경우 cm으로 변환
-                        if "mm" in col.lower():
-                            W = W / 10.0
-                        break
-                except (ValueError, TypeError):
-                    continue
-
-        # 치수 기반 SQM 계산: L(cm) × W(cm) / 10,000
-        if L is not None and W is not None:
-            sqm = (L * W) / 10000.0
-            return round(sqm, 2)
-
-    except Exception:
-        pass  # 치수 계산 실패 시 다음 단계로
-
-    # 3순위: 기존 추정 로직 (PKG 기반)
+    #  SQM 정보가 없으면 PKG 기반 추정 (1 PKG = 1.5 SQM)
     pkg_value = _get_pkg(row)
     estimated_sqm = pkg_value * 1.5
     return estimated_sqm
@@ -222,63 +141,6 @@ def _get_sqm_with_source(row):
     pkg_value = _get_pkg(row)
     estimated_sqm = pkg_value * 1.5
     return estimated_sqm, "ESTIMATED", "PKG_BASED"
-
-
-def _calculate_stack_status(df: pd.DataFrame, stack_col: str = "Stack") -> pd.Series:
-    """
-    Stack 컬럼 텍스트를 파싱하여 Stack_Status 반환
-
-    Args:
-        df: 입력 DataFrame
-        stack_col: Stack 컬럼명 (기본: "Stack")
-
-    Returns:
-        Stack_Status Series (정수 또는 None)
-    """
-    if stack_col not in df.columns:
-        logger.warning(f"[WARN] '{stack_col}' 컬럼이 없습니다. Stack_Status를 None으로 설정합니다.")
-        return pd.Series([None] * len(df), index=df.index)
-
-    # core.data_parser 사용
-    return df[stack_col].apply(parse_stack_status)
-
-
-def _calculate_total_sqm(df: pd.DataFrame) -> pd.Series:
-    """
-    Total sqm = SQM × PKG 계산
-
-    Args:
-        df: PKG, SQM 컬럼이 있는 DataFrame
-
-    Returns:
-        Total sqm Series
-    """
-    result = pd.Series([None] * len(df), index=df.index, dtype=float)
-
-    # 필수 컬럼 확인
-    required_cols = ["Pkg", "SQM"]
-    missing_cols = [col for col in required_cols if col not in df.columns]
-
-    if missing_cols:
-        logger.warning(f"[WARN] Total sqm 계산에 필요한 컬럼 누락: {missing_cols}")
-        return result
-
-    # 계산: SQM × PKG
-    for idx in df.index:
-        try:
-            pkg = df.loc[idx, "Pkg"]
-            sqm = df.loc[idx, "SQM"]
-
-            # 모든 값이 유효한 경우에만 계산
-            if pd.notna(pkg) and pd.notna(sqm) and pkg > 0 and sqm > 0:
-                result.loc[idx] = round(sqm * pkg, 2)
-            else:
-                result.loc[idx] = None
-        except Exception as e:
-            logger.debug(f"[DEBUG] Total sqm 계산 오류 (idx={idx}): {e}")
-            result.loc[idx] = None
-
-    return result
 
 
 # KPI 임계값 (수정 버전 검증 완료)
@@ -334,63 +196,28 @@ def validate_kpi_thresholds(stats: Dict) -> Dict:
 
     all_pass = all(result["status"] == "PASS" for result in validation_results.values())
 
-    logger.info(f" 수정 버전 KPI 검증 완료: {'ALL PASS' if all_pass else 'SOME FAILED'}")
+    logger.info(
+        f" 수정 버전 KPI 검증 완료: {'ALL PASS' if all_pass else 'SOME FAILED'}"
+    )
     return validation_results
 
 
 class CorrectedWarehouseIOCalculator:
     """수정된 창고 입출고 계산기"""
 
-    def __init__(self, use_vectorized=False, use_parallel=False):
+    def __init__(self):
         """초기화"""
         self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self.use_vectorized = use_vectorized
-        self.use_parallel = use_parallel
 
-        pipeline_config = _load_yaml_config(PIPELINE_CONFIG_PATH)
-        stage2_config = _load_yaml_config(STAGE2_CONFIG_PATH)
-
-        paths_config = pipeline_config.get("paths", {})
-        data_root = _resolve_path(paths_config.get("data_root", "data"))
-        reports_root_value = paths_config.get("reports_root")
-        reports_root = (
-            _resolve_path(reports_root_value)
-            if reports_root_value
-            else data_root / "processed" / "reports"
-        )
-
-        derived_output_value = stage2_config.get("output", {}).get(
-            "derived_file", DEFAULT_STAGE2_OUTPUT
-        )
-        derived_output_path = _resolve_path(derived_output_value)
-
-        self.stage2_output_dir = derived_output_path.parent
-        self.reports_output_dir = reports_root
-        self.data_path = self.stage2_output_dir
-
-        self.hitachi_file = derived_output_path
-
-        simense_candidates = [
-            self.stage2_output_dir / "HVDC_WAREHOUSE_SIMENSE_SIM_derived.xlsx",
-            self.stage2_output_dir / "HVDC WAREHOUSE_SIMENSE(SIM).xlsx",
-        ]
-        self.simense_file = next(
-            (candidate for candidate in simense_candidates if candidate.exists()),
-            simense_candidates[0],
-        )
-
-        invoice_candidates = [
-            data_root / "processed" / "invoices" / "HVDC_WAREHOUSE_INVOICE.xlsx",
-            self.stage2_output_dir / "HVDC WAREHOUSE_INVOICE.xlsx",
-        ]
-        self.invoice_file = next(
-            (candidate for candidate in invoice_candidates if candidate.exists()),
-            invoice_candidates[0],
-        )
+        # 실제 데이터 경로 설정 (현재 디렉토리 기준)
+        self.data_path = Path(".")  # 현재 hitachi 디렉토리
+        self.hitachi_file = self.data_path / "HVDC WAREHOUSE_HITACHI(HE).xlsx"
+        self.simense_file = self.data_path / "HVDC WAREHOUSE_SIMENSE(SIM).xlsx"
+        self.invoice_file = self.data_path / "HVDC WAREHOUSE_INVOICE.xlsx"
 
         #  수정: 창고와 현장을 명확히 분리
         self.warehouse_columns = [
-            "DHL WH",
+            "DHL Warehouse",
             "DSV Indoor",
             "DSV Al Markaz",
             "Hauler Indoor",
@@ -517,7 +344,9 @@ class CorrectedWarehouseIOCalculator:
             inv = invoice_df.copy()
             # 월 컬럼을 YYYY-MM 형식으로 정규화
             inv["Month"] = (
-                pd.to_datetime(inv["Month"], errors="coerce").dt.to_period("M").astype(str)
+                pd.to_datetime(inv["Month"], errors="coerce")
+                .dt.to_period("M")
+                .astype(str)
             )
 
             # 월×창고별 총액 집계
@@ -529,7 +358,8 @@ class CorrectedWarehouseIOCalculator:
 
             # dict 형태로 변환: {(YYYY-MM, Warehouse): amount}
             passthrough_dict = {
-                (r["Month"], r["Warehouse"]): float(r["Invoice_Amount"]) for _, r in grp.iterrows()
+                (r["Month"], r["Warehouse"]): float(r["Invoice_Amount"])
+                for _, r in grp.iterrows()
             }
 
             logger.info(f" Passthrough 금액 로더 완료: {len(passthrough_dict)}개 항목")
@@ -649,10 +479,13 @@ class CorrectedWarehouseIOCalculator:
 
             # 데이터 결합
             if combined_dfs:
-                self.combined_data = pd.concat(combined_dfs, ignore_index=True, sort=False)
-                # [패치] 컬럼명 정규화 및 동의어 매핑 (통합 데이터)
-                self.combined_data.columns = normalize_columns(self.combined_data.columns)
-                self.combined_data = apply_column_synonyms(self.combined_data)
+                self.combined_data = pd.concat(
+                    combined_dfs, ignore_index=True, sort=False
+                )
+                # [패치] 컬럼명 공백 1칸으로 정규화 (통합 데이터)
+                self.combined_data.columns = self.combined_data.columns.str.replace(
+                    r"\s+", " ", regex=True
+                ).str.strip()
                 self.total_records = len(self.combined_data)
 
                 #  FIX: 통합 후 누락 컬럼 재확인
@@ -668,7 +501,9 @@ class CorrectedWarehouseIOCalculator:
                         print(f"    {warehouse}: {non_null_count}건 데이터")
 
                 if missing_warehouses:
-                    logger.warning(f" 누락된 창고 컬럼들이 빈 값으로 추가됨: {missing_warehouses}")
+                    logger.warning(
+                        f" 누락된 창고 컬럼들이 빈 값으로 추가됨: {missing_warehouses}"
+                    )
 
                 logger.info(f" 데이터 결합 완료: {self.total_records}건")
             else:
@@ -693,7 +528,9 @@ class CorrectedWarehouseIOCalculator:
             #  FIX 3: 원본 데이터 우선 보존
             original_wh_handling = self.combined_data["wh handling"].copy()
             self.combined_data["wh_handling_original"] = original_wh_handling
-            self.combined_data.rename(columns={"wh handling": "wh_handling_legacy"}, inplace=True)
+            self.combined_data.rename(
+                columns={"wh handling": "wh_handling_legacy"}, inplace=True
+            )
             logger.info(
                 " 기존 'wh handling' 컬럼을 'wh_handling_original'과 'wh_handling_legacy'로 보존"
             )
@@ -701,7 +538,9 @@ class CorrectedWarehouseIOCalculator:
         # ② 0값과 빈 문자열을 NaN으로 치환 (notna() 오류 방지)
         for col in WH_COLS + MOSB_COLS:
             if col in self.combined_data.columns:
-                self.combined_data[col] = self.combined_data[col].replace({0: np.nan, "": np.nan})
+                self.combined_data[col] = self.combined_data[col].replace(
+                    {0: np.nan, "": np.nan}
+                )
 
         # ③ 명시적 Pre Arrival 판별
         status_col = "Status_Location"
@@ -711,7 +550,9 @@ class CorrectedWarehouseIOCalculator:
             )
         else:
             is_pre_arrival = pd.Series(False, index=self.combined_data.index)
-            logger.warning(f" '{status_col}' 컬럼을 찾을 수 없음 - Pre Arrival 판별 불가")
+            logger.warning(
+                f" '{status_col}' 컬럼을 찾을 수 없음 - Pre Arrival 판별 불가"
+            )
 
         # ④ 창고 Hop 수 + Offshore 계산
         wh_cnt = self.combined_data[WH_COLS].notna().sum(axis=1)
@@ -757,7 +598,9 @@ class CorrectedWarehouseIOCalculator:
 
         for col in date_columns:
             if col in self.combined_data.columns:
-                self.combined_data[col] = pd.to_datetime(self.combined_data[col], errors="coerce")
+                self.combined_data[col] = pd.to_datetime(
+                    self.combined_data[col], errors="coerce"
+                )
 
         #  FIX 3: 원본 handling 컬럼 보존 로직
         print("\n Handling 컬럼 처리:")
@@ -768,7 +611,9 @@ class CorrectedWarehouseIOCalculator:
         if "site handling" in self.combined_data.columns:
             original_site_handling = self.combined_data["site handling"].copy()
             self.combined_data["site_handling_original"] = original_site_handling
-            print(f"    원본 'site handling' 보존: {original_site_handling.notna().sum()}건")
+            print(
+                f"    원본 'site handling' 보존: {original_site_handling.notna().sum()}건"
+            )
         else:
             print("    'site handling' 컬럼 없음")
 
@@ -776,7 +621,9 @@ class CorrectedWarehouseIOCalculator:
         if "total handling" in self.combined_data.columns:
             original_total_handling = self.combined_data["total handling"].copy()
             self.combined_data["total_handling_original"] = original_total_handling
-            print(f"    원본 'total handling' 보존: {original_total_handling.notna().sum()}건")
+            print(
+                f"    원본 'total handling' 보존: {original_total_handling.notna().sum()}건"
+            )
 
             # 원본 total handling이 있으면 우선 사용
             self.combined_data["total handling"] = original_total_handling.fillna(
@@ -805,15 +652,6 @@ class CorrectedWarehouseIOCalculator:
         - 창고간 이동의 목적지는 제외 (이중 계산 방지)
         - 정확한 PKG 수량 반영
         """
-        if self.use_parallel and self.use_vectorized and len(df) > 1000:
-            return self._calculate_warehouse_inbound_parallel(df)
-        elif self.use_vectorized:
-            return self._calculate_warehouse_inbound_vectorized(df)
-        else:
-            return self._calculate_warehouse_inbound_legacy(df)
-
-    def _calculate_warehouse_inbound_legacy(self, df: pd.DataFrame) -> Dict:
-        """기존 iterrows 방식 (레거시)"""
         logger.info(" 수정된 창고 입고 계산 시작")
 
         inbound_items = []
@@ -853,12 +691,18 @@ class CorrectedWarehouseIOCalculator:
                             )
 
                             total_inbound += pkg_quantity
-                            by_warehouse[warehouse] = by_warehouse.get(warehouse, 0) + pkg_quantity
+                            by_warehouse[warehouse] = (
+                                by_warehouse.get(warehouse, 0) + pkg_quantity
+                            )
                             month_key = arrival_date.strftime("%Y-%m")
-                            by_month[month_key] = by_month.get(month_key, 0) + pkg_quantity
+                            by_month[month_key] = (
+                                by_month.get(month_key, 0) + pkg_quantity
+                            )
 
                     except Exception as e:
-                        logger.warning(f"입고 계산 오류 (Row {idx}, Warehouse {warehouse}): {e}")
+                        logger.warning(
+                            f"입고 계산 오류 (Row {idx}, Warehouse {warehouse}): {e}"
+                        )
                         continue
 
         #  1. warehouse_transfers에 Year_Month 키 주입
@@ -877,189 +721,6 @@ class CorrectedWarehouseIOCalculator:
             "warehouse_transfers": warehouse_transfers,
         }
 
-    def _calculate_warehouse_inbound_vectorized(self, df: pd.DataFrame) -> Dict:
-        """벡터화된 창고 입고 계산 (PATCH.MD 전략)"""
-        logger.info(" Vectorized 창고 입고 계산 시작")
-
-        # 1. 창고 컬럼을 melt하여 벡터화 처리
-        df_with_index = df.reset_index().rename(columns={"index": "Row_ID"})
-        wh_df = df_with_index.melt(
-            id_vars=["Row_ID", "Pkg"],
-            value_vars=self.warehouse_columns,
-            var_name="Warehouse",
-            value_name="Inbound_Date",
-        )
-        wh_df = wh_df[wh_df["Inbound_Date"].notna()].copy()
-        wh_df["Row_ID"] = wh_df["Row_ID"].apply(
-            lambda value: int(value)
-            if isinstance(value, (int, np.integer))
-            else value
-        )
-        wh_df["Inbound_Date"] = pd.to_datetime(wh_df["Inbound_Date"])
-        wh_df["Year_Month"] = wh_df["Inbound_Date"].dt.strftime("%Y-%m")
-        wh_df["Pkg_Quantity"] = wh_df["Pkg"].fillna(1).clip(lower=1).astype(int)
-
-        # 2. 창고간 이동 감지 (벡터화)
-        df_with_transfers = df.copy()
-        df_with_transfers["transfers"] = df_with_transfers.apply(
-            self._detect_warehouse_transfers, axis=1
-        )
-        transfers_flat = pd.DataFrame(
-            [t for transfers in df_with_transfers["transfers"] for t in transfers]
-        )
-
-        if not transfers_flat.empty:
-            if "Row_ID" in transfers_flat.columns:
-                transfers_flat["Row_ID"] = transfers_flat["Row_ID"].apply(
-                    lambda value: int(value)
-                    if isinstance(value, (int, np.integer))
-                    else value
-                )
-            transfers_flat["transfer_date"] = pd.to_datetime(
-                transfers_flat["transfer_date"]
-            )
-            transfers_flat["Year_Month"] = transfers_flat["transfer_date"].dt.strftime(
-                "%Y-%m"
-            )
-
-            transfer_destinations = transfers_flat.rename(
-                columns={
-                    "to_warehouse": "Warehouse",
-                    "transfer_date": "Inbound_Date",
-                    "pkg_quantity": "Transfer_Quantity",
-                }
-            )
-            transfer_destinations = transfer_destinations[
-                ["Row_ID", "Warehouse", "Inbound_Date", "Transfer_Quantity"]
-            ]
-
-            wh_df = wh_df.merge(
-                transfer_destinations,
-                on=["Row_ID", "Warehouse", "Inbound_Date"],
-                how="left",
-            )
-            wh_df["Transfer_Quantity"] = (
-                wh_df["Transfer_Quantity"].fillna(0).astype(int)
-            )
-        else:
-            wh_df["Transfer_Quantity"] = 0
-
-        # 창고간 이동 목적지 수량 제외
-        wh_df["External_Quantity"] = (
-            wh_df["Pkg_Quantity"] - wh_df["Transfer_Quantity"]
-        ).clip(lower=0)
-        external_wh_df = wh_df[wh_df["External_Quantity"] > 0].copy()
-        external_wh_df["Pkg_Quantity"] = (
-            external_wh_df["External_Quantity"].astype(int)
-        )
-        external_wh_df.drop(columns=["Transfer_Quantity", "External_Quantity", "Pkg"], inplace=True)
-
-        # 3. 집계 (벡터화)
-        if external_wh_df.empty:
-            by_month_wh = pd.DataFrame(columns=self.warehouse_columns)
-        else:
-            by_month_wh = (
-                external_wh_df.groupby(["Year_Month", "Warehouse"])["Pkg_Quantity"].sum()
-                .unstack(fill_value=0)
-            )
-        by_warehouse = by_month_wh.sum(axis=0).to_dict()
-        by_month = by_month_wh.sum(axis=1).to_dict()
-        total_inbound = int(external_wh_df["Pkg_Quantity"].sum())
-
-        # 4. 결과 구성
-        if external_wh_df.empty:
-            inbound_items: List[Dict] = []
-        else:
-            inbound_items = external_wh_df.rename(columns={"Row_ID": "Item_ID"}).to_dict("records")
-
-        for item in inbound_items:
-            if isinstance(item.get("Item_ID"), (int, np.integer)):
-                item["Item_ID"] = int(item["Item_ID"])
-            item["Inbound_Type"] = "external_arrival"
-
-        warehouse_transfers = (
-            transfers_flat.to_dict("records") if not transfers_flat.empty else []
-        )
-
-        logger.info(f" Vectorized 창고 입고 계산 완료: {total_inbound}건")
-
-        return {
-            "total_inbound": total_inbound,
-            "by_warehouse": by_warehouse,
-            "by_month": by_month,
-            "inbound_items": inbound_items,
-            "warehouse_transfers": warehouse_transfers,
-        }
-
-    def _calculate_warehouse_inbound_parallel(self, df: pd.DataFrame) -> Dict:
-        """병렬 처리된 창고 입고 계산"""
-        logger.info(" Parallel 창고 입고 계산 시작")
-
-        try:
-            from multiprocessing import Pool, cpu_count
-            import numpy as np
-
-            n_cores = min(cpu_count(), 4)  # 최대 4코어로 제한
-            chunks = np.array_split(df, n_cores)
-
-            with Pool(n_cores) as pool:
-                results = pool.starmap(
-                    self._process_chunk_inbound,
-                    [(chunk, self.warehouse_columns) for chunk in chunks],
-                )
-
-            # 결과 병합
-            inbound_items = pd.concat([r["inbound_items"] for r in results], ignore_index=True)
-            transfers_flat = pd.concat([r["transfers"] for r in results], ignore_index=True)
-
-            # 집계
-            by_month_wh = (
-                inbound_items.groupby(["Year_Month", "Warehouse"])["Pkg_Quantity"]
-                .sum()
-                .unstack(fill_value=0)
-            )
-            by_warehouse = by_month_wh.sum(axis=0).to_dict()
-            by_month = by_month_wh.sum(axis=1).to_dict()
-            total_inbound = inbound_items["Pkg_Quantity"].sum()
-
-            logger.info(f" Parallel 창고 입고 계산 완료: {total_inbound}건")
-            return {
-                "total_inbound": total_inbound,
-                "by_warehouse": by_warehouse,
-                "by_month": by_month,
-                "inbound_items": inbound_items.to_dict("records"),
-                "warehouse_transfers": transfers_flat.to_dict("records"),
-            }
-
-        except Exception as e:
-            logger.error(f"병렬 처리 실패: {e}, 벡터화로 폴백")
-            return self._calculate_warehouse_inbound_vectorized(df)
-
-    def _process_chunk_inbound(self, chunk_df: pd.DataFrame, warehouse_columns: list) -> dict:
-        """청크 단위 입고 처리"""
-        # 1. 창고 입고 데이터 처리
-        wh_df = chunk_df.melt(
-            id_vars=["Pkg"],
-            value_vars=warehouse_columns,
-            var_name="Warehouse",
-            value_name="Inbound_Date",
-        )
-        wh_df = wh_df[wh_df["Inbound_Date"].notna()]
-        wh_df["Inbound_Date"] = pd.to_datetime(wh_df["Inbound_Date"])
-        wh_df["Year_Month"] = wh_df["Inbound_Date"].dt.strftime("%Y-%m")
-        wh_df["Pkg_Quantity"] = self._get_pkg_quantity_vectorized(wh_df)
-
-        # 2. 창고간 이동 감지
-        transfers_flat = self._vectorized_detect_warehouse_transfers_batch(chunk_df)
-        transfer_dest = (
-            set(transfers_flat["to_warehouse"].unique()) if not transfers_flat.empty else set()
-        )
-
-        # 3. 이동 목적지 제외
-        wh_df = wh_df[~wh_df["Warehouse"].isin(transfer_dest)]
-
-        return {"inbound_items": wh_df, "transfers": transfers_flat}
-
     def calculate_warehouse_outbound_corrected(self, df: pd.DataFrame) -> Dict:
         """
          수정된 창고 출고 계산
@@ -1067,15 +728,6 @@ class CorrectedWarehouseIOCalculator:
         - 다음 날 이동만 출고로 인정 (동일 날짜 제외)
         - 창고간 이동과 창고→현장 이동 구분
         """
-        if self.use_parallel and self.use_vectorized and len(df) > 1000:
-            return self._calculate_warehouse_outbound_parallel(df)
-        elif self.use_vectorized:
-            return self._calculate_warehouse_outbound_vectorized(df)
-        else:
-            return self._calculate_warehouse_outbound_legacy(df)
-
-    def _calculate_warehouse_outbound_legacy(self, df: pd.DataFrame) -> Dict:
-        """기존 iterrows 방식 (레거시)"""
         logger.info(" 수정된 창고 출고 계산 시작")
 
         outbound_items = []
@@ -1129,12 +781,14 @@ class CorrectedWarehouseIOCalculator:
                             if site in row.index and pd.notna(row[site]):
                                 site_date = pd.to_datetime(row[site])
                                 #  수정: 다음 날 이동만 출고로 인정
-                                if site_date > warehouse_date:  # 동일 날짜 제외
+                                if (site_date.date() == (warehouse_date.date() + timedelta(days=1))):  # 동일 날짜 제외
                                     next_site_movements.append((site, site_date))
 
                         # 가장 빠른 현장 이동을 출고로 계산
                         if next_site_movements:
-                            next_site, next_date = min(next_site_movements, key=lambda x: x[1])
+                            next_site, next_date = min(
+                                next_site_movements, key=lambda x: x[1]
+                            )
                             pkg_quantity = self._get_pkg_quantity(row)
 
                             outbound_items.append(
@@ -1150,9 +804,13 @@ class CorrectedWarehouseIOCalculator:
                             )
 
                             total_outbound += pkg_quantity
-                            by_warehouse[warehouse] = by_warehouse.get(warehouse, 0) + pkg_quantity
+                            by_warehouse[warehouse] = (
+                                by_warehouse.get(warehouse, 0) + pkg_quantity
+                            )
                             month_key = next_date.strftime("%Y-%m")
-                            by_month[month_key] = by_month.get(month_key, 0) + pkg_quantity
+                            by_month[month_key] = (
+                                by_month.get(month_key, 0) + pkg_quantity
+                            )
 
                             #  HOT-FIX: 중복 출고 방지를 위해 break 추가
                             break
@@ -1171,291 +829,6 @@ class CorrectedWarehouseIOCalculator:
             "outbound_items": outbound_items,
         }
 
-    def _calculate_warehouse_outbound_vectorized(self, df: pd.DataFrame) -> Dict:
-        """벡터화된 창고 출고 계산 (PATCH.MD 전략)"""
-        logger.info(" Vectorized 창고 출고 계산 시작")
-
-        # 1. 창고간 이동 출고 처리 (완전 벡터화)
-        transfers_flat = self._vectorized_detect_warehouse_transfers_batch(df)
-
-        outbound_items = []
-        total_outbound = 0
-        by_warehouse = {}
-        by_month = {}
-
-        # 창고간 이동 출고 처리
-        if not transfers_flat.empty:
-            transfers_flat["Year_Month"] = transfers_flat["transfer_date"].dt.strftime("%Y-%m")
-            transfers_flat["Pkg_Quantity"] = transfers_flat["pkg_quantity"]
-
-            # 집계 (벡터화)
-            transfer_grouped = transfers_flat.groupby(["from_warehouse", "Year_Month"])[
-                "Pkg_Quantity"
-            ].sum()
-            for (warehouse, month), quantity in transfer_grouped.items():
-                by_warehouse[warehouse] = by_warehouse.get(warehouse, 0) + quantity
-                by_month[month] = by_month.get(month, 0) + quantity
-                total_outbound += quantity
-
-            # 창고간 이동으로 이미 출고된 창고 추적
-            transferred_warehouses = set(transfers_flat["from_warehouse"].unique())
-        else:
-            transferred_warehouses = set()
-
-        # 2. 창고→현장 출고 처리 (벡터화)
-        # 창고 컬럼과 현장 컬럼을 melt하여 처리
-        # SQM 컬럼이 없으면 Pkg만 사용
-        id_vars = ["Pkg"]
-        if "SQM" in df.columns:
-            id_vars.append("SQM")
-
-        wh_melt = df.melt(
-            id_vars=id_vars,
-            value_vars=self.warehouse_columns,
-            var_name="Warehouse",
-            value_name="wh_date",
-        )
-        site_melt = df.melt(
-            id_vars=id_vars, value_vars=self.site_columns, var_name="Site", value_name="site_date"
-        )
-
-        # 날짜 변환
-        wh_melt["wh_date"] = pd.to_datetime(wh_melt["wh_date"], errors="coerce")
-        site_melt["site_date"] = pd.to_datetime(site_melt["site_date"], errors="coerce")
-
-        # 유효한 데이터만 필터링
-        wh_valid = wh_melt[wh_melt["wh_date"].notna()].copy()
-        site_valid = site_melt[site_melt["site_date"].notna()].copy()
-
-        # 창고간 이동으로 이미 출고된 창고 제외 로직 제거 (너무 광범위하게 적용됨)
-        # wh_valid = wh_valid[~wh_valid["Warehouse"].isin(transferred_warehouses)]
-
-        # 창고-현장 매칭 (오리지널 로직 적용)
-        if not wh_valid.empty and not site_valid.empty:
-            # 창고간 이동으로 이미 출고된 창고 추적 로직 제거 (너무 광범위하게 적용됨)
-            # transferred_from_warehouses = set()
-            # for transfer in transfers_flat.to_dict("records"):
-            #     transferred_from_warehouses.add(transfer["from_warehouse"])
-            
-            warehouse_site_outbound = []
-            
-            # 행별로 그룹화하여 처리
-            for row_idx in wh_valid.index.unique():
-                row_warehouses = wh_valid[wh_valid.index == row_idx]
-                row_sites = site_valid[site_valid.index == row_idx]
-                
-                if not row_warehouses.empty and not row_sites.empty:
-                    # 각 창고에 대해 해당 행의 현장들과 매칭
-                    for _, wh_row in row_warehouses.iterrows():
-                        warehouse = wh_row["Warehouse"]
-                        
-                        # 창고간 이동으로 이미 출고된 창고 제외 로직 제거 (너무 광범위하게 적용됨)
-                        # if warehouse in transferred_from_warehouses:
-                        #     continue
-                        
-                        wh_date = wh_row["wh_date"]
-                        pkg_quantity = wh_row["Pkg"] if pd.notna(wh_row["Pkg"]) else 1
-                        pkg_quantity = max(1, int(pkg_quantity))
-                        
-                        # 수정된 로직: 창고 입고일 이후 모든 현장 이동 인정
-                        next_site_movements = []
-                        for _, site_row in row_sites.iterrows():
-                            site_date = site_row["site_date"]
-                            # 창고 입고일 이후 현장 이동 (동일 날짜 제외)
-                            if site_date.date() > wh_date.date():
-                                next_site_movements.append((site_row["Site"], site_date))
-                        
-                        # 가장 빠른 현장 이동을 출고로 계산
-                        if next_site_movements:
-                            next_site, next_date = min(next_site_movements, key=lambda x: x[1])
-                            
-                            warehouse_site_outbound.append({
-                                "Item_ID": row_idx,
-                                "From_Location": warehouse,
-                                "To_Location": next_site,
-                                "Outbound_Date": next_date,
-                                "Year_Month": next_date.strftime("%Y-%m"),
-                                "Pkg_Quantity": pkg_quantity,
-                                "Outbound_Type": "warehouse_to_site",
-                            })
-                            
-                            # 중복 출고 방지를 위해 break 추가 (오리지널 로직)
-                            break
-            
-            # 결과를 outbound_items에 추가
-            outbound_items.extend(warehouse_site_outbound)
-            
-            # 집계 업데이트
-            for item in warehouse_site_outbound:
-                warehouse = item["From_Location"]
-                month = item["Year_Month"]
-                quantity = item["Pkg_Quantity"]
-                
-                by_warehouse[warehouse] = by_warehouse.get(warehouse, 0) + quantity
-                by_month[month] = by_month.get(month, 0) + quantity
-                total_outbound += quantity
-
-        # 창고간 이동 아이템 추가
-        if not transfers_flat.empty:
-            for _, transfer in transfers_flat.iterrows():
-                outbound_items.append(
-                    {
-                        "Item_ID": transfer.name,
-                        "From_Location": transfer["from_warehouse"],
-                        "To_Location": transfer["to_warehouse"],
-                        "Outbound_Date": transfer["transfer_date"],
-                        "Year_Month": transfer["Year_Month"],
-                        "Pkg_Quantity": transfer["Pkg_Quantity"],
-                        "Outbound_Type": "warehouse_transfer",
-                    }
-                )
-
-        logger.info(f" Vectorized 창고 출고 계산 완료: {total_outbound}건")
-
-        return {
-            "total_outbound": total_outbound,
-            "by_warehouse": by_warehouse,
-            "by_month": by_month,
-            "outbound_items": outbound_items,
-        }
-
-    def _calculate_warehouse_outbound_parallel(self, df: pd.DataFrame) -> Dict:
-        """병렬 처리된 창고 출고 계산"""
-        logger.info(" Parallel 창고 출고 계산 시작")
-
-        try:
-            from multiprocessing import Pool, cpu_count
-            import numpy as np
-
-            n_cores = min(cpu_count(), 4)  # 최대 4코어로 제한
-            chunks = np.array_split(df, n_cores)
-
-            with Pool(n_cores) as pool:
-                results = pool.starmap(
-                    self._process_chunk_outbound,
-                    [(chunk, self.warehouse_columns, self.site_columns) for chunk in chunks],
-                )
-
-            # 결과 병합
-            outbound_items = pd.concat([r["outbound_items"] for r in results], ignore_index=True)
-
-            # 집계
-            by_month_wh = (
-                outbound_items.groupby(["Year_Month", "From_Location"])["Pkg_Quantity"]
-                .sum()
-                .unstack(fill_value=0)
-            )
-            by_warehouse = by_month_wh.sum(axis=0).to_dict()
-            by_month = by_month_wh.sum(axis=1).to_dict()
-            total_outbound = outbound_items["Pkg_Quantity"].sum()
-
-            logger.info(f" Parallel 창고 출고 계산 완료: {total_outbound}건")
-            return {
-                "total_outbound": total_outbound,
-                "by_warehouse": by_warehouse,
-                "by_month": by_month,
-                "outbound_items": outbound_items.to_dict("records"),
-            }
-
-        except Exception as e:
-            logger.error(f"병렬 처리 실패: {e}, 벡터화로 폴백")
-            return self._calculate_warehouse_outbound_vectorized(df)
-
-    def _process_chunk_outbound(
-        self, chunk_df: pd.DataFrame, warehouse_columns: list, site_columns: list
-    ) -> dict:
-        """청크 단위 출고 처리"""
-        # 1. 창고간 이동 감지
-        transfers_flat = self._vectorized_detect_warehouse_transfers_batch(chunk_df)
-        if not transfers_flat.empty:
-            transfers_flat["Outbound_Type"] = "warehouse_transfer"
-            transfers_flat.rename(
-                columns={
-                    "from_warehouse": "From_Location",
-                    "to_warehouse": "To_Location",
-                    "transfer_date": "Outbound_Date",
-                },
-                inplace=True,
-            )
-            transfers_flat["Year_Month"] = transfers_flat["Outbound_Date"].dt.strftime("%Y-%m")
-            transfers_flat["Pkg_Quantity"] = self._get_pkg_quantity_vectorized(transfers_flat)
-        else:
-            transfers_flat = pd.DataFrame(
-                columns=[
-                    "From_Location",
-                    "To_Location",
-                    "Outbound_Date",
-                    "Year_Month",
-                    "Pkg_Quantity",
-                    "Outbound_Type",
-                ]
-            )
-
-        # 2. 창고→현장 이동 처리
-        # SQM 컬럼이 없으면 Pkg만 사용
-        id_vars = ["Pkg"]
-        if "SQM" in chunk_df.columns:
-            id_vars.append("SQM")
-
-        wh_melt = chunk_df.melt(
-            id_vars=id_vars,
-            value_vars=warehouse_columns,
-            var_name="Warehouse",
-            value_name="warehouse_date",
-        )
-        site_melt = chunk_df.melt(
-            id_vars=id_vars, value_vars=site_columns, var_name="Site", value_name="site_date"
-        )
-
-        merged = wh_melt.merge(
-            site_melt, left_index=True, right_index=True, suffixes=("_wh", "_site")
-        )
-        merged = merged[(merged["warehouse_date"].notna()) & (merged["site_date"].notna())]
-        merged["warehouse_date"] = pd.to_datetime(merged["warehouse_date"])
-        merged["site_date"] = pd.to_datetime(merged["site_date"])
-
-        # 다음 날 이동만 출고로 인정
-        next_day_mask = (
-            merged["site_date"].dt.date == (merged["warehouse_date"] + pd.Timedelta(days=1)).dt.date
-        )
-        outbound_site = merged[next_day_mask].copy()
-
-        if not outbound_site.empty:
-            outbound_site["Year_Month"] = outbound_site["site_date"].dt.strftime("%Y-%m")
-            outbound_site["Outbound_Type"] = "warehouse_to_site"
-            outbound_site["From_Location"] = outbound_site["Warehouse"]
-            outbound_site["To_Location"] = outbound_site["Site"]
-            outbound_site["Outbound_Date"] = outbound_site["site_date"]
-            outbound_site["Pkg_Quantity"] = self._get_pkg_quantity_vectorized(outbound_site)
-
-            # 필요한 컬럼만 선택
-            outbound_site = outbound_site[
-                [
-                    "From_Location",
-                    "To_Location",
-                    "Outbound_Date",
-                    "Year_Month",
-                    "Pkg_Quantity",
-                    "Outbound_Type",
-                ]
-            ]
-        else:
-            outbound_site = pd.DataFrame(
-                columns=[
-                    "From_Location",
-                    "To_Location",
-                    "Outbound_Date",
-                    "Year_Month",
-                    "Pkg_Quantity",
-                    "Outbound_Type",
-                ]
-            )
-
-        # 3. 결과 병합
-        outbound_items = pd.concat([transfers_flat, outbound_site], ignore_index=True)
-
-        return {"outbound_items": outbound_items}
-
     def calculate_warehouse_inventory_corrected(self, df: pd.DataFrame) -> Dict:
         """
          수정된 창고 재고 계산 (고성능 Pandas 버전)
@@ -1469,7 +842,9 @@ class CorrectedWarehouseIOCalculator:
         if "Status_Location" in df.columns:
             # 입고일자 컬럼 찾기 (가장 최근 날짜 컬럼 사용)
             date_columns = [
-                col for col in df.columns if col in self.warehouse_columns + self.site_columns
+                col
+                for col in df.columns
+                if col in self.warehouse_columns + self.site_columns
             ]
             if date_columns:
                 # 가장 많은 데이터가 있는 날짜 컬럼을 기준으로 사용
@@ -1477,20 +852,30 @@ class CorrectedWarehouseIOCalculator:
                 df["입고일자"] = pd.to_datetime(df[primary_date_col], errors="coerce")
 
                 status_inv = (
-                    df.groupby(["Status_Location", pd.Grouper(key="입고일자", freq="M")])["Pkg"]
+                    df.groupby(
+                        ["Status_Location", pd.Grouper(key="입고일자", freq="M")]
+                    )["Pkg"]
                     .sum()
                     .rename("status_inventory")
                 )
             else:
                 # 날짜 컬럼이 없으면 전체를 하나의 그룹으로 처리
-                status_inv = df.groupby("Status_Location")["Pkg"].sum().rename("status_inventory")
+                status_inv = (
+                    df.groupby("Status_Location")["Pkg"]
+                    .sum()
+                    .rename("status_inventory")
+                )
         else:
             status_inv = pd.Series(dtype=float)
 
         logger.info(f" Status_Location 기준 재고 계산 완료: {len(status_inv)}개 그룹")
 
         #  2. 물리적 위치 재고 (도착일자 기준)
-        phys_cols = [col for col in self.warehouse_columns + self.site_columns if col in df.columns]
+        phys_cols = [
+            col
+            for col in self.warehouse_columns + self.site_columns
+            if col in df.columns
+        ]
         frames = []
 
         for loc in phys_cols:
@@ -1503,7 +888,9 @@ class CorrectedWarehouseIOCalculator:
             phys_df["arrival"] = pd.to_datetime(phys_df["arrival"], errors="coerce")
 
             physical_inv = (
-                phys_df.groupby(["Location", pd.Grouper(key="arrival", freq="M")])["Pkg"]
+                phys_df.groupby(["Location", pd.Grouper(key="arrival", freq="M")])[
+                    "Pkg"
+                ]
                 .sum()
                 .rename("physical_inventory")
             )
@@ -1514,7 +901,9 @@ class CorrectedWarehouseIOCalculator:
 
         #  3. 병합 & 차이 계산
         inv = pd.concat([status_inv, physical_inv], axis=1).fillna(0)
-        inv["verified_inventory"] = inv[["status_inventory", "physical_inventory"]].min(axis=1)
+        inv["verified_inventory"] = inv[["status_inventory", "physical_inventory"]].min(
+            axis=1
+        )
         inv["diff"] = inv["status_inventory"] - inv["physical_inventory"]
 
         #  4. 불일치 탐지 (임계값 10건 이상)
@@ -1530,7 +919,9 @@ class CorrectedWarehouseIOCalculator:
 
         # 월별 재고 구조로 변환
         for idx, row in inv.reset_index().iterrows():
-            month_str = row.iloc[1].strftime("%Y-%m") if pd.notna(row.iloc[1]) else "Unknown"
+            month_str = (
+                row.iloc[1].strftime("%Y-%m") if pd.notna(row.iloc[1]) else "Unknown"
+            )
             location = row.iloc[0] if pd.notna(row.iloc[0]) else "Unknown"
 
             if month_str not in inventory_by_month:
@@ -1580,135 +971,27 @@ class CorrectedWarehouseIOCalculator:
             to_date = pd.to_datetime(row.get(to_wh), errors="coerce")
 
             if (
-                pd.notna(from_date) and pd.notna(to_date) and from_date.date() == to_date.date()
+                pd.notna(from_date)
+                and pd.notna(to_date)
+                and from_date.date() == to_date.date()
             ):  # 동일 날짜 이동
 
                 #  추가: 논리적 검증
                 if self._validate_transfer_logic(from_wh, to_wh, from_date, to_date):
                     transfers.append(
                         {
-                            "Row_ID": int(row.name)
-                            if isinstance(row.name, (int, np.integer))
-                            else row.name,
                             "from_warehouse": from_wh,
                             "to_warehouse": to_wh,
                             "transfer_date": from_date,
                             "pkg_quantity": self._get_pkg_quantity(row),
                             "transfer_type": "warehouse_to_warehouse",
-                            "Year_Month": from_date.strftime("%Y-%m"),  #  Year_Month 키 추가
+                            "Year_Month": from_date.strftime(
+                                "%Y-%m"
+                            ),  #  Year_Month 키 추가
                         }
                     )
 
         return transfers
-
-    def _vectorized_detect_warehouse_transfers_batch(self, df: pd.DataFrame) -> pd.DataFrame:
-        """완전 벡터화된 창고간 이동 감지 (v4.1 전략)"""
-        logger.info(" Vectorized 창고간 이동 감지 시작")
-
-        transfers_list = []
-        warehouse_pairs = [
-            ("DSV Indoor", "DSV Al Markaz"),
-            ("DSV Indoor", "DSV Outdoor"),
-            ("DSV Al Markaz", "DSV Outdoor"),
-            ("AAA Storage", "DSV Al Markaz"),
-            ("AAA Storage", "DSV Indoor"),
-            ("DSV Indoor", "MOSB"),
-            ("DSV Al Markaz", "MOSB"),
-        ]
-
-        for from_wh, to_wh in warehouse_pairs:
-            if from_wh in df.columns and to_wh in df.columns:
-                # 벡터화된 날짜 변환
-                from_date = pd.to_datetime(df[from_wh], errors="coerce")
-                to_date = pd.to_datetime(df[to_wh], errors="coerce")
-
-                # 동일 날짜 이동 마스크
-                same_date_mask = (
-                    from_date.notna() & to_date.notna() & (from_date.dt.date == to_date.dt.date)
-                )
-
-                if same_date_mask.any():
-                    # 유효한 이동만 필터링
-                    valid_mask = same_date_mask & self._validate_transfer_logic_vectorized(
-                        from_wh, to_wh, from_date, to_date, df
-                    )
-
-                    if valid_mask.any():
-                        # 이동 데이터 생성
-                        transfer_df = df[valid_mask].copy()
-                        transfer_df["Row_ID"] = transfer_df.index
-                        transfer_df["from_warehouse"] = from_wh
-                        transfer_df["to_warehouse"] = to_wh
-                        transfer_df["transfer_date"] = from_date[valid_mask]
-                        transfer_df["pkg_quantity"] = self._get_pkg_quantity_vectorized(transfer_df)
-                        transfer_df["transfer_type"] = "warehouse_to_warehouse"
-                        transfer_df["Year_Month"] = transfer_df["transfer_date"].dt.strftime(
-                            "%Y-%m"
-                        )
-
-                        transfers_list.append(
-                            transfer_df[
-                                [
-                                    "Row_ID",
-                                    "from_warehouse",
-                                    "to_warehouse",
-                                    "transfer_date",
-                                    "pkg_quantity",
-                                    "transfer_type",
-                                    "Year_Month",
-                                ]
-                            ]
-                        )
-
-        if transfers_list:
-            result = pd.concat(transfers_list, ignore_index=True)
-            logger.info(f" Vectorized 창고간 이동 감지 완료: {len(result)}건")
-            result["Row_ID"] = result["Row_ID"].apply(
-                lambda value: int(value)
-                if isinstance(value, (int, np.integer))
-                else value
-            )
-            return result
-        else:
-            logger.info(" Vectorized 창고간 이동 감지 완료: 0건")
-            return pd.DataFrame(
-                columns=[
-                    "Row_ID",
-                    "from_warehouse",
-                    "to_warehouse",
-                    "transfer_date",
-                    "pkg_quantity",
-                    "transfer_type",
-                    "Year_Month",
-                ]
-            )
-
-    def _validate_transfer_logic_vectorized(self, from_wh, to_wh, from_date, to_date, df):
-        """벡터화된 이동 로직 검증"""
-        # 우선순위 기반 검증
-        from_priority = pd.Series(self.location_priority.get(from_wh, 99), index=df.index)
-        to_priority = pd.Series(self.location_priority.get(to_wh, 99), index=df.index)
-
-        # 우선순위가 높은 경우만 허용 (낮은 숫자 = 높은 우선순위)
-        priority_valid = from_priority > to_priority
-
-        # 특별 허용 쌍들
-        special_pairs = [
-            ("DSV Indoor", "DSV Al Markaz"),
-            ("AAA Storage", "DSV Al Markaz"),
-            ("DSV Outdoor", "MOSB"),
-        ]
-        special_valid = pd.Series(False, index=df.index)
-        for special_from, special_to in special_pairs:
-            if (from_wh, to_wh) == (special_from, special_to):
-                special_valid = pd.Series(True, index=df.index)
-                break
-
-        return priority_valid | special_valid
-
-    def _get_pkg_quantity_vectorized(self, df):
-        """벡터화된 PKG 수량 계산"""
-        return df["Pkg"].fillna(1).clip(lower=1).astype(int)
 
     def _validate_transfer_logic(self, from_wh, to_wh, from_date, to_date):
         """새로 추가: 창고간 이동 논리 검증"""
@@ -1792,7 +1075,9 @@ class CorrectedWarehouseIOCalculator:
             validation_results["inventory_check"] = "PASS"
         else:
             validation_results["inventory_check"] = "FAIL"
-            logger.error(f" 재고 불일치: 예상({expected_inventory}) vs 실제({actual_inventory})")
+            logger.error(
+                f" 재고 불일치: 예상({expected_inventory}) vs 실제({actual_inventory})"
+            )
 
         # 전체 검증 결과
         all_checks = [
@@ -1842,7 +1127,9 @@ class CorrectedWarehouseIOCalculator:
                             total_direct += pkg_quantity
 
                         except Exception as e:
-                            logger.warning(f"직접 배송 계산 오류 (Row {idx}, Site {site}): {e}")
+                            logger.warning(
+                                f"직접 배송 계산 오류 (Row {idx}, Site {site}): {e}"
+                            )
                             continue
 
         logger.info(f" 직접 배송 계산 완료: {total_direct}건")
@@ -1869,7 +1156,8 @@ class CorrectedWarehouseIOCalculator:
             # 창고별 입고 집계
             for warehouse in self.warehouse_columns:
                 mask = (df[warehouse].notna()) & (
-                    pd.to_datetime(df[warehouse], errors="coerce").dt.strftime("%Y-%m") == month_str
+                    pd.to_datetime(df[warehouse], errors="coerce").dt.strftime("%Y-%m")
+                    == month_str
                 )
                 inbound_count = df.loc[mask, "Pkg"].sum()
                 row[f"{warehouse}_Inbound"] = int(inbound_count)
@@ -1877,7 +1165,8 @@ class CorrectedWarehouseIOCalculator:
             # 현장별 입고 집계
             for site in self.site_columns:
                 mask = (df[site].notna()) & (
-                    pd.to_datetime(df[site], errors="coerce").dt.strftime("%Y-%m") == month_str
+                    pd.to_datetime(df[site], errors="coerce").dt.strftime("%Y-%m")
+                    == month_str
                 )
                 inbound_count = df.loc[mask, "Pkg"].sum()
                 row[f"{site}_Inbound"] = int(inbound_count)
@@ -1922,13 +1211,6 @@ class CorrectedWarehouseIOCalculator:
 
     def calculate_monthly_sqm_inbound(self, df: pd.DataFrame) -> Dict:
         """월별 SQM 입고 계산"""
-        if self.use_vectorized:
-            return self._calculate_monthly_sqm_inbound_vectorized(df)
-        else:
-            return self._calculate_monthly_sqm_inbound_legacy(df)
-
-    def _calculate_monthly_sqm_inbound_legacy(self, df: pd.DataFrame) -> Dict:
-        """기존 iterrows 방식 (레거시)"""
         logger.info(" 월별 SQM 입고 계산 시작")
 
         monthly_sqm_inbound = {}
@@ -1958,56 +1240,8 @@ class CorrectedWarehouseIOCalculator:
         logger.info(f" 월별 SQM 입고 계산 완료")
         return monthly_sqm_inbound
 
-    def _calculate_monthly_sqm_inbound_vectorized(self, df: pd.DataFrame) -> Dict:
-        """벡터화된 월별 SQM 입고 계산 (PATCH.MD 전략)"""
-        logger.info(" Vectorized 월별 SQM 입고 계산 시작")
-
-        # 1. 창고 컬럼을 melt하여 벡터화 처리
-        # SQM 컬럼이 없으면 Pkg만 사용
-        id_vars = ["Pkg"]
-        if "SQM" in df.columns:
-            id_vars.append("SQM")
-
-        wh_df = df.melt(
-            id_vars=id_vars,
-            value_vars=self.warehouse_columns,
-            var_name="Warehouse",
-            value_name="Inbound_Date",
-        )
-
-        # 유효한 데이터만 필터링
-        wh_df = wh_df[wh_df["Inbound_Date"].notna()].copy()
-        wh_df["Inbound_Date"] = pd.to_datetime(wh_df["Inbound_Date"], errors="coerce")
-        wh_df = wh_df[wh_df["Inbound_Date"].notna()]
-
-        # SQM 값 계산 (벡터화)
-        wh_df["SQM_Value"] = wh_df.apply(lambda row: _get_sqm(row), axis=1)
-        wh_df["Year_Month"] = wh_df["Inbound_Date"].dt.strftime("%Y-%m")
-
-        # 2. 월별·창고별 집계 (벡터화)
-        monthly_sqm = wh_df.groupby(["Year_Month", "Warehouse"])["SQM_Value"].sum()
-
-        # 3. 결과를 딕셔너리로 변환
-        monthly_sqm_inbound = {}
-        for (month, warehouse), sqm_value in monthly_sqm.items():
-            if month not in monthly_sqm_inbound:
-                monthly_sqm_inbound[month] = {}
-            monthly_sqm_inbound[month][warehouse] = sqm_value
-
-        logger.info(f" Vectorized 월별 SQM 입고 계산 완료")
-        return monthly_sqm_inbound
-
     def calculate_monthly_sqm_outbound(self, df: pd.DataFrame) -> Dict:
         """ENHANCED: 월별 SQM 출고 계산 (창고간 + 창고→현장 모두)"""
-        if self.use_parallel and self.use_vectorized and len(df) > 1000:
-            return self._calculate_monthly_sqm_outbound_parallel(df)
-        elif self.use_vectorized:
-            return self._calculate_monthly_sqm_outbound_vectorized(df)
-        else:
-            return self._calculate_monthly_sqm_outbound_legacy(df)
-
-    def _calculate_monthly_sqm_outbound_legacy(self, df: pd.DataFrame) -> Dict:
-        """기존 iterrows 방식 (레거시)"""
         logger.info(" 월별 SQM 출고 계산 시작 (창고간 + 창고→현장)")
 
         monthly_sqm_outbound = {}
@@ -2030,12 +1264,16 @@ class CorrectedWarehouseIOCalculator:
                 # ① 창고↔창고 transfer (기존 유지)
                 transfers = self._detect_warehouse_transfers(row)
                 for transfer in transfers:
-                    _accumulate(transfer["from_warehouse"], transfer["transfer_date"], row)
+                    _accumulate(
+                        transfer["from_warehouse"], transfer["transfer_date"], row
+                    )
 
                 # ② 창고→현장 출고 추가 (새로 추가)
                 for warehouse in self.warehouse_columns:
                     #  ENHANCED HOT-FIX: 창고간 이동으로 이미 출고된 창고 제외
-                    transferred_from_warehouses = [t["from_warehouse"] for t in transfers]
+                    transferred_from_warehouses = [
+                        t["from_warehouse"] for t in transfers
+                    ]
 
                     if warehouse in transferred_from_warehouses:
                         continue
@@ -2050,12 +1288,14 @@ class CorrectedWarehouseIOCalculator:
                                 if site in row.index and pd.notna(row[site]):
                                     site_date = pd.to_datetime(row[site])
                                     #  수정: 다음 날 이동만 출고로 인정
-                                    if site_date > warehouse_date:  # 동일 날짜 제외
+                                    if (site_date.date() == (warehouse_date.date() + timedelta(days=1))):  # 동일 날짜 제외
                                         next_site_movements.append((site, site_date))
 
                             # 가장 빠른 현장 이동을 출고로 계산
                             if next_site_movements:
-                                next_site, next_date = min(next_site_movements, key=lambda x: x[1])
+                                next_site, next_date = min(
+                                    next_site_movements, key=lambda x: x[1]
+                                )
                                 _accumulate(warehouse, next_date, row)
 
                         except Exception as e:
@@ -2071,157 +1311,9 @@ class CorrectedWarehouseIOCalculator:
         logger.info(f" 월별 SQM 출고 계산 완료 (창고간 + 창고→현장)")
         return monthly_sqm_outbound
 
-    def _calculate_monthly_sqm_outbound_vectorized(self, df: pd.DataFrame) -> Dict:
-        """벡터화된 월별 SQM 출고 계산 (PATCH.MD 전략)"""
-        logger.info(" Vectorized 월별 SQM 출고 계산 시작")
-
-        # 1. 창고간 이동 출고 처리 (완전 벡터화)
-        transfers_flat = self._vectorized_detect_warehouse_transfers_batch(df)
-
-        monthly_sqm_outbound = {}
-
-        # 창고간 이동 출고 처리
-        if not transfers_flat.empty:
-            transfers_flat["Year_Month"] = transfers_flat["transfer_date"].dt.strftime("%Y-%m")
-            # SQM 값 계산을 위해 원본 행에 접근
-            sqm_values = []
-            for idx in transfers_flat.index:
-                try:
-                    sqm_val = _get_sqm(df.iloc[idx])
-                    sqm_values.append(sqm_val)
-                except:
-                    sqm_values.append(0)
-            transfers_flat["SQM_Value"] = sqm_values
-
-            # 집계 (벡터화)
-            transfer_grouped = transfers_flat.groupby(["from_warehouse", "Year_Month"])[
-                "SQM_Value"
-            ].sum()
-            for (warehouse, month), sqm_value in transfer_grouped.items():
-                if month not in monthly_sqm_outbound:
-                    monthly_sqm_outbound[month] = {}
-                monthly_sqm_outbound[month][warehouse] = sqm_value
-
-            # 창고간 이동으로 이미 출고된 창고 추적
-            transferred_warehouses = set(transfers_flat["from_warehouse"].unique())
-        else:
-            transferred_warehouses = set()
-
-        # 2. 창고→현장 출고 처리 (벡터화)
-        # 창고 컬럼과 현장 컬럼을 melt하여 처리
-        # SQM 컬럼이 없으면 Pkg만 사용
-        id_vars = ["Pkg"]
-        if "SQM" in df.columns:
-            id_vars.append("SQM")
-
-        wh_melt = df.melt(
-            id_vars=id_vars,
-            value_vars=self.warehouse_columns,
-            var_name="Warehouse",
-            value_name="wh_date",
-        )
-        site_melt = df.melt(
-            id_vars=id_vars,
-            value_vars=self.site_columns,
-            var_name="Site",
-            value_name="site_date",
-        )
-
-        # 날짜 변환
-        wh_melt["wh_date"] = pd.to_datetime(wh_melt["wh_date"], errors="coerce")
-        site_melt["site_date"] = pd.to_datetime(site_melt["site_date"], errors="coerce")
-
-        # 유효한 데이터만 필터링
-        wh_valid = wh_melt[wh_melt["wh_date"].notna()].copy()
-        site_valid = site_melt[site_melt["site_date"].notna()].copy()
-
-        # 창고간 이동으로 이미 출고된 창고 제외
-        wh_valid = wh_valid[~wh_valid["Warehouse"].isin(transferred_warehouses)]
-
-        # 창고-현장 매칭 (다음 날 이동만)
-        if not wh_valid.empty and not site_valid.empty:
-            # 각 행별로 창고-현장 매칭
-            for idx, wh_row in wh_valid.iterrows():
-                # 해당 행의 현장 이동 찾기
-                row_sites = site_valid[site_valid.index == wh_row.name]
-                next_sites = row_sites[row_sites["site_date"] > wh_row["wh_date"]]
-
-                if not next_sites.empty:
-                    # 가장 빠른 현장 이동 선택
-                    next_site = next_sites.loc[next_sites["site_date"].idxmin()]
-
-                    # SQM 값 계산
-                    try:
-                        sqm_value = _get_sqm(df.iloc[wh_row.name])
-                    except:
-                        sqm_value = 0
-                    warehouse = wh_row["Warehouse"]
-                    month = next_site["site_date"].strftime("%Y-%m")
-
-                    if month not in monthly_sqm_outbound:
-                        monthly_sqm_outbound[month] = {}
-                    monthly_sqm_outbound[month][warehouse] = (
-                        monthly_sqm_outbound[month].get(warehouse, 0) + sqm_value
-                    )
-
-        logger.info(f" Vectorized 월별 SQM 출고 계산 완료")
-        return monthly_sqm_outbound
-
-    def _calculate_monthly_sqm_outbound_parallel(self, df: pd.DataFrame) -> Dict:
-        """병렬 처리된 SQM 출고 계산"""
-        logger.info(" Parallel 월별 SQM 출고 계산 시작")
-
-        try:
-            from multiprocessing import Pool, cpu_count
-            import numpy as np
-
-            n_cores = min(cpu_count(), 4)  # 최대 4코어로 제한
-            chunks = np.array_split(df, n_cores)
-
-            with Pool(n_cores) as pool:
-                results = pool.starmap(
-                    self._process_chunk_sqm_outbound,
-                    [(chunk, self.warehouse_columns, self.site_columns) for chunk in chunks],
-                )
-
-            # 결과 병합
-            all_outbound_items = pd.concat(
-                [r["outbound_items"] for r in results], ignore_index=True
-            )
-
-            # SQM 값 추가
-            all_outbound_items["SQM_Value"] = self._get_sqm_vectorized(
-                all_outbound_items.merge(
-                    df, left_on="Item_ID", right_index=True, suffixes=("", "_dup")
-                )
-            )
-
-            # 월별 집계
-            monthly_sqm_outbound = (
-                all_outbound_items.groupby(["Year_Month", "From_Location"])["SQM_Value"]
-                .sum()
-                .unstack(fill_value=0)
-                .to_dict("index")
-            )
-
-            logger.info(f" Parallel 월별 SQM 출고 계산 완료")
-            return monthly_sqm_outbound
-
-        except Exception as e:
-            logger.error(f"병렬 처리 실패: {e}, 벡터화로 폴백")
-            return self._calculate_monthly_sqm_outbound_vectorized(df)
-
-    def _process_chunk_sqm_outbound(
-        self, chunk_df: pd.DataFrame, warehouse_columns: list, site_columns: list
-    ) -> dict:
-        """청크 단위 SQM 출고 처리"""
-        # 창고 출고 계산 (기존 로직 재사용)
-        outbound_result = self._calculate_warehouse_outbound_vectorized(chunk_df)
-        outbound_items = pd.DataFrame(outbound_result["outbound_items"])
-
-        return {"outbound_items": outbound_items}
-
-    def calculate_cumulative_sqm_inventory(self, sqm_inbound: Dict, sqm_outbound: Dict) -> Dict:
+    def calculate_cumulative_sqm_inventory(
+        self, sqm_inbound: Dict, sqm_outbound: Dict
+    ) -> Dict:
         """누적 SQM 재고 계산"""
         logger.info(" 누적 SQM 재고 계산 시작")
 
@@ -2253,7 +1345,8 @@ class CorrectedWarehouseIOCalculator:
                     "cumulative_inventory_sqm": current_inventory[warehouse],
                     "base_capacity_sqm": self.warehouse_base_sqm.get(warehouse, 1000),
                     "utilization_rate_%": (
-                        current_inventory[warehouse] / self.warehouse_base_sqm.get(warehouse, 1000)
+                        current_inventory[warehouse]
+                        / self.warehouse_base_sqm.get(warehouse, 1000)
                     )
                     * 100,
                 }
@@ -2275,21 +1368,6 @@ class CorrectedWarehouseIOCalculator:
         Returns:
             dict: 월별 과금 결과
         """
-        if self.use_parallel and self.use_vectorized and len(df) > 1000:
-            return self._calculate_monthly_invoice_charges_prorated_parallel(
-                df, passthrough_amounts
-            )
-        elif self.use_vectorized:
-            return self._calculate_monthly_invoice_charges_prorated_vectorized(
-                df, passthrough_amounts
-            )
-        else:
-            return self._calculate_monthly_invoice_charges_prorated_legacy(df, passthrough_amounts)
-
-    def _calculate_monthly_invoice_charges_prorated_legacy(
-        self, df: pd.DataFrame, passthrough_amounts: dict = None
-    ) -> dict:
-        """기존 iterrows 방식 (레거시)"""
         logger.info(" 일할 과금 시스템 시작 (모드별 차등 적용)")
 
         passthrough_amounts = passthrough_amounts or {}
@@ -2347,7 +1425,8 @@ class CorrectedWarehouseIOCalculator:
                     # 월 범위와 교집합 계산
                     s = max(seg_start, month_start)
                     e = min(
-                        (seg_end or (month_end + pd.Timedelta(days=1))) - pd.Timedelta(days=1),
+                        (seg_end or (month_end + pd.Timedelta(days=1)))
+                        - pd.Timedelta(days=1),
                         month_end,
                     )
                     if s > e:
@@ -2402,293 +1481,6 @@ class CorrectedWarehouseIOCalculator:
         logger.info(f" 일할 과금 시스템 완료: {len(months)}개월 처리")
         return result
 
-    def _calculate_monthly_invoice_charges_prorated_vectorized(
-        self, df: pd.DataFrame, passthrough_amounts: dict = None
-    ) -> dict:
-        """벡터화된 일할 과금 계산 (v4.1 전략)"""
-        logger.info(" Vectorized 일할 과금 시스템 시작")
-
-        passthrough_amounts = passthrough_amounts or {}
-        rates = self.warehouse_sqm_rates
-        wh_cols = [w for w in self.warehouse_columns if w in df.columns]
-
-        if not wh_cols:
-            logger.warning("일할 과금 계산을 위한 창고 컬럼이 없습니다.")
-            return {}
-
-        # 1. Melt로 방문 기록을 long format으로 변환
-        df_with_index = df.copy()
-        df_with_index["row_id"] = df_with_index.index
-
-        visits = df_with_index.melt(
-            id_vars=["row_id"],
-            value_vars=wh_cols,
-            var_name="loc",
-            value_name="dt",
-        )
-        visits = visits[visits["dt"].notna()]
-        visits["dt"] = pd.to_datetime(visits["dt"])
-        visits = visits.sort_values(["row_id", "dt"])
-
-        # 2. Vectorized segments with shift
-        visits["next_dt"] = visits.groupby("row_id")["dt"].shift(-1)
-        visits["same_day"] = visits["dt"].dt.date == visits["next_dt"].dt.date
-        segments = visits[~visits["same_day"]].copy()
-        segments["seg_end"] = segments["next_dt"]
-
-        # 3. Explode date ranges for daily sums
-        def explode_dates(row):
-            if pd.isna(row["seg_end"]):
-                return pd.DataFrame(
-                    {"date": [row["dt"]], "loc": [row["loc"]], "row_id": [row["row_id"]]}
-                )
-            dates = pd.date_range(row["dt"], row["seg_end"] - pd.Timedelta(days=1), freq="D")
-            return pd.DataFrame({"date": dates, "loc": row["loc"], "row_id": row["row_id"]})
-
-        daily = pd.concat([explode_dates(r) for _, r in segments.iterrows()], ignore_index=True)
-
-        # 4. Merge SQM and aggregate
-        daily = daily.merge(
-            df.reset_index(names="row_id")[["row_id"]].assign(SQM=_get_sqm(df)), on="row_id"
-        )
-        daily["Year_Month"] = daily["date"].dt.strftime("%Y-%m")
-        daily_sum = daily.groupby(["Year_Month", "loc", "date"])["SQM"].sum().reset_index()
-
-        # 5. Monthly avg and billing (groupby)
-        monthly_avg = (
-            daily_sum.groupby(["Year_Month", "loc"])["SQM"].mean().reset_index(name="avg_sqm")
-        )
-
-        result = {}
-        for ym in monthly_avg["Year_Month"].unique():
-            ym_df = monthly_avg[monthly_avg["Year_Month"] == ym]
-            result[ym] = {}
-            total = 0.0
-
-            for _, r in ym_df.iterrows():
-                w = r["loc"]
-                mode = self.billing_mode.get(w, "rate")
-                avg_sqm = r["avg_sqm"]
-
-                if mode == "rate":
-                    amt = round(avg_sqm * rates.get(w, 0.0), 2)
-                    source = "AvgSQM×Rate"
-                elif mode == "passthrough":
-                    amt = float(passthrough_amounts.get((ym, w), 0.0))
-                    source = "Invoice Total (passthrough)"
-                else:
-                    amt = 0.0
-                    source = "No charge (policy)"
-
-                result[ym][w] = {
-                    "billing_mode": mode,
-                    "avg_sqm": round(avg_sqm, 2),
-                    "rate_aed": rates.get(w, 0.0),
-                    "monthly_charge_aed": amt,
-                    "amount_source": source,
-                }
-                total += amt
-
-            result[ym]["total_monthly_charge_aed"] = round(total, 2)
-
-        logger.info(f" Vectorized 일할 과금 완료")
-        return result
-
-    def _calculate_monthly_invoice_charges_prorated_parallel(
-        self, df: pd.DataFrame, passthrough_amounts: dict = None
-    ) -> dict:
-        """병렬 처리된 일할 과금 계산 (v4.1 전략)"""
-        logger.info(" Parallel 일할 과금 시스템 시작")
-
-        try:
-            from multiprocessing import Pool, cpu_count
-            import numpy as np
-
-            n_cores = min(cpu_count(), 4)  # 최대 4코어로 제한
-            chunks = np.array_split(df, n_cores)
-
-            with Pool(n_cores) as pool:
-                results = pool.starmap(
-                    self._process_chunk_invoice_charges,
-                    [(chunk, passthrough_amounts) for chunk in chunks],
-                )
-
-            # 월별 결과 병합
-            merged_result = self._merge_invoice_results(results)
-            logger.info(f" Parallel 일할 과금 완료: {len(merged_result)}개월")
-            return merged_result
-
-        except Exception as e:
-            logger.error(f"병렬 처리 실패: {e}, 벡터화로 폴백")
-            return self._calculate_monthly_invoice_charges_prorated_vectorized(
-                df, passthrough_amounts
-            )
-
-    def _process_chunk_invoice_charges(
-        self, chunk_df: pd.DataFrame, passthrough_amounts: dict = None
-    ) -> dict:
-        """청크 단위 일할 과금 처리"""
-        passthrough_amounts = passthrough_amounts or {}
-        rates = self.warehouse_sqm_rates
-        chunk_df = chunk_df.copy()
-        wh_cols = [w for w in self.warehouse_columns if w in chunk_df.columns]
-
-        if not wh_cols:
-            logger.warning("청크 일할 과금 계산을 위한 창고 컬럼이 없습니다.")
-            return {}
-
-        # 1. Melt로 방문 기록을 long format으로 변환
-        chunk_df["row_id"] = chunk_df.index
-
-        visits = chunk_df.melt(
-            id_vars=["row_id"],
-            value_vars=wh_cols,
-            var_name="loc",
-            value_name="dt",
-        )
-        visits = visits[visits["dt"].notna()]
-        visits["dt"] = pd.to_datetime(visits["dt"])
-        visits = visits.sort_values(["row_id", "dt"])
-
-        # 2. Vectorized segments with shift
-        visits["next_dt"] = visits.groupby("row_id")["dt"].shift(-1)
-        visits["same_day"] = visits["dt"].dt.date == visits["next_dt"].dt.date
-        segments = visits[~visits["same_day"]].copy()
-        segments["seg_end"] = segments["next_dt"]
-
-        # 3. Explode date ranges for daily sums (Numpy 기반 최적화)
-        def explode_dates_vectorized(row):
-            if pd.isna(row["seg_end"]):
-                return pd.DataFrame(
-                    {"date": [row["dt"]], "loc": [row["loc"]], "row_id": [row["row_id"]]}
-                )
-
-            # Numpy 기반 날짜 범위 생성
-            start_date = row["dt"]
-            end_date = row["seg_end"] - pd.Timedelta(days=1)
-            dates = pd.date_range(start_date, end_date, freq="D")
-
-            return pd.DataFrame(
-                {
-                    "date": dates,
-                    "loc": [row["loc"]] * len(dates),
-                    "row_id": [row["row_id"]] * len(dates),
-                }
-            )
-
-        daily_list = []
-        for _, row in segments.iterrows():
-            daily_list.append(explode_dates_vectorized(row))
-
-        if daily_list:
-            daily = pd.concat(daily_list, ignore_index=True)
-        else:
-            daily = pd.DataFrame(columns=["date", "loc", "row_id"])
-
-        # 4. Merge SQM and aggregate
-        if not daily.empty:
-            daily = daily.merge(
-                chunk_df.reset_index(names="row_id")[["row_id"]].assign(
-                    SQM=self._get_sqm_vectorized(chunk_df)
-                ),
-                on="row_id",
-            )
-            daily["Year_Month"] = daily["date"].dt.strftime("%Y-%m")
-            daily_sum = daily.groupby(["Year_Month", "loc", "date"])["SQM"].sum().reset_index()
-
-            # 5. Monthly avg and billing (groupby)
-            monthly_avg = (
-                daily_sum.groupby(["Year_Month", "loc"])["SQM"].mean().reset_index(name="avg_sqm")
-            )
-
-            result = {}
-            for ym in monthly_avg["Year_Month"].unique():
-                ym_df = monthly_avg[monthly_avg["Year_Month"] == ym]
-                result[ym] = {}
-                total = 0.0
-
-                for _, r in ym_df.iterrows():
-                    w = r["loc"]
-                    mode = self.billing_mode.get(w, "rate")
-                    avg_sqm = r["avg_sqm"]
-
-                    if mode == "rate":
-                        amt = round(avg_sqm * rates.get(w, 0.0), 2)
-                        source = "AvgSQM×Rate"
-                    elif mode == "passthrough":
-                        amt = float(passthrough_amounts.get((ym, w), 0.0))
-                        source = "Invoice Total (passthrough)"
-                    else:
-                        amt = 0.0
-                        source = "No charge (policy)"
-
-                    result[ym][w] = {
-                        "billing_mode": mode,
-                        "avg_sqm": round(avg_sqm, 2),
-                        "rate_aed": rates.get(w, 0.0),
-                        "monthly_charge_aed": amt,
-                        "amount_source": source,
-                    }
-                    total += amt
-
-                result[ym]["total_monthly_charge_aed"] = round(total, 2)
-
-            return result
-        else:
-            return {}
-
-    def _get_sqm_vectorized(self, df: pd.DataFrame) -> pd.Series:
-        """벡터화된 SQM 값 추출"""
-        sqm_columns = [
-            "SQM",
-            "sqm",
-            "Area",
-            "area",
-            "AREA",
-            "Size_SQM",
-            "Item_SQM",
-            "Package_SQM",
-            "Total_SQM",
-            "M2",
-            "m2",
-            "SQUARE",
-            "Square",
-            "square",
-            "Dimension",
-            "Space",
-            "Volume_SQM",
-        ]
-        for col in sqm_columns:
-            if col in df.columns:
-                sqm = df[col].fillna(0).clip(lower=0).astype(float)
-                if (sqm > 0).any():
-                    return sqm
-        return df.get("Pkg", pd.Series()).fillna(1).clip(lower=1).astype(int) * 1.5
-
-    def _merge_invoice_results(self, results: list) -> dict:
-        """병렬 처리 결과 병합"""
-        if not results:
-            return {}
-
-        # 첫 번째 결과를 기준으로 시작
-        merged = results[0].copy()
-
-        # 나머지 결과들을 병합
-        for result in results[1:]:
-            for ym, ym_data in result.items():
-                if ym not in merged:
-                    merged[ym] = {}
-
-                for warehouse, data in ym_data.items():
-                    if warehouse == "total_monthly_charge_aed":
-                        # 총액은 합산
-                        merged[ym][warehouse] = merged[ym].get(warehouse, 0) + data
-                    else:
-                        # 창고별 데이터는 병합
-                        merged[ym][warehouse] = data
-
-        return merged
-
     def analyze_sqm_data_quality(self, df: pd.DataFrame) -> Dict:
         """SQM 데이터 품질 분석"""
         logger.info(" SQM 데이터 품질 분석 시작")
@@ -2705,7 +1497,9 @@ class CorrectedWarehouseIOCalculator:
             else:
                 estimated_sqm_count += 1
 
-        actual_percentage = (actual_sqm_count / total_records) * 100 if total_records > 0 else 0
+        actual_percentage = (
+            (actual_sqm_count / total_records) * 100 if total_records > 0 else 0
+        )
         estimated_percentage = (
             (estimated_sqm_count / total_records) * 100 if total_records > 0 else 0
         )
@@ -2731,9 +1525,7 @@ class HVDCExcelReporterFinal:
     def __init__(self):
         """초기화"""
         self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self.calculator = CorrectedWarehouseIOCalculator(use_vectorized=True)
-        self.report_output_dir = self.calculator.reports_output_dir
-        self.report_output_dir.mkdir(parents=True, exist_ok=True)
+        self.calculator = CorrectedWarehouseIOCalculator()
 
         logger.info(" HVDC Excel Reporter Final 초기화 완료 (v3.0-corrected)")
 
@@ -2820,14 +1612,13 @@ class HVDCExcelReporterFinal:
                     ):
                         inbound_count += item.get("Pkg_Quantity", 1)
 
-                # 2. 창고간 이동 입고 (키 이름 폴백)
+                # 2. 창고간 이동 입고 (키 이름 수정)
                 for transfer in stats["inbound_result"].get("warehouse_transfers", []):
                     if (
                         transfer.get("to_warehouse") == warehouse
                         and transfer.get("Year_Month") == month_str
                     ):
-                        pkg_qty = transfer.get("pkg_quantity") or transfer.get("Pkg_Quantity", 1)
-                        inbound_count += pkg_qty
+                        inbound_count += transfer.get("pkg_quantity", 1)
 
                 inbound_values.append(inbound_count)
                 row.append(inbound_count)
@@ -2837,23 +1628,21 @@ class HVDCExcelReporterFinal:
             for i, warehouse in enumerate(warehouses):
                 outbound_count = 0
 
-                # 창고간 이동 출고 (키 이름 폴백)
+                # 창고간 이동 출고
                 for transfer in stats["inbound_result"].get("warehouse_transfers", []):
                     if (
                         transfer.get("from_warehouse") == warehouse
                         and transfer.get("Year_Month") == month_str
                     ):
-                        pkg_qty = transfer.get("pkg_quantity") or transfer.get("Pkg_Quantity", 1)
-                        outbound_count += pkg_qty
+                        outbound_count += transfer.get("pkg_quantity", 1)
 
-                # 창고→현장 출고 (키 이름 폴백)
+                # 창고→현장 출고 (키 이름 수정)
                 for item in stats["outbound_result"].get("outbound_items", []):
                     if (
                         item.get("From_Location") == warehouse
                         and item.get("Year_Month") == month_str
                     ):
-                        pkg_qty = item.get("Pkg_Quantity") or item.get("pkg_quantity", 1)
-                        outbound_count += pkg_qty
+                        outbound_count += item.get("Pkg_Quantity", 1)
 
                 outbound_values.append(outbound_count)
                 row.append(outbound_count)
@@ -2888,7 +1677,9 @@ class HVDCExcelReporterFinal:
             total_row.append(warehouse_monthly[col].sum())
         warehouse_monthly.loc[len(warehouse_monthly)] = total_row
 
-        logger.info(f" 창고_월별_입출고 시트 완료 (창고간 이동 반영): {warehouse_monthly.shape}")
+        logger.info(
+            f" 창고_월별_입출고 시트 완료 (창고간 이동 반영): {warehouse_monthly.shape}"
+        )
         return warehouse_monthly
 
     def create_site_monthly_sheet(self, stats: Dict) -> pd.DataFrame:
@@ -2918,7 +1709,10 @@ class HVDCExcelReporterFinal:
                 mask = (
                     (df["Final_Location"] == site)
                     & (df[site].notna())
-                    & (pd.to_datetime(df[site], errors="coerce").dt.strftime("%Y-%m") == month_str)
+                    & (
+                        pd.to_datetime(df[site], errors="coerce").dt.strftime("%Y-%m")
+                        == month_str
+                    )
                 )
                 inbound_count = df.loc[mask, "Pkg"].sum()
                 row.append(int(inbound_count))
@@ -2954,12 +1748,16 @@ class HVDCExcelReporterFinal:
 
         # 재고 총합 (최종 재고)
         for site in sites:
-            final_inventory = site_monthly[f"재고_{site}"].iloc[-1] if not site_monthly.empty else 0
+            final_inventory = (
+                site_monthly[f"재고_{site}"].iloc[-1] if not site_monthly.empty else 0
+            )
             total_row.append(final_inventory)
 
         site_monthly.loc[len(site_monthly)] = total_row
 
-        logger.info(f" 현장_월별_입고재고 시트 완료: {site_monthly.shape} (9열, 중복 없는 집계)")
+        logger.info(
+            f" 현장_월별_입고재고 시트 완료: {site_monthly.shape} (9열, 중복 없는 집계)"
+        )
         return site_monthly
 
     # === BEGIN MACHO PATCH: Flow Traceability Dashboard ===
@@ -2967,7 +1765,9 @@ class HVDCExcelReporterFinal:
         """Case 행에서 방문 위치-시점 추출 (창고+현장)
         동일일자 창고간 이동은 기존 이동감지 로직이 처리함.
         """
-        locations = list(self.calculator.warehouse_columns) + list(self.calculator.site_columns)
+        locations = list(self.calculator.warehouse_columns) + list(
+            self.calculator.site_columns
+        )
         visits = []
         for loc in locations:
             if loc in row.index and pd.notna(row[loc]):
@@ -3031,7 +1831,9 @@ class HVDCExcelReporterFinal:
             avg_wh_dwell = 0.0
         else:
             cases_with_mosb = (
-                segments.assign(has_mosb=lambda d: (d["From"].eq("MOSB") | d["To"].eq("MOSB")))
+                segments.assign(
+                    has_mosb=lambda d: (d["From"].eq("MOSB") | d["To"].eq("MOSB"))
+                )
                 .groupby("Case")["has_mosb"]
                 .max()
                 .mean()
@@ -3101,7 +1903,9 @@ class HVDCExcelReporterFinal:
             timeline = timeline.copy()
             for col in ["Start", "End"]:
                 if col in timeline.columns:
-                    timeline[col] = pd.to_datetime(timeline[col]).dt.strftime("%Y-%m-%d %H:%M:%S")
+                    timeline[col] = pd.to_datetime(timeline[col]).dt.strftime(
+                        "%Y-%m-%d %H:%M:%S"
+                    )
         timeline.to_excel(writer, sheet_name="Flow_Timeline", index=False)
 
         kpis = frames.get("kpis", {})
@@ -3110,7 +1914,9 @@ class HVDCExcelReporterFinal:
 
     # === END MACHO PATCH: Flow Traceability Dashboard ===
 
-    def create_multi_level_headers(self, df: pd.DataFrame, sheet_type: str) -> pd.DataFrame:
+    def create_multi_level_headers(
+        self, df: pd.DataFrame, sheet_type: str
+    ) -> pd.DataFrame:
         """Multi-Level Header 생성 (가이드 표준)"""
         if sheet_type == "warehouse":
             # 창고 Multi-Level Header: 19열 (Location + 입고8 + 출고8)
@@ -3170,7 +1976,9 @@ class HVDCExcelReporterFinal:
         flow_summary = df.groupby("FLOW_CODE").size().reset_index(name="Count")
 
         # Flow Description 추가
-        flow_summary["FLOW_DESCRIPTION"] = flow_summary["FLOW_CODE"].map(self.calculator.flow_codes)
+        flow_summary["FLOW_DESCRIPTION"] = flow_summary["FLOW_CODE"].map(
+            self.calculator.flow_codes
+        )
 
         # 컬럼 순서 조정
         cols = flow_summary.columns.tolist()
@@ -3249,7 +2057,9 @@ class HVDCExcelReporterFinal:
                         "Inbound_SQM": warehouse_data["inbound_sqm"],
                         "Outbound_SQM": warehouse_data["outbound_sqm"],
                         "Net_Change_SQM": warehouse_data["net_change_sqm"],
-                        "Cumulative_Inventory_SQM": warehouse_data["cumulative_inventory_sqm"],
+                        "Cumulative_Inventory_SQM": warehouse_data[
+                            "cumulative_inventory_sqm"
+                        ],
                         "Base_Capacity_SQM": warehouse_data["base_capacity_sqm"],
                         "Utilization_Rate_%": warehouse_data["utilization_rate_%"],
                     }
@@ -3291,7 +2101,9 @@ class HVDCExcelReporterFinal:
 
         # TOTAL 행 추가
         if not df.empty:
-            total_df = df.groupby("Year_Month", as_index=False)["Monthly_Charge_AED"].sum()
+            total_df = df.groupby("Year_Month", as_index=False)[
+                "Monthly_Charge_AED"
+            ].sum()
             total_df["Warehouse"] = "TOTAL"
             total_df["Billing_Mode"] = "mix"
             total_df["Avg_SQM"] = 0
@@ -3303,8 +2115,12 @@ class HVDCExcelReporterFinal:
 
         logger.info(f" SQM Invoice 과금 시트 완료: {len(df)}건")
         logger.info(f"   - Rate 모드: {len(df[df['Billing_Mode']=='rate'])}건")
-        logger.info(f"   - Passthrough 모드: {len(df[df['Billing_Mode']=='passthrough'])}건")
-        logger.info(f"   - No-charge 모드: {len(df[df['Billing_Mode']=='no-charge'])}건")
+        logger.info(
+            f"   - Passthrough 모드: {len(df[df['Billing_Mode']=='passthrough'])}건"
+        )
+        logger.info(
+            f"   - No-charge 모드: {len(df[df['Billing_Mode']=='no-charge'])}건"
+        )
 
         return df
 
@@ -3324,7 +2140,9 @@ class HVDCExcelReporterFinal:
                     {
                         f"{wh}_Inbound_SQM": wh_data.get("inbound_sqm", 0),
                         f"{wh}_Outbound_SQM": wh_data.get("outbound_sqm", 0),
-                        f"{wh}_Cumulative_SQM": wh_data.get("cumulative_inventory_sqm", 0),
+                        f"{wh}_Cumulative_SQM": wh_data.get(
+                            "cumulative_inventory_sqm", 0
+                        ),
                         f"{wh}_Util_%": round(wh_data.get("utilization_rate_%", 0), 2),
                     }
                 )
@@ -3361,7 +2179,9 @@ class HVDCExcelReporterFinal:
 
         # 시트 2: 현장_월별_입고재고 (Multi-Level Header, 9열)
         site_monthly = self.create_site_monthly_sheet(stats)
-        site_monthly_with_headers = self.create_multi_level_headers(site_monthly, "site")
+        site_monthly_with_headers = self.create_multi_level_headers(
+            site_monthly, "site"
+        )
 
         # 시트 3: Flow_Code_분석
         flow_analysis = self.create_flow_analysis_sheet(stats)
@@ -3419,208 +2239,62 @@ class HVDCExcelReporterFinal:
             else:
                 print(f"    {col}: 컬럼 없음")
 
+        # output 폴더 자동 생성
+        output_dir = Path("output")
+        output_dir.mkdir(exist_ok=True)
+
         #  FIX: 전체 데이터는 CSV로도 저장 (백업용)
         hitachi_original.to_csv(
-            self.report_output_dir / "HITACHI_원본데이터_FULL_fixed.csv",
+            "output/HITACHI_원본데이터_FULL_fixed.csv",
             index=False,
             encoding="utf-8-sig",
         )
         siemens_original.to_csv(
-            self.report_output_dir / "SIEMENS_원본데이터_FULL_fixed.csv",
+            "output/SIEMENS_원본데이터_FULL_fixed.csv",
             index=False,
             encoding="utf-8-sig",
         )
         combined_original.to_csv(
-            self.report_output_dir / "통합_원본데이터_FULL_fixed.csv",
-            index=False,
-            encoding="utf-8-sig",
+            "output/통합_원본데이터_FULL_fixed.csv", index=False, encoding="utf-8-sig"
         )
-
-        # Stage 3 SQM 관련 시트 사전 계산
-        sqm_cumulative_sheet = self.create_sqm_cumulative_sheet(stats)
-        sqm_invoice_sheet = self.create_sqm_invoice_sheet(stats)
-        sqm_pivot_sheet = self.create_sqm_pivot_sheet(stats)
 
         # Excel 파일 생성 (수정 버전)
         excel_filename = (
-            self.report_output_dir
-            / f"HVDC_입고로직_종합리포트_{self.timestamp}_v3.0-corrected.xlsx"
+            f"HVDC_입고로직_종합리포트_{self.timestamp}_v3.0-corrected.xlsx"
         )
-
-        # ✅ Stage 3 헤더명 정규화 및 표준 순서 적용
-        logger.info(" 통합_원본데이터_Fixed 시트 생성 - 유연한 헤더 검색 및 표준 순서 적용")
-
-        # HITACHI 데이터 처리
-        hitachi_normalized = normalize_header_names_for_stage3(hitachi_original)
-        hitachi_reordered = reorder_dataframe_columns(
-            hitachi_normalized, is_stage2=False, use_semantic_matching=True
-        )
-
-        # SIEMENS 데이터 처리
-        siemens_normalized = normalize_header_names_for_stage3(siemens_original)
-        siemens_reordered = reorder_dataframe_columns(
-            siemens_normalized, is_stage2=False, use_semantic_matching=True
-        )
-
-        # 통합 데이터 처리
-        combined_normalized = normalize_header_names_for_stage3(combined_original)
-
-        # ✅ Stage 3 신규 컬럼 추가 (통합 데이터에만)
-        logger.info("\n[INFO] Stage 3 신규 컬럼 계산 중...")
-
-        # Stack_Status 계산
-        combined_normalized["Stack_Status"] = _calculate_stack_status(combined_normalized, "Stack")
-        stack_parsed = combined_normalized["Stack_Status"].notna().sum()
-        logger.info(f"  - Stack_Status 파싱 완료: {stack_parsed}개")
-
-        # Total sqm 계산
-        combined_normalized["Total sqm"] = _calculate_total_sqm(combined_normalized)
-        total_sqm_calculated = combined_normalized["Total sqm"].notna().sum()
-        logger.info(f"  - Total sqm 계산 완료: {total_sqm_calculated}개")
-
-        # 🔍 디버그: 컬럼 추가 후 상태 확인
-        logger.info(f"\n[DEBUG] 컬럼 추가 후 combined_normalized 상태:")
-        logger.info(f"  - 총 컬럼 수: {len(combined_normalized.columns)}")
-        logger.info(f"  - 'Total sqm' 존재: {'Total sqm' in combined_normalized.columns}")
-        logger.info(f"  - 'Stack_Status' 존재: {'Stack_Status' in combined_normalized.columns}")
-        logger.info(f"  - 'SQM' 존재: {'SQM' in combined_normalized.columns}")
-
-        combined_reordered = reorder_dataframe_columns(
-            combined_normalized, is_stage2=False, use_semantic_matching=True
-        )
-
-        # 🔍 디버그: 재정렬 후 상태 확인
-        logger.info(f"\n[DEBUG] 컬럼 재정렬 후 combined_reordered 상태:")
-        logger.info(f"  - 총 컬럼 수: {len(combined_reordered.columns)}")
-        logger.info(f"  - 'Total sqm' 존재: {'Total sqm' in combined_reordered.columns}")
-        logger.info(f"  - 'Stack_Status' 존재: {'Stack_Status' in combined_reordered.columns}")
-        logger.info(f"  - 'SQM' 존재: {'SQM' in combined_reordered.columns}")
-
-        # 🔍 디버그: 누락된 컬럼 확인
-        missing_cols = []
-        if "Total sqm" not in combined_reordered.columns:
-            missing_cols.append("Total sqm")
-        if "Stack_Status" not in combined_reordered.columns:
-            missing_cols.append("Stack_Status")
-        if missing_cols:
-            logger.warning(f"[WARN] 재정렬 후 누락된 컬럼: {missing_cols}")
-        else:
-            logger.info("[SUCCESS] 모든 신규 컬럼이 재정렬 후에도 유지됨")
-
-        # SQM/Stack_Status 검증
-        print("\n[INFO] 통합_원본데이터_Fixed SQM/Stack 검증:")
-        validation = validate_sqm_stack_presence(combined_reordered)
-        print(f"  - SQM 계산됨: {validation['sqm_calculated_count']}개")
-        print(f"  - Stack_Status 파싱됨: {validation['stack_parsed_count']}개")
-
-        if validation["warnings"]:
-            for warning in validation["warnings"]:
-                print(f"  {warning}")
-
-        # 헤더 호환성 분석
-        compatibility = analyze_header_compatibility(combined_reordered, is_stage2=False)
-        logger.info(
-            f" 통합 데이터 헤더 매칭률: {compatibility['matching_rate']:.1f}% ({compatibility['matched_columns']}/{compatibility['total_columns']}개)"
-        )
-
-        # 🔍 디버그: Excel 저장 전 최종 상태 확인
-        logger.info(f"\n[DEBUG] Excel 저장 전 combined_reordered 최종 상태:")
-        logger.info(f"  - 총 컬럼 수: {len(combined_reordered.columns)}")
-        logger.info(f"  - 'Total sqm' 존재: {'Total sqm' in combined_reordered.columns}")
-        logger.info(f"  - 'Stack_Status' 존재: {'Stack_Status' in combined_reordered.columns}")
-        logger.info(f"  - 'SQM' 존재: {'SQM' in combined_reordered.columns}")
-
-        # 🔍 디버그: Total sqm과 Stack_Status 값 확인
-        if "Total sqm" in combined_reordered.columns:
-            total_sqm_count = combined_reordered["Total sqm"].notna().sum()
-            logger.info(f"  - Total sqm 유효값 개수: {total_sqm_count}")
-        if "Stack_Status" in combined_reordered.columns:
-            stack_status_count = combined_reordered["Stack_Status"].notna().sum()
-            logger.info(f"  - Stack_Status 유효값 개수: {stack_status_count}")
-
-        # 🔍 디버그: Excel 저장 직전 최종 검증
-        logger.info(f"\n[DEBUG] Excel 저장 직전 최종 검증:")
-        logger.info(f"  - combined_reordered 컬럼 수: {len(combined_reordered.columns)}")
-        logger.info(f"  - 마지막 5개 컬럼: {list(combined_reordered.columns[-5:])}")
-
-        # 🔍 디버그: Excel 저장 전 컬럼명 검증
-        logger.info(f"\n[DEBUG] Excel 저장 전 컬럼명 검증:")
-        logger.info(f"  - Total sqm 컬럼명: {repr('Total sqm')}")
-        logger.info(f"  - Stack_Status 컬럼명: {repr('Stack_Status')}")
-        logger.info(f"  - Total sqm in columns: {'Total sqm' in combined_reordered.columns}")
-        logger.info(f"  - Stack_Status in columns: {'Stack_Status' in combined_reordered.columns}")
-
-        # 🔍 디버그: 문제가 될 수 있는 컬럼명 확인
-        problem_cols = []
-        for col in combined_reordered.columns:
-            if any(char in col for char in ["\n", "\r", "\t", "\x00"]):
-                problem_cols.append(f"'{col}' (contains special chars)")
-        if problem_cols:
-            logger.warning(f"[WARN] 문제가 될 수 있는 컬럼명: {problem_cols}")
-
-        # ✅ 모든 시트를 단일 ExcelWriter 컨텍스트 안에서 저장
         with pd.ExcelWriter(excel_filename, engine="xlsxwriter") as writer:
             warehouse_monthly_with_headers.to_excel(
                 writer, sheet_name="창고_월별_입출고", index=True
             )
-            site_monthly_with_headers.to_excel(writer, sheet_name="현장_월별_입고재고", index=True)
+            site_monthly_with_headers.to_excel(
+                writer, sheet_name="현장_월별_입고재고", index=True
+            )
             flow_analysis.to_excel(writer, sheet_name="Flow_Code_분석", index=False)
-            transaction_summary.to_excel(writer, sheet_name="전체_트랜잭션_요약", index=False)
+            transaction_summary.to_excel(
+                writer, sheet_name="전체_트랜잭션_요약", index=False
+            )
             kpi_validation_df.to_excel(writer, sheet_name="KPI_검증_결과", index=False)
-            sqm_cumulative_sheet.to_excel(writer, sheet_name="SQM_누적재고", index=False)
-            sqm_invoice_sheet.to_excel(writer, sheet_name="SQM_Invoice과금", index=False)
+            sqm_cumulative_sheet = self.create_sqm_cumulative_sheet(stats)
+            sqm_cumulative_sheet.to_excel(
+                writer, sheet_name="SQM_누적재고", index=False
+            )
+            sqm_invoice_sheet = self.create_sqm_invoice_sheet(stats)
+            sqm_invoice_sheet.to_excel(
+                writer, sheet_name="SQM_Invoice과금", index=False
+            )
+            sqm_pivot_sheet = self.create_sqm_pivot_sheet(stats)
             sqm_pivot_sheet.to_excel(writer, sheet_name="SQM_피벗테이블", index=False)
             sample_data.to_excel(writer, sheet_name="원본_데이터_샘플", index=False)
-
-            #  FIX: 수정된 원본 데이터 시트들 (표준 헤더 순서 적용)
-            hitachi_reordered.to_excel(writer, sheet_name="HITACHI_원본데이터_Fixed", index=False)
-            siemens_reordered.to_excel(writer, sheet_name="SIEMENS_원본데이터_Fixed", index=False)
-
-            # 🔍 디버그: combined_reordered 저장 전 최종 확인
-            logger.info(f"\n[DEBUG] combined_reordered Excel 저장 직전:")
-            logger.info(f"  - 컬럼 수: {len(combined_reordered.columns)}")
-            logger.info(
-                f"  - Total sqm 위치: {list(combined_reordered.columns).index('Total sqm') if 'Total sqm' in combined_reordered.columns else 'NOT FOUND'}"
+            #  FIX: 수정된 원본 데이터 시트들
+            hitachi_original.to_excel(
+                writer, sheet_name="HITACHI_원본데이터_Fixed", index=False
             )
-            logger.info(
-                f"  - Stack_Status 위치: {list(combined_reordered.columns).index('Stack_Status') if 'Stack_Status' in combined_reordered.columns else 'NOT FOUND'}"
+            siemens_original.to_excel(
+                writer, sheet_name="SIEMENS_원본데이터_Fixed", index=False
             )
-
-            # 🔍 디버그: Excel 저장 전 최종 컬럼 검증
-            logger.info(f"\n[DEBUG] Excel 저장 전 최종 컬럼 검증:")
-            logger.info(f"  - combined_reordered 컬럼 수: {len(combined_reordered.columns)}")
-            logger.info(f"  - Total sqm 존재: {'Total sqm' in combined_reordered.columns}")
-            logger.info(f"  - Stack_Status 존재: {'Stack_Status' in combined_reordered.columns}")
-            logger.info(
-                f"  - Total sqm 위치: {list(combined_reordered.columns).index('Total sqm') if 'Total sqm' in combined_reordered.columns else 'NOT FOUND'}"
+            combined_original.to_excel(
+                writer, sheet_name="통합_원본데이터_Fixed", index=False
             )
-            logger.info(
-                f"  - Stack_Status 위치: {list(combined_reordered.columns).index('Stack_Status') if 'Stack_Status' in combined_reordered.columns else 'NOT FOUND'}"
-            )
-
-            # 🔍 디버그: Excel 저장 시도
-            try:
-                # Excel 저장 시 컬럼 제한 확인
-                logger.info(f"[DEBUG] Excel 저장 시도: {len(combined_reordered.columns)}개 컬럼")
-                combined_reordered.to_excel(writer, sheet_name="통합_원본데이터_Fixed", index=False)
-                logger.info("[SUCCESS] Excel 저장 완료")
-            except Exception as e:
-                logger.error(f"[ERROR] Excel 저장 실패: {e}")
-                # 컬럼명 문제일 수 있으므로 컬럼명을 안전하게 변경
-                safe_df = combined_reordered.copy()
-                safe_df.columns = [
-                    str(col).replace(" ", "_").replace(".", "_") for col in safe_df.columns
-                ]
-                safe_df.to_excel(writer, sheet_name="통합_원본데이터_Fixed", index=False)
-                logger.info("[FALLBACK] 안전한 컬럼명으로 Excel 저장 완료")
-
-        # 🔍 디버그: Excel 저장 후 검증
-        logger.info(f"\n[DEBUG] Excel 저장 후 검증:")
-        logger.info(f"  - combined_reordered 컬럼 수: {len(combined_reordered.columns)}")
-        logger.info(f"  - 'Total sqm' 존재: {'Total sqm' in combined_reordered.columns}")
-        logger.info(f"  - 'Stack_Status' 존재: {'Stack_Status' in combined_reordered.columns}")
-
-        logger.info(f" 표준 헤더 순서 적용 완료: {len(combined_reordered.columns)}개 컬럼")
 
         # 저장 후 검증
         try:
@@ -3629,10 +2303,7 @@ class HVDCExcelReporterFinal:
             print(f" [경고] 엑셀 파일 저장 후 열기 실패: {e}")
 
         logger.info(f" 최종 Excel 리포트 생성 완료: {excel_filename}")
-        logger.info(
-            " 원본 전체 데이터는 %s 경로의 CSV로도 저장됨",
-            self.report_output_dir,
-        )
+        logger.info(f" 원본 전체 데이터는 output/ 폴더의 CSV로도 저장됨")
 
         #  FIX: 수정사항 요약 출력
         print(f"\n v3.0-corrected 수정사항 요약:")
@@ -3711,7 +2382,9 @@ def main():
             )
 
             sqm_charges = stats.get("sqm_invoice_charges", {})
-            total_charges = sqm_charges.get(latest_month, {}).get("total_monthly_charge_aed", 0)
+            total_charges = sqm_charges.get(latest_month, {}).get(
+                "total_monthly_charge_aed", 0
+            )
 
             print(f"\n SQM 기반 창고 관리 결과 ({latest_month}):")
             print(f"    총 사용 면적: {total_sqm_used:,.2f} SQM")
@@ -3733,7 +2406,7 @@ def main():
 
         # 동적 날짜 범위 계산
         end_month = datetime.now().strftime("%Y-%m")
-
+        
         print(f"\n 핵심 로직 (Status_Location 기반):")
         print(f"   - 입고: 위치 컬럼 날짜 = 입고일")
         print(f"   - 출고: 다음 위치 날짜 = 출고일")
@@ -3770,7 +2443,9 @@ def run_unit_tests():
         and monthly_totals_test_passed
         and sqm_consistency_test_passed
     ):
-        print(" 창고간 이동 테스트 + 월차 총합 검증 + SQM 누적 일관성 포함 전체 테스트 통과")
+        print(
+            " 창고간 이동 테스트 + 월차 총합 검증 + SQM 누적 일관성 포함 전체 테스트 통과"
+        )
         return True
     else:
         print(" 일부 테스트 실패")
@@ -3833,7 +2508,9 @@ def test_same_date_warehouse_transfer():
     #  테스트 4: AAA Storage 동일 날짜 이동 감지
     transfers = calculator._detect_warehouse_transfers(test_data.iloc[3])
     # AAA Storage(2024-06-03)와 DSV Indoor(2024-06-03)가 동일 날짜이므로 이동 감지됨
-    assert len(transfers) == 1, f"Expected 1 transfer for same dates, got {len(transfers)}"
+    assert (
+        len(transfers) == 1
+    ), f"Expected 1 transfer for same dates, got {len(transfers)}"
     assert (
         transfers[0]["from_warehouse"] == "AAA Storage"
     ), f"Expected 'AAA Storage', got {transfers[0]['from_warehouse']}"
@@ -3852,11 +2529,17 @@ def test_same_date_warehouse_transfer():
             "Status_Location": ["DSV Al Markaz"],
         }
     )
-    test_aaa_same_date["AAA Storage"] = pd.to_datetime(test_aaa_same_date["AAA Storage"])
-    test_aaa_same_date["DSV Al Markaz"] = pd.to_datetime(test_aaa_same_date["DSV Al Markaz"])
+    test_aaa_same_date["AAA Storage"] = pd.to_datetime(
+        test_aaa_same_date["AAA Storage"]
+    )
+    test_aaa_same_date["DSV Al Markaz"] = pd.to_datetime(
+        test_aaa_same_date["DSV Al Markaz"]
+    )
 
     transfers = calculator._detect_warehouse_transfers(test_aaa_same_date.iloc[0])
-    assert len(transfers) == 1, f"Expected 1 transfer for AAA Storage, got {len(transfers)}"
+    assert (
+        len(transfers) == 1
+    ), f"Expected 1 transfer for AAA Storage, got {len(transfers)}"
     assert (
         transfers[0]["from_warehouse"] == "AAA Storage"
     ), f"Expected 'AAA Storage', got {transfers[0]['from_warehouse']}"
@@ -3878,7 +2561,9 @@ def test_same_date_warehouse_transfer():
     assert total_transfers > 0, "월차 총합이 0입니다"
     print(f"SUCCESS: 테스트 7 통과: 월차 총합 {total_transfers}건 > 0")
 
-    print("[SUCCESS] 모든 테스트 통과! AAA Storage 포함 동일 날짜 창고간 이동 로직 검증 완료")
+    print(
+        "[SUCCESS] 모든 테스트 통과! AAA Storage 포함 동일 날짜 창고간 이동 로직 검증 완료"
+    )
     return True
 
 
@@ -3939,19 +2624,25 @@ def validate_patch_effectiveness():
         print(f"   출고: {outbound_total:,}건")
         print(f"   재고: {inventory_total:,}건")
         print(f"   불일치: {discrepancy_count}건")
-        print(f"   입고≥출고: {' PASS' if inbound_total >= outbound_total else ' FAIL'}")
+        print(
+            f"   입고≥출고: {' PASS' if inbound_total >= outbound_total else ' FAIL'}"
+        )
 
         # 예상 재고 계산
         expected_inventory = inbound_total - outbound_total
         inventory_difference = abs(expected_inventory - inventory_total)
-        inventory_accuracy = (1 - (inventory_difference / max(expected_inventory, 1))) * 100
+        inventory_accuracy = (
+            1 - (inventory_difference / max(expected_inventory, 1))
+        ) * 100
 
         print(f"   재고 정확도: {inventory_accuracy:.2f}%")
         print(f"   재고 일관성: {' PASS' if inventory_accuracy >= 95 else ' FAIL'}")
 
         # 전체 검증 결과
         all_passed = (
-            inbound_total >= outbound_total and inventory_accuracy >= 95 and discrepancy_count == 0
+            inbound_total >= outbound_total
+            and inventory_accuracy >= 95
+            and discrepancy_count == 0
         )
 
         print(f"   전체 검증: {' ALL PASS' if all_passed else ' SOME FAILED'}")
@@ -3981,7 +2672,9 @@ def test_sqm_cumulative_consistency():
         )
 
         # 날짜 변환
-        df[["DSV Indoor", "DAS", "MIR"]] = df[["DSV Indoor", "DAS", "MIR"]].apply(pd.to_datetime)
+        df[["DSV Indoor", "DAS", "MIR"]] = df[["DSV Indoor", "DAS", "MIR"]].apply(
+            pd.to_datetime
+        )
 
         # SQM 계산 실행
         sqm_in = calc.calculate_monthly_sqm_inbound(df)
@@ -3992,7 +2685,9 @@ def test_sqm_cumulative_consistency():
         may_inbound = sqm_in.get("2025-05", {}).get("DSV Indoor", 0)
         may_outbound = sqm_out.get("2025-05", {}).get("DSV Indoor", 0)
         may_cumulative = (
-            cum.get("2025-05", {}).get("DSV Indoor", {}).get("cumulative_inventory_sqm", 0)
+            cum.get("2025-05", {})
+            .get("DSV Indoor", {})
+            .get("cumulative_inventory_sqm", 0)
         )
 
         assert may_inbound == 10, f"5월 입고: 예상 10, 실제 {may_inbound}"
@@ -4004,29 +2699,39 @@ def test_sqm_cumulative_consistency():
         june_inbound = sqm_in.get("2025-06", {}).get("DSV Indoor", 0)
         june_outbound = sqm_out.get("2025-06", {}).get("DSV Indoor", 0)
         june_cumulative = (
-            cum.get("2025-06", {}).get("DSV Indoor", {}).get("cumulative_inventory_sqm", 0)
+            cum.get("2025-06", {})
+            .get("DSV Indoor", {})
+            .get("cumulative_inventory_sqm", 0)
         )
 
         assert june_inbound == 10, f"6월 입고: 예상 10, 실제 {june_inbound}"
         assert june_outbound == 10, f"6월 출고: 예상 10, 실제 {june_outbound}"
-        assert june_cumulative == 10, f"6월 누적: 예상 10 (5월 10 + 6월 0), 실제 {june_cumulative}"
+        assert (
+            june_cumulative == 10
+        ), f"6월 누적: 예상 10 (5월 10 + 6월 0), 실제 {june_cumulative}"
         print(" 검증 2 통과: 6월 입고(10) + 출고(10) = 순변동 0")
 
         # 검증 3: 7월 입고 + 출고 (순변동 +5)
         july_inbound = sqm_in.get("2025-07", {}).get("DSV Indoor", 0)
         july_outbound = sqm_out.get("2025-07", {}).get("DSV Indoor", 0)
         july_cumulative = (
-            cum.get("2025-07", {}).get("DSV Indoor", {}).get("cumulative_inventory_sqm", 0)
+            cum.get("2025-07", {})
+            .get("DSV Indoor", {})
+            .get("cumulative_inventory_sqm", 0)
         )
 
         assert july_inbound == 15, f"7월 입고: 예상 15, 실제 {july_inbound}"
         assert july_outbound == 15, f"7월 출고: 예상 15, 실제 {july_outbound}"
-        assert july_cumulative == 10, f"7월 누적: 예상 10 (6월 10 + 7월 0), 실제 {july_cumulative}"
+        assert (
+            july_cumulative == 10
+        ), f"7월 누적: 예상 10 (6월 10 + 7월 0), 실제 {july_cumulative}"
         print(" 검증 3 통과: 7월 입고(15) + 출고(15) = 순변동 0")
 
         # 검증 4: 전체 누적 일관성
         total_inbound = sum(sum(month_data.values()) for month_data in sqm_in.values())
-        total_outbound = sum(sum(month_data.values()) for month_data in sqm_out.values())
+        total_outbound = sum(
+            sum(month_data.values()) for month_data in sqm_out.values()
+        )
 
         # 마지막 월의 누적값 확인 (전체 누적이 아닌 마지막 월 기준)
         last_month = max(cum.keys())
