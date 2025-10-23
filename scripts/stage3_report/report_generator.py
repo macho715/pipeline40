@@ -913,6 +913,10 @@ class CorrectedWarehouseIOCalculator:
 
         # 4. 결과 구성
         inbound_items = wh_df.to_dict("records")
+        # Inbound_Type 필드 추가
+        for item in inbound_items:
+            item["Inbound_Type"] = "external_arrival"
+        
         warehouse_transfers = transfers_flat.to_dict("records") if not transfers_flat.empty else []
 
         logger.info(f" Vectorized 창고 입고 계산 완료: {total_inbound}건")

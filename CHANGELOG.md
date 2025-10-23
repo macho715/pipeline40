@@ -12,12 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### SCT Ref.No 컬럼 위치 수정
 - **Problem**: SCT Ref.No가 65번째 위치에 있어서 찾기 어려움
 - **Solution**: STANDARD_HEADER_ORDER에서 SCT Ref.No를 4번째 위치로 이동
-- **Result**: 
+- **Result**:
   - 1. no.
   - 2. Shipment Invoice No.
   - 3. SCT Ref.No ← 이동 완료
   - 4. Site
-- **Benefits**: 
+- **Benefits**:
   - 컬럼 순서 일관성 확보
   - Stage 2와 Stage 3 헤더 순서 통일
   - 데이터 접근성 향상
