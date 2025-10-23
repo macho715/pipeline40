@@ -78,31 +78,28 @@ class TestCalculateTotalSqm:
         """기본 Total sqm 계산 테스트"""
         df = pd.DataFrame({
             "Pkg": [10, 5, 2, None, 10],
-            "SQM": [2.5, 3.0, 1.5, 2.0, None],
-            "Stack_Status": [2, 3, 0, 1, 1]
+            "SQM": [2.5, 3.0, 1.5, 2.0, None]
         })
         result = _calculate_total_sqm(df)
         
-        # PKG × SQM × Stack_Status
-        assert result.iloc[0] == pytest.approx(50.0), "10 × 2.5 × 2 = 50.0"
-        assert result.iloc[1] == pytest.approx(45.0), "5 × 3.0 × 3 = 45.0"
-        assert pd.isna(result.iloc[2]), "Stack_Status=0 should return None"
+        # SQM × PKG
+        assert result.iloc[0] == pytest.approx(25.0), "2.5 × 10 = 25.0"
+        assert result.iloc[1] == pytest.approx(15.0), "3.0 × 5 = 15.0"
+        assert result.iloc[2] == pytest.approx(3.0), "1.5 × 2 = 3.0"
         assert pd.isna(result.iloc[3]), "Pkg=None should return None"
         assert pd.isna(result.iloc[4]), "SQM=None should return None"
 
     def test_edge_cases(self):
         """Total sqm 엣지 케이스 테스트"""
         df = pd.DataFrame({
-            "Pkg": [10, 0, -5, 10],
-            "SQM": [2.5, 2.5, 2.5, 2.5],
-            "Stack_Status": [2, 2, 2, None]
+            "Pkg": [10, 0, -5],
+            "SQM": [2.5, 2.5, 2.5]
         })
         result = _calculate_total_sqm(df)
         
-        assert result.iloc[0] == pytest.approx(50.0), "Valid calculation"
+        assert result.iloc[0] == pytest.approx(25.0), "Valid calculation: 2.5 × 10 = 25.0"
         assert pd.isna(result.iloc[1]), "Pkg = 0 should return None"
         assert pd.isna(result.iloc[2]), "Pkg < 0 should return None"
-        assert pd.isna(result.iloc[3]), "Stack_Status None should return None"
 
     def test_missing_columns(self):
         """필수 컬럼이 없는 경우 테스트"""
@@ -119,12 +116,11 @@ class TestCalculateTotalSqm:
         """0과 음수 값 처리 테스트"""
         df = pd.DataFrame({
             "Pkg": [10, 0, -5, 10, 10],
-            "SQM": [2.5, 2.5, 2.5, 0, -1.5],
-            "Stack_Status": [2, 2, 2, 2, 2]
+            "SQM": [2.5, 2.5, 2.5, 0, -1.5]
         })
         result = _calculate_total_sqm(df)
         
-        assert result.iloc[0] == pytest.approx(50.0), "Valid: 10 × 2.5 × 2"
+        assert result.iloc[0] == pytest.approx(25.0), "Valid: 2.5 × 10 = 25.0"
         assert pd.isna(result.iloc[1]), "Pkg=0 invalid"
         assert pd.isna(result.iloc[2]), "Pkg<0 invalid"
         assert pd.isna(result.iloc[3]), "SQM=0 invalid"
@@ -150,13 +146,13 @@ class TestIntegration:
         
         # 검증
         assert df.iloc[0]["Stack_Status"] == 2
-        assert df.iloc[0]["Total sqm"] == pytest.approx(50.0)  # 10 × 2.5 × 2
+        assert df.iloc[0]["Total sqm"] == pytest.approx(25.0)  # 2.5 × 10 = 25.0
         
         assert df.iloc[1]["Stack_Status"] == 3
-        assert df.iloc[1]["Total sqm"] == pytest.approx(45.0)  # 5 × 3.0 × 3
+        assert df.iloc[1]["Total sqm"] == pytest.approx(15.0)  # 3.0 × 5 = 15.0
         
         assert df.iloc[2]["Stack_Status"] == 0
-        assert pd.isna(df.iloc[2]["Total sqm"])  # Stack_Status=0 이므로 None
+        assert df.iloc[2]["Total sqm"] == pytest.approx(4.5)  # 1.5 × 3 = 4.5
 
 
 if __name__ == "__main__":

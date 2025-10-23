@@ -245,10 +245,10 @@ def _calculate_stack_status(df: pd.DataFrame, stack_col: str = "Stack") -> pd.Se
 
 def _calculate_total_sqm(df: pd.DataFrame) -> pd.Series:
     """
-    Total sqm = PKG × SQM × Stack_Status 계산
+    Total sqm = SQM × PKG 계산
     
     Args:
-        df: PKG, SQM, Stack_Status 컬럼이 있는 DataFrame
+        df: PKG, SQM 컬럼이 있는 DataFrame
         
     Returns:
         Total sqm Series
@@ -256,24 +256,22 @@ def _calculate_total_sqm(df: pd.DataFrame) -> pd.Series:
     result = pd.Series([None] * len(df), index=df.index, dtype=float)
     
     # 필수 컬럼 확인
-    required_cols = ["Pkg", "SQM", "Stack_Status"]
+    required_cols = ["Pkg", "SQM"]
     missing_cols = [col for col in required_cols if col not in df.columns]
     
     if missing_cols:
         logger.warning(f"[WARN] Total sqm 계산에 필요한 컬럼 누락: {missing_cols}")
         return result
     
-    # 계산: PKG × SQM × Stack_Status
+    # 계산: SQM × PKG
     for idx in df.index:
         try:
             pkg = df.loc[idx, "Pkg"]
             sqm = df.loc[idx, "SQM"]
-            stack_status = df.loc[idx, "Stack_Status"]
             
             # 모든 값이 유효한 경우에만 계산
-            if (pd.notna(pkg) and pd.notna(sqm) and pd.notna(stack_status) and
-                pkg > 0 and sqm > 0 and stack_status > 0):
-                result.loc[idx] = round(pkg * sqm * stack_status, 2)
+            if pd.notna(pkg) and pd.notna(sqm) and pkg > 0 and sqm > 0:
+                result.loc[idx] = round(sqm * pkg, 2)
             else:
                 result.loc[idx] = None
         except Exception as e:

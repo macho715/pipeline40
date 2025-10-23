@@ -12,13 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Stage 3에 Total sqm 계산 로직 추가
 - **Problem**: Stage 3에 Stack_Status 및 Total sqm 컬럼 누락
   - Stack 텍스트 파싱 로직 없음
-  - PKG × SQM × Stack_Status 계산 없음
+  - SQM × PKG 계산 없음
   - 창고 적재 효율 분석 불가
   - 실제 사용 공간 추적 불가능
 
 - **Solution**: core.data_parser 통합 및 Total sqm 계산
   - **Stack_Status 파싱**: core.data_parser.parse_stack_status 사용
-  - **Total sqm 계산**: PKG × SQM × Stack_Status
+  - **Total sqm 계산**: SQM × PKG
   - **헤더 순서**: SQM → Stack_Status → Total sqm
   - **core 중앙 관리**: 헤더 순서 및 데이터 파싱 로직 core에서 관리
 
@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `scripts/stage3_report/report_generator.py`:
     - `from core.data_parser import parse_stack_status` import 추가
     - `_calculate_stack_status()`: Stack 컬럼 파싱 함수
-    - `_calculate_total_sqm()`: Total sqm 계산 함수 (PKG × SQM × Stack_Status)
+    - `_calculate_total_sqm()`: Total sqm 계산 함수 (SQM × PKG)
     - 통합_원본데이터_Fixed 시트에 적용
   - `tests/test_stage3_total_sqm.py`:
     - Stack_Status 파싱 테스트 (기본, 다양한 패턴, 컬럼 누락)
@@ -51,16 +51,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Test Results**:
   - Stack_Status 파싱: "X2" → 2, "Stackable / 3" → 3, "Not stackable" → 0
-  - Total sqm 계산: PKG=10, SQM=2.5, Stack_Status=2 → 50.0
-  - 엣지 케이스: Pkg=0, SQM=None, Stack_Status=None → None
+  - Total sqm 계산: SQM=2.5, PKG=10 → 25.0
+  - 엣지 케이스: Pkg=0, SQM=None → None
   - 모든 테스트 통과 (8/8)
 
 - **Example Usage**:
   ```python
   # Stage 3 통합_원본데이터_Fixed 시트
   # ... | SQM | Stack_Status | Total sqm | ...
-  # ... | 9.84 | 2 | 196.80 | ...  (PKG=10, SQM=9.84, Stack=2)
-  # ... | 5.20 | 3 | 156.00 | ...  (PKG=10, SQM=5.20, Stack=3)
+  # ... | 9.84 | 2 | 98.40 | ...  (SQM=9.84, PKG=10)
+  # ... | 5.20 | 3 | 52.00 | ...  (SQM=5.20, PKG=10)
   ```
 
 ## [4.0.21] - 2025-10-23
