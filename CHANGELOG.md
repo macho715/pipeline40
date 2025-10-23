@@ -5,6 +5,51 @@ All notable changes to the HVDC Pipeline project will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.20] - 2025-10-23
+
+### 🔧 Refactoring
+
+#### 헤더 관리 로직 Core 통합
+- **Problem**: 중복된 'no' 컬럼 제거 로직이 Stage 2에만 존재하고 Stage 3에는 없음
+  - Stage 2: `derived_columns_processor.py`에 중복 제거 로직 별도 구현
+  - Stage 3: 중복 제거 로직 누락으로 일관성 부족
+  - 유지보수 어려움: 새 Stage 추가 시 매번 중복 제거 로직 추가 필요
+  - 단일 책임 원칙 위반: 헤더 정규화는 core가 담당해야 함
+
+- **Solution**: Core 모듈로 헤더 관리 로직 통합
+  - **중앙 집중식 관리**: `core/standard_header_order.py`의 normalize 함수에 중복 제거 로직 통합
+  - **자동 적용**: Stage 2, 3 모두 normalize 함수 호출만으로 자동 처리
+  - **코드 중복 제거**: Stage별 파일에서 중복 로직 완전 제거
+  - **단일 책임 원칙**: 헤더 관리는 core 모듈만 담당
+
+- **Implementation Details**:
+  - `normalize_header_names_for_stage3()`: 중복 'no' 컬럼 제거 로직 추가
+  - `normalize_header_names_for_stage2()`: 중복 'no' 컬럼 제거 로직 추가
+  - `derived_columns_processor.py`: 중복 제거 로직 제거 (4줄 삭제)
+  - `report_generator.py`: 수정 불필요 (자동 적용)
+
+- **Files Modified**:
+  - `scripts/core/standard_header_order.py`: normalize 함수 2개에 중복 제거 로직 추가 (+8 lines)
+  - `scripts/stage2_derived/derived_columns_processor.py`: 중복 로직 제거 (-4 lines)
+
+- **Benefits**:
+  - **DRY 원칙**: 코드 중복 완전 제거
+  - **단일 책임 원칙**: 헤더 관리는 core만 담당
+  - **일관성**: 모든 Stage에서 동일한 정규화 규칙
+  - **유지보수성**: 한 곳만 수정하면 모든 Stage 적용
+  - **확장성**: 새 Stage는 normalize 함수만 호출
+  - **하위 호환성**: 100% 유지 (함수 시그니처 변경 없음)
+
+- **Test Results**:
+  - **Stage 2**: 53개 컬럼, 중복 'no' 제거 완료, 실행 시간 7.25초 ✅
+  - **Stage 3**: 64개 컬럼, 중복 'no' 제거 3회 완료 (HITACHI, SIEMENS, 통합), 실행 시간 20.19초 ✅
+  - **데이터 무결성**: 100% 유지 ✅
+  - **성능 영향**: 없음 ✅
+
+### 📚 Documentation
+- `docs/reports/centralized-header-management-report.md`: 헤더 관리 통합 상세 보고서
+- `scripts/core/standard_header_order.py`: docstring 업데이트 (중복 제거 명시)
+
 ## [4.0.19] - 2025-10-23
 
 ### 🛠️ Fixed

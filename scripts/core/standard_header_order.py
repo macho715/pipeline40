@@ -584,6 +584,7 @@ def normalize_header_names_for_stage3(df: pd.DataFrame) -> pd.DataFrame:
     - "No" → "no."
     - "wh handling" → "wh_handling_legacy"
     - "site  handling" (공백 2개) → "site handling" (공백 1개)
+    - 중복 "no" 컬럼 제거 (no.와 no가 동시에 존재하는 경우)
     """
     renamed = {}
 
@@ -601,6 +602,11 @@ def normalize_header_names_for_stage3(df: pd.DataFrame) -> pd.DataFrame:
         for old, new in renamed.items():
             logger.info(f"  - '{old}' → '{new}'")
 
+    # 중복 'no' 컬럼 제거 (no.와 no가 동시에 존재하는 경우)
+    if "no" in df.columns and "no." in df.columns:
+        df = df.drop(columns=["no"], errors="ignore")
+        logger.info("[INFO] 중복 'no' 컬럼 제거 완료 (no. 유지)")
+
     return df
 
 
@@ -611,6 +617,7 @@ def normalize_header_names_for_stage2(df: pd.DataFrame) -> pd.DataFrame:
     변환:
     - "No" → "no."
     - "site  handling" (공백 2개) → "site handling" (공백 1개)
+    - 중복 "no" 컬럼 제거 (no.와 no가 동시에 존재하는 경우)
     """
     renamed = {}
 
@@ -625,6 +632,11 @@ def normalize_header_names_for_stage2(df: pd.DataFrame) -> pd.DataFrame:
         logger.info(f"[INFO] Stage 2 헤더명 정규화: {len(renamed)}개 컬럼 변경됨")
         for old, new in renamed.items():
             logger.info(f"  - '{old}' → '{new}'")
+
+    # 중복 'no' 컬럼 제거 (no.와 no가 동시에 존재하는 경우)
+    if "no" in df.columns and "no." in df.columns:
+        df = df.drop(columns=["no"], errors="ignore")
+        logger.info("[INFO] 중복 'no' 컬럼 제거 완료 (no. 유지)")
 
     return df
 
