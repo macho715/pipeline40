@@ -891,9 +891,7 @@ class CorrectedWarehouseIOCalculator:
         )
         wh_df = wh_df[wh_df["Inbound_Date"].notna()].copy()
         wh_df["Row_ID"] = wh_df["Row_ID"].apply(
-            lambda value: int(value)
-            if isinstance(value, (int, np.integer))
-            else value
+            lambda value: int(value) if isinstance(value, (int, np.integer)) else value
         )
         wh_df["Inbound_Date"] = pd.to_datetime(wh_df["Inbound_Date"])
         wh_df["Year_Month"] = wh_df["Inbound_Date"].dt.strftime("%Y-%m")
@@ -911,16 +909,10 @@ class CorrectedWarehouseIOCalculator:
         if not transfers_flat.empty:
             if "Row_ID" in transfers_flat.columns:
                 transfers_flat["Row_ID"] = transfers_flat["Row_ID"].apply(
-                    lambda value: int(value)
-                    if isinstance(value, (int, np.integer))
-                    else value
+                    lambda value: int(value) if isinstance(value, (int, np.integer)) else value
                 )
-            transfers_flat["transfer_date"] = pd.to_datetime(
-                transfers_flat["transfer_date"]
-            )
-            transfers_flat["Year_Month"] = transfers_flat["transfer_date"].dt.strftime(
-                "%Y-%m"
-            )
+            transfers_flat["transfer_date"] = pd.to_datetime(transfers_flat["transfer_date"])
+            transfers_flat["Year_Month"] = transfers_flat["transfer_date"].dt.strftime("%Y-%m")
 
             transfer_destinations = transfers_flat.rename(
                 columns={
@@ -938,20 +930,16 @@ class CorrectedWarehouseIOCalculator:
                 on=["Row_ID", "Warehouse", "Inbound_Date"],
                 how="left",
             )
-            wh_df["Transfer_Quantity"] = (
-                wh_df["Transfer_Quantity"].fillna(0).astype(int)
-            )
+            wh_df["Transfer_Quantity"] = wh_df["Transfer_Quantity"].fillna(0).astype(int)
         else:
             wh_df["Transfer_Quantity"] = 0
 
         # 창고간 이동 목적지 수량 제외
-        wh_df["External_Quantity"] = (
-            wh_df["Pkg_Quantity"] - wh_df["Transfer_Quantity"]
-        ).clip(lower=0)
-        external_wh_df = wh_df[wh_df["External_Quantity"] > 0].copy()
-        external_wh_df["Pkg_Quantity"] = (
-            external_wh_df["External_Quantity"].astype(int)
+        wh_df["External_Quantity"] = (wh_df["Pkg_Quantity"] - wh_df["Transfer_Quantity"]).clip(
+            lower=0
         )
+        external_wh_df = wh_df[wh_df["External_Quantity"] > 0].copy()
+        external_wh_df["Pkg_Quantity"] = external_wh_df["External_Quantity"].astype(int)
         external_wh_df.drop(columns=["Transfer_Quantity", "External_Quantity", "Pkg"], inplace=True)
 
         # 3. 집계 (벡터화)
@@ -959,7 +947,8 @@ class CorrectedWarehouseIOCalculator:
             by_month_wh = pd.DataFrame(columns=self.warehouse_columns)
         else:
             by_month_wh = (
-                external_wh_df.groupby(["Year_Month", "Warehouse"])["Pkg_Quantity"].sum()
+                external_wh_df.groupby(["Year_Month", "Warehouse"])["Pkg_Quantity"]
+                .sum()
                 .unstack(fill_value=0)
             )
         by_warehouse = by_month_wh.sum(axis=0).to_dict()
@@ -977,9 +966,7 @@ class CorrectedWarehouseIOCalculator:
                 item["Item_ID"] = int(item["Item_ID"])
             item["Inbound_Type"] = "external_arrival"
 
-        warehouse_transfers = (
-            transfers_flat.to_dict("records") if not transfers_flat.empty else []
-        )
+        warehouse_transfers = transfers_flat.to_dict("records") if not transfers_flat.empty else []
 
         logger.info(f" Vectorized 창고 입고 계산 완료: {total_inbound}건")
 
@@ -1236,27 +1223,27 @@ class CorrectedWarehouseIOCalculator:
             # transferred_from_warehouses = set()
             # for transfer in transfers_flat.to_dict("records"):
             #     transferred_from_warehouses.add(transfer["from_warehouse"])
-            
+
             warehouse_site_outbound = []
-            
+
             # 행별로 그룹화하여 처리
             for row_idx in wh_valid.index.unique():
                 row_warehouses = wh_valid[wh_valid.index == row_idx]
                 row_sites = site_valid[site_valid.index == row_idx]
-                
+
                 if not row_warehouses.empty and not row_sites.empty:
                     # 각 창고에 대해 해당 행의 현장들과 매칭
                     for _, wh_row in row_warehouses.iterrows():
                         warehouse = wh_row["Warehouse"]
-                        
+
                         # 창고간 이동으로 이미 출고된 창고 제외 로직 제거 (너무 광범위하게 적용됨)
                         # if warehouse in transferred_from_warehouses:
                         #     continue
-                        
+
                         wh_date = wh_row["wh_date"]
                         pkg_quantity = wh_row["Pkg"] if pd.notna(wh_row["Pkg"]) else 1
                         pkg_quantity = max(1, int(pkg_quantity))
-                        
+
                         # 수정된 로직: 창고 입고일 이후 모든 현장 이동 인정
                         next_site_movements = []
                         for _, site_row in row_sites.iterrows():
@@ -1264,33 +1251,35 @@ class CorrectedWarehouseIOCalculator:
                             # 창고 입고일 이후 현장 이동 (동일 날짜 제외)
                             if site_date.date() > wh_date.date():
                                 next_site_movements.append((site_row["Site"], site_date))
-                        
+
                         # 가장 빠른 현장 이동을 출고로 계산
                         if next_site_movements:
                             next_site, next_date = min(next_site_movements, key=lambda x: x[1])
-                            
-                            warehouse_site_outbound.append({
-                                "Item_ID": row_idx,
-                                "From_Location": warehouse,
-                                "To_Location": next_site,
-                                "Outbound_Date": next_date,
-                                "Year_Month": next_date.strftime("%Y-%m"),
-                                "Pkg_Quantity": pkg_quantity,
-                                "Outbound_Type": "warehouse_to_site",
-                            })
-                            
+
+                            warehouse_site_outbound.append(
+                                {
+                                    "Item_ID": row_idx,
+                                    "From_Location": warehouse,
+                                    "To_Location": next_site,
+                                    "Outbound_Date": next_date,
+                                    "Year_Month": next_date.strftime("%Y-%m"),
+                                    "Pkg_Quantity": pkg_quantity,
+                                    "Outbound_Type": "warehouse_to_site",
+                                }
+                            )
+
                             # 중복 출고 방지를 위해 break 추가 (오리지널 로직)
                             break
-            
+
             # 결과를 outbound_items에 추가
             outbound_items.extend(warehouse_site_outbound)
-            
+
             # 집계 업데이트
             for item in warehouse_site_outbound:
                 warehouse = item["From_Location"]
                 month = item["Year_Month"]
                 quantity = item["Pkg_Quantity"]
-                
+
                 by_warehouse[warehouse] = by_warehouse.get(warehouse, 0) + quantity
                 by_month[month] = by_month.get(month, 0) + quantity
                 total_outbound += quantity
@@ -1587,9 +1576,11 @@ class CorrectedWarehouseIOCalculator:
                 if self._validate_transfer_logic(from_wh, to_wh, from_date, to_date):
                     transfers.append(
                         {
-                            "Row_ID": int(row.name)
-                            if isinstance(row.name, (int, np.integer))
-                            else row.name,
+                            "Row_ID": (
+                                int(row.name)
+                                if isinstance(row.name, (int, np.integer))
+                                else row.name
+                            ),
                             "from_warehouse": from_wh,
                             "to_warehouse": to_wh,
                             "transfer_date": from_date,
@@ -1664,9 +1655,7 @@ class CorrectedWarehouseIOCalculator:
             result = pd.concat(transfers_list, ignore_index=True)
             logger.info(f" Vectorized 창고간 이동 감지 완료: {len(result)}건")
             result["Row_ID"] = result["Row_ID"].apply(
-                lambda value: int(value)
-                if isinstance(value, (int, np.integer))
-                else value
+                lambda value: int(value) if isinstance(value, (int, np.integer)) else value
             )
             return result
         else:
@@ -2798,65 +2787,107 @@ class HVDCExcelReporterFinal:
         # 결과 DataFrame 초기화
         results = []
 
+        #  Stage-1 정규화 순서 기반 창고 목록 사용
+        warehouses = list(self.calculator.warehouse_columns)
+        warehouse_display_names = list(self.calculator.warehouse_columns)
+
+        # 벡터화된 입고/출고 맵 생성
+        inbound_items = stats["inbound_result"].get("inbound_items", [])
+        inbound_df = pd.DataFrame(inbound_items)
+
+        if not inbound_df.empty:
+            inbound_df = inbound_df.copy()
+            if "Inbound_Type" in inbound_df.columns:
+                inbound_df = inbound_df[
+                    inbound_df["Inbound_Type"].astype(str).str.lower()
+                    == "external_arrival"
+                ]
+            if "Year_Month" not in inbound_df.columns:
+                inbound_df["Inbound_Date"] = pd.to_datetime(
+                    inbound_df.get("Inbound_Date"), errors="coerce"
+                )
+                inbound_df["Year_Month"] = inbound_df["Inbound_Date"].dt.strftime("%Y-%m")
+            inbound_df["Year_Month"] = inbound_df["Year_Month"].astype(str)
+            inbound_df["Warehouse"] = inbound_df["Warehouse"].astype(str)
+            inbound_df["Pkg_Quantity"] = pd.to_numeric(
+                inbound_df.get("Pkg_Quantity", inbound_df.get("pkg_quantity", 0)),
+                errors="coerce",
+            ).fillna(0).astype(int)
+            external_inbound_map = (
+                inbound_df.groupby(["Year_Month", "Warehouse"])["Pkg_Quantity"]
+                .sum()
+                .to_dict()
+            )
+        else:
+            external_inbound_map = {}
+
+        transfer_items = stats["inbound_result"].get("warehouse_transfers", [])
+        transfer_df = pd.DataFrame(transfer_items)
+
+        if not transfer_df.empty:
+            transfer_df = transfer_df.copy()
+            if "Year_Month" not in transfer_df.columns:
+                transfer_df["transfer_date"] = pd.to_datetime(
+                    transfer_df.get("transfer_date"), errors="coerce"
+                )
+                transfer_df["Year_Month"] = transfer_df["transfer_date"].dt.strftime("%Y-%m")
+            transfer_df["Year_Month"] = transfer_df["Year_Month"].astype(str)
+            transfer_df["to_warehouse"] = transfer_df["to_warehouse"].astype(str)
+            transfer_df["Transfer_Quantity"] = pd.to_numeric(
+                transfer_df.get("pkg_quantity", transfer_df.get("Pkg_Quantity", 0)),
+                errors="coerce",
+            ).fillna(0).astype(int)
+            transfer_inbound_map = (
+                transfer_df.groupby(["Year_Month", "to_warehouse"])["Transfer_Quantity"]
+                .sum()
+                .to_dict()
+            )
+        else:
+            transfer_inbound_map = {}
+
+        outbound_items = stats["outbound_result"].get("outbound_items", [])
+        outbound_df = pd.DataFrame(outbound_items)
+
+        if not outbound_df.empty:
+            outbound_df = outbound_df.copy()
+            if "Year_Month" not in outbound_df.columns:
+                outbound_df["Outbound_Date"] = pd.to_datetime(
+                    outbound_df.get("Outbound_Date"), errors="coerce"
+                )
+                outbound_df["Year_Month"] = outbound_df["Outbound_Date"].dt.strftime("%Y-%m")
+            outbound_df["Year_Month"] = outbound_df["Year_Month"].astype(str)
+            outbound_df["From_Location"] = outbound_df["From_Location"].astype(str)
+            outbound_df["Pkg_Quantity"] = pd.to_numeric(
+                outbound_df.get("Pkg_Quantity", outbound_df.get("pkg_quantity", 0)),
+                errors="coerce",
+            ).fillna(0).astype(int)
+            outbound_map = (
+                outbound_df.groupby(["Year_Month", "From_Location"])["Pkg_Quantity"]
+                .sum()
+                .to_dict()
+            )
+        else:
+            outbound_map = {}
+
         for month_str in month_strings:
             row = [month_str]  # 첫 번째 컬럼: 입고월
 
-            #  Stage-1 정규화 순서 기반 창고 목록 사용
-            warehouses = list(self.calculator.warehouse_columns)
-            warehouse_display_names = list(self.calculator.warehouse_columns)
-
             inbound_values = []
+            for warehouse in warehouses:
+                key = (month_str, warehouse)
+                inbound_count = external_inbound_map.get(key, 0)
+                inbound_count += transfer_inbound_map.get(key, 0)
 
-            # 입고 계산 (순수 입고 + 창고간 이동 입고)
-            for i, warehouse in enumerate(warehouses):
-                inbound_count = 0
+                inbound_values.append(int(inbound_count))
+                row.append(int(inbound_count))
 
-                # 1. 순수 입고 (external_arrival)
-                for item in stats["inbound_result"].get("inbound_items", []):
-                    if (
-                        item.get("Warehouse") == warehouse
-                        and item.get("Year_Month") == month_str
-                        and item.get("Inbound_Type") == "external_arrival"
-                    ):
-                        inbound_count += item.get("Pkg_Quantity", 1)
-
-                # 2. 창고간 이동 입고 (키 이름 폴백)
-                for transfer in stats["inbound_result"].get("warehouse_transfers", []):
-                    if (
-                        transfer.get("to_warehouse") == warehouse
-                        and transfer.get("Year_Month") == month_str
-                    ):
-                        pkg_qty = transfer.get("pkg_quantity") or transfer.get("Pkg_Quantity", 1)
-                        inbound_count += pkg_qty
-
-                inbound_values.append(inbound_count)
-                row.append(inbound_count)
-
-            # 출고 계산 (창고간 이동 출고 + 현장 이동 출고)
             outbound_values = []
-            for i, warehouse in enumerate(warehouses):
-                outbound_count = 0
+            for warehouse in warehouses:
+                key = (month_str, warehouse)
+                outbound_count = outbound_map.get(key, 0)
 
-                # 창고간 이동 출고 (키 이름 폴백)
-                for transfer in stats["inbound_result"].get("warehouse_transfers", []):
-                    if (
-                        transfer.get("from_warehouse") == warehouse
-                        and transfer.get("Year_Month") == month_str
-                    ):
-                        pkg_qty = transfer.get("pkg_quantity") or transfer.get("Pkg_Quantity", 1)
-                        outbound_count += pkg_qty
-
-                # 창고→현장 출고 (키 이름 폴백)
-                for item in stats["outbound_result"].get("outbound_items", []):
-                    if (
-                        item.get("From_Location") == warehouse
-                        and item.get("Year_Month") == month_str
-                    ):
-                        pkg_qty = item.get("Pkg_Quantity") or item.get("pkg_quantity", 1)
-                        outbound_count += pkg_qty
-
-                outbound_values.append(outbound_count)
-                row.append(outbound_count)
+                outbound_values.append(int(outbound_count))
+                row.append(int(outbound_count))
 
             # 누계 열 추가
             row.append(sum(inbound_values))  # 누계_입고
