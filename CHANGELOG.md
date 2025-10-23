@@ -5,6 +5,23 @@ All notable changes to the HVDC Pipeline project will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.25] - 2025-10-24
+
+### 🐛 Fixed
+
+#### 창고_월별_입출고 계산 수정
+- **Problem**: 창고_월별_입출고 시트의 데이터가 대부분 0으로 표시
+  - 벡터화 입고 계산에서 Inbound_Type 필드 누락
+  - create_warehouse_monthly_sheet()에서 조건 미충족
+- **Solution**: _calculate_warehouse_inbound_vectorized()에 Inbound_Type 명시적 설정
+- **Result**: 
+  - 입고 데이터 정상 표시
+  - 창고별/월별 집계 정확성 확보
+  - 입고_DHL WH: 0 → 408
+  - 입고_DSV Indoor: 0 → 2360
+  - 입고_DSV Outdoor: 0 → 2846
+  - 입고_MOSB: 0 → 2286
+
 ## [4.0.24] - 2025-10-23
 
 ### 🔧 Fixed
