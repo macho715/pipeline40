@@ -227,18 +227,18 @@ def _get_sqm_with_source(row):
 def _calculate_stack_status(df: pd.DataFrame, stack_col: str = "Stack") -> pd.Series:
     """
     Stack 컬럼 텍스트를 파싱하여 Stack_Status 반환
-    
+
     Args:
         df: 입력 DataFrame
         stack_col: Stack 컬럼명 (기본: "Stack")
-        
+
     Returns:
         Stack_Status Series (정수 또는 None)
     """
     if stack_col not in df.columns:
         logger.warning(f"[WARN] '{stack_col}' 컬럼이 없습니다. Stack_Status를 None으로 설정합니다.")
         return pd.Series([None] * len(df), index=df.index)
-    
+
     # core.data_parser 사용
     return df[stack_col].apply(parse_stack_status)
 
@@ -246,29 +246,29 @@ def _calculate_stack_status(df: pd.DataFrame, stack_col: str = "Stack") -> pd.Se
 def _calculate_total_sqm(df: pd.DataFrame) -> pd.Series:
     """
     Total sqm = SQM × PKG 계산
-    
+
     Args:
         df: PKG, SQM 컬럼이 있는 DataFrame
-        
+
     Returns:
         Total sqm Series
     """
     result = pd.Series([None] * len(df), index=df.index, dtype=float)
-    
+
     # 필수 컬럼 확인
     required_cols = ["Pkg", "SQM"]
     missing_cols = [col for col in required_cols if col not in df.columns]
-    
+
     if missing_cols:
         logger.warning(f"[WARN] Total sqm 계산에 필요한 컬럼 누락: {missing_cols}")
         return result
-    
+
     # 계산: SQM × PKG
     for idx in df.index:
         try:
             pkg = df.loc[idx, "Pkg"]
             sqm = df.loc[idx, "SQM"]
-            
+
             # 모든 값이 유효한 경우에만 계산
             if pd.notna(pkg) and pd.notna(sqm) and pkg > 0 and sqm > 0:
                 result.loc[idx] = round(sqm * pkg, 2)
@@ -277,7 +277,7 @@ def _calculate_total_sqm(df: pd.DataFrame) -> pd.Series:
         except Exception as e:
             logger.debug(f"[DEBUG] Total sqm 계산 오류 (idx={idx}): {e}")
             result.loc[idx] = None
-    
+
     return result
 
 
@@ -3362,23 +3362,48 @@ class HVDCExcelReporterFinal:
 
         # 통합 데이터 처리
         combined_normalized = normalize_header_names_for_stage3(combined_original)
-        
+
         # ✅ Stage 3 신규 컬럼 추가 (통합 데이터에만)
         logger.info("\n[INFO] Stage 3 신규 컬럼 계산 중...")
-        
+
         # Stack_Status 계산
         combined_normalized["Stack_Status"] = _calculate_stack_status(combined_normalized, "Stack")
         stack_parsed = combined_normalized["Stack_Status"].notna().sum()
         logger.info(f"  - Stack_Status 파싱 완료: {stack_parsed}개")
-        
+
         # Total sqm 계산
         combined_normalized["Total sqm"] = _calculate_total_sqm(combined_normalized)
         total_sqm_calculated = combined_normalized["Total sqm"].notna().sum()
         logger.info(f"  - Total sqm 계산 완료: {total_sqm_calculated}개")
-        
+
+        # 🔍 디버그: 컬럼 추가 후 상태 확인
+        logger.info(f"\n[DEBUG] 컬럼 추가 후 combined_normalized 상태:")
+        logger.info(f"  - 총 컬럼 수: {len(combined_normalized.columns)}")
+        logger.info(f"  - 'Total sqm' 존재: {'Total sqm' in combined_normalized.columns}")
+        logger.info(f"  - 'Stack_Status' 존재: {'Stack_Status' in combined_normalized.columns}")
+        logger.info(f"  - 'SQM' 존재: {'SQM' in combined_normalized.columns}")
+
         combined_reordered = reorder_dataframe_columns(
             combined_normalized, is_stage2=False, use_semantic_matching=True
         )
+
+        # 🔍 디버그: 재정렬 후 상태 확인
+        logger.info(f"\n[DEBUG] 컬럼 재정렬 후 combined_reordered 상태:")
+        logger.info(f"  - 총 컬럼 수: {len(combined_reordered.columns)}")
+        logger.info(f"  - 'Total sqm' 존재: {'Total sqm' in combined_reordered.columns}")
+        logger.info(f"  - 'Stack_Status' 존재: {'Stack_Status' in combined_reordered.columns}")
+        logger.info(f"  - 'SQM' 존재: {'SQM' in combined_reordered.columns}")
+
+        # 🔍 디버그: 누락된 컬럼 확인
+        missing_cols = []
+        if "Total sqm" not in combined_reordered.columns:
+            missing_cols.append("Total sqm")
+        if "Stack_Status" not in combined_reordered.columns:
+            missing_cols.append("Stack_Status")
+        if missing_cols:
+            logger.warning(f"[WARN] 재정렬 후 누락된 컬럼: {missing_cols}")
+        else:
+            logger.info("[SUCCESS] 모든 신규 컬럼이 재정렬 후에도 유지됨")
 
         # SQM/Stack_Status 검증
         print("\n[INFO] 통합_원본데이터_Fixed SQM/Stack 검증:")
@@ -3396,10 +3421,88 @@ class HVDCExcelReporterFinal:
             f" 통합 데이터 헤더 매칭률: {compatibility['matching_rate']:.1f}% ({compatibility['matched_columns']}/{compatibility['total_columns']}개)"
         )
 
+        # 🔍 디버그: Excel 저장 전 최종 상태 확인
+        logger.info(f"\n[DEBUG] Excel 저장 전 combined_reordered 최종 상태:")
+        logger.info(f"  - 총 컬럼 수: {len(combined_reordered.columns)}")
+        logger.info(f"  - 'Total sqm' 존재: {'Total sqm' in combined_reordered.columns}")
+        logger.info(f"  - 'Stack_Status' 존재: {'Stack_Status' in combined_reordered.columns}")
+        logger.info(f"  - 'SQM' 존재: {'SQM' in combined_reordered.columns}")
+
+        # 🔍 디버그: Total sqm과 Stack_Status 값 확인
+        if "Total sqm" in combined_reordered.columns:
+            total_sqm_count = combined_reordered["Total sqm"].notna().sum()
+            logger.info(f"  - Total sqm 유효값 개수: {total_sqm_count}")
+        if "Stack_Status" in combined_reordered.columns:
+            stack_status_count = combined_reordered["Stack_Status"].notna().sum()
+            logger.info(f"  - Stack_Status 유효값 개수: {stack_status_count}")
+
+        # 🔍 디버그: Excel 저장 직전 최종 검증
+        logger.info(f"\n[DEBUG] Excel 저장 직전 최종 검증:")
+        logger.info(f"  - combined_reordered 컬럼 수: {len(combined_reordered.columns)}")
+        logger.info(f"  - 마지막 5개 컬럼: {list(combined_reordered.columns[-5:])}")
+
+        # 🔍 디버그: Excel 저장 전 컬럼명 검증
+        logger.info(f"\n[DEBUG] Excel 저장 전 컬럼명 검증:")
+        logger.info(f"  - Total sqm 컬럼명: {repr('Total sqm')}")
+        logger.info(f"  - Stack_Status 컬럼명: {repr('Stack_Status')}")
+        logger.info(f"  - Total sqm in columns: {'Total sqm' in combined_reordered.columns}")
+        logger.info(f"  - Stack_Status in columns: {'Stack_Status' in combined_reordered.columns}")
+
+        # 🔍 디버그: 문제가 될 수 있는 컬럼명 확인
+        problem_cols = []
+        for col in combined_reordered.columns:
+            if any(char in col for char in ["\n", "\r", "\t", "\x00"]):
+                problem_cols.append(f"'{col}' (contains special chars)")
+        if problem_cols:
+            logger.warning(f"[WARN] 문제가 될 수 있는 컬럼명: {problem_cols}")
+
         #  FIX: 수정된 원본 데이터 시트들 (표준 헤더 순서 적용)
         hitachi_reordered.to_excel(writer, sheet_name="HITACHI_원본데이터_Fixed", index=False)
         siemens_reordered.to_excel(writer, sheet_name="SIEMENS_원본데이터_Fixed", index=False)
-        combined_reordered.to_excel(writer, sheet_name="통합_원본데이터_Fixed", index=False)
+
+        # 🔍 디버그: combined_reordered 저장 전 최종 확인
+        logger.info(f"\n[DEBUG] combined_reordered Excel 저장 직전:")
+        logger.info(f"  - 컬럼 수: {len(combined_reordered.columns)}")
+        logger.info(
+            f"  - Total sqm 위치: {list(combined_reordered.columns).index('Total sqm') if 'Total sqm' in combined_reordered.columns else 'NOT FOUND'}"
+        )
+        logger.info(
+            f"  - Stack_Status 위치: {list(combined_reordered.columns).index('Stack_Status') if 'Stack_Status' in combined_reordered.columns else 'NOT FOUND'}"
+        )
+
+        # 🔍 디버그: Excel 저장 전 최종 컬럼 검증
+        logger.info(f"\n[DEBUG] Excel 저장 전 최종 컬럼 검증:")
+        logger.info(f"  - combined_reordered 컬럼 수: {len(combined_reordered.columns)}")
+        logger.info(f"  - Total sqm 존재: {'Total sqm' in combined_reordered.columns}")
+        logger.info(f"  - Stack_Status 존재: {'Stack_Status' in combined_reordered.columns}")
+        logger.info(
+            f"  - Total sqm 위치: {list(combined_reordered.columns).index('Total sqm') if 'Total sqm' in combined_reordered.columns else 'NOT FOUND'}"
+        )
+        logger.info(
+            f"  - Stack_Status 위치: {list(combined_reordered.columns).index('Stack_Status') if 'Stack_Status' in combined_reordered.columns else 'NOT FOUND'}"
+        )
+
+        # 🔍 디버그: Excel 저장 시도
+        try:
+            # Excel 저장 시 컬럼 제한 확인
+            logger.info(f"[DEBUG] Excel 저장 시도: {len(combined_reordered.columns)}개 컬럼")
+            combined_reordered.to_excel(writer, sheet_name="통합_원본데이터_Fixed", index=False)
+            logger.info("[SUCCESS] Excel 저장 완료")
+        except Exception as e:
+            logger.error(f"[ERROR] Excel 저장 실패: {e}")
+            # 컬럼명 문제일 수 있으므로 컬럼명을 안전하게 변경
+            safe_df = combined_reordered.copy()
+            safe_df.columns = [
+                str(col).replace(" ", "_").replace(".", "_") for col in safe_df.columns
+            ]
+            safe_df.to_excel(writer, sheet_name="통합_원본데이터_Fixed", index=False)
+            logger.info("[FALLBACK] 안전한 컬럼명으로 Excel 저장 완료")
+
+        # 🔍 디버그: Excel 저장 후 검증
+        logger.info(f"\n[DEBUG] Excel 저장 후 검증:")
+        logger.info(f"  - combined_reordered 컬럼 수: {len(combined_reordered.columns)}")
+        logger.info(f"  - 'Total sqm' 존재: {'Total sqm' in combined_reordered.columns}")
+        logger.info(f"  - 'Stack_Status' 존재: {'Stack_Status' in combined_reordered.columns}")
 
         logger.info(f" 표준 헤더 순서 적용 완료: {len(combined_reordered.columns)}개 컬럼")
 
