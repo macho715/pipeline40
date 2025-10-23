@@ -2229,9 +2229,16 @@ class CorrectedWarehouseIOCalculator:
         rates = self.warehouse_sqm_rates
         wh_cols = [w for w in self.warehouse_columns if w in df.columns]
 
+        if not wh_cols:
+            logger.warning("일할 과금 계산을 위한 창고 컬럼이 없습니다.")
+            return {}
+
         # 1. Melt로 방문 기록을 long format으로 변환
-        visits = df.melt(
-            id_vars=df.index.to_series().rename("row_id"),
+        df_with_index = df.copy()
+        df_with_index["row_id"] = df_with_index.index
+
+        visits = df_with_index.melt(
+            id_vars=["row_id"],
             value_vars=wh_cols,
             var_name="loc",
             value_name="dt",
@@ -2340,11 +2347,18 @@ class CorrectedWarehouseIOCalculator:
         """청크 단위 일할 과금 처리"""
         passthrough_amounts = passthrough_amounts or {}
         rates = self.warehouse_sqm_rates
+        chunk_df = chunk_df.copy()
         wh_cols = [w for w in self.warehouse_columns if w in chunk_df.columns]
 
+        if not wh_cols:
+            logger.warning("청크 일할 과금 계산을 위한 창고 컬럼이 없습니다.")
+            return {}
+
         # 1. Melt로 방문 기록을 long format으로 변환
+        chunk_df["row_id"] = chunk_df.index
+
         visits = chunk_df.melt(
-            id_vars=chunk_df.index.to_series().rename("row_id"),
+            id_vars=["row_id"],
             value_vars=wh_cols,
             var_name="loc",
             value_name="dt",

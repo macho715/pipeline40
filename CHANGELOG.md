@@ -5,6 +5,18 @@ All notable changes to the HVDC Pipeline project will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.19] - 2025-10-23
+
+### 🛠️ Fixed
+
+- **Stage 3 월별 과금 벡터화 오류 수정**
+  - `melt()` 함수에 인덱스가 `id_vars`로 전달되면서 발생한 KeyError 해결
+  - 창고 방문 시계열을 전개하기 전 `row_id` 보조 컬럼을 명시적으로 주입하여 안정성 확보
+  - 벡터화 경로와 병렬 청크 처리 경로 모두에 동일한 패치를 적용하여 일관성 보장
+
+### 📚 Documentation
+- `docs/common/STAGE3_USER_GUIDE.md`: 패치 하이라이트 추가 (KR/EN 병기)
+
 ## [4.0.18] - 2025-10-23
 
 ### 🚀 STACK.MD 기반 SQM 및 Stack_Status 최적화
