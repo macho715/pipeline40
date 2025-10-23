@@ -130,7 +130,7 @@ STAGE2_HEADER_ORDER = [
     "POD",
     "ETD/ATD",
     "ETA/ATA",
-    "no",  # 소문자 no (점 없음) - Stage 2에 존재
+    # "no" 제거됨 - 26번째에 DHL WH이 옴
     "DHL WH",
     "DSV Indoor",
     "DSV Al Markaz",
@@ -552,13 +552,15 @@ def validate_sqm_stack_presence(df: pd.DataFrame) -> dict:
     if result["sqm_present"]:
         result["sqm_calculated_count"] = df["SQM"].notna().sum()
         sqm_percentage = (result["sqm_calculated_count"] / len(df) * 100) if len(df) > 0 else 0
-        logger.info(f"[SUCCESS] SQM: {result['sqm_calculated_count']}개 계산됨 ({sqm_percentage:.1f}%)")
+        logger.info(
+            f"[SUCCESS] SQM: {result['sqm_calculated_count']}개 계산됨 ({sqm_percentage:.1f}%)"
+        )
         if result["sqm_calculated_count"] == 0:
             result["warnings"].append("SQM 컬럼은 존재하지만 계산된 값이 없습니다.")
     else:
         result["warnings"].append("[ERROR] SQM 컬럼이 존재하지 않습니다.")
         logger.warning("SQM 컬럼이 존재하지 않습니다.")
-    
+
     if result["stack_status_present"]:
         result["stack_parsed_count"] = df["Stack_Status"].notna().sum()
         stack_percentage = (result["stack_parsed_count"] / len(df) * 100) if len(df) > 0 else 0

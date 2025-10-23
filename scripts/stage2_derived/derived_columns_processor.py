@@ -359,6 +359,11 @@ def process_derived_columns(
     print("\n[INFO] Stage 2 헤더명 정규화 중...")
     df = normalize_header_names_for_stage2(df)
 
+    # ✅ 중복 'no' 컬럼 제거 (26번째 위치)
+    if 'no' in df.columns and 'no.' in df.columns:
+        df = df.drop(columns=['no'], errors='ignore')
+        print("[INFO] 중복 'no' 컬럼 제거 완료 (no. 유지)")
+
     # ✅ SQM/Stack 계산 검증 추가
     print("\n[INFO] SQM/Stack 계산 최종 검증:")
     validation = validate_sqm_stack_presence(df)
