@@ -52,6 +52,18 @@ from .column_definitions import (
     WAREHOUSE_COLUMNS,
     WH_HANDLING_COLUMN,
 )
+
+# 유연한 헤더 검색 기능을 위한 import
+import sys
+
+sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+
+from core.standard_header_order import (
+    reorder_dataframe_columns,
+    validate_sqm_stack_presence,
+    normalize_header_names_for_stage2,
+    analyze_header_compatibility,
+)
 from .stack_and_sqm import add_sqm_and_stack, get_sqm_with_fallback
 
 SITE_COLUMN_LOOKUP = {col.lower() for col in SITE_COLUMNS}
@@ -342,6 +354,38 @@ def process_derived_columns(
     print(f"원본 데이터 로드 완료: {len(df)}행, {len(df.columns)}컬럼")
 
     df = calculate_derived_columns(df)
+
+    # ✅ 헤더명 정규화 추가 (No → no., site  handling → site handling)
+    print("\n[INFO] Stage 2 헤더명 정규화 중...")
+    df = normalize_header_names_for_stage2(df)
+
+    # ✅ SQM/Stack 계산 검증 추가
+    print("\n[INFO] SQM/Stack 계산 최종 검증:")
+    validation = validate_sqm_stack_presence(df)
+    print(f"  - SQM 계산됨: {validation['sqm_calculated_count']}개")
+    print(f"  - Stack_Status 파싱됨: {validation['stack_parsed_count']}개")
+
+    if validation["warnings"]:
+        for warning in validation["warnings"]:
+            print(f"  {warning}")
+
+    # ✅ 헤더 호환성 분석 추가
+    print("\n[INFO] 헤더 호환성 분석 중...")
+    compatibility = analyze_header_compatibility(df, is_stage2=True)
+    print(
+        f"  - 매칭률: {compatibility['matching_rate']:.1f}% ({compatibility['matched_columns']}/{compatibility['total_columns']}개)"
+    )
+    print(f"  - 헤더 변형 감지: {compatibility['variations_detected']}개")
+
+    if compatibility["recommendations"]:
+        print("  권장사항:")
+        for rec in compatibility["recommendations"]:
+            print(f"    - {rec}")
+
+    # ✅ 표준 헤더 순서로 재정렬 추가 (유연한 검색)
+    print(f"\n[INFO] Stage 2 표준 헤더 순서로 재정렬 중 (유연한 검색)...")
+    df = reorder_dataframe_columns(df, is_stage2=True, use_semantic_matching=True)
+    print(f"  [SUCCESS] 재정렬 완료: {len(df.columns)}개 컬럼")
 
     wh_cols = [c for c in WAREHOUSE_COLUMNS if c in df.columns]
     st_cols = [c for c in SITE_COLUMNS if c in df.columns]

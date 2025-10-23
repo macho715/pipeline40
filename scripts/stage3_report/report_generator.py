@@ -24,9 +24,21 @@ Multi-Level Header: 창고 17열(누계 포함), 현장 9열
 import logging
 import os
 import re
+import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+
+# 유연한 헤더 검색 기능을 위한 import
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+
+from core.standard_header_order import (
+    reorder_dataframe_columns,
+    validate_sqm_stack_presence,
+    normalize_header_names_for_stage3,
+    analyze_header_compatibility,
+)
 
 import numpy as np
 import pandas as pd
@@ -93,11 +105,11 @@ def _check_duplicate_function(func_name: str):
 def _get_pkg(row):
     """Pkg 컬럼에서 수량을 안전하게 추출하는 헬퍼 함수"""
     pkg_value = row.get("Pkg", 1)
-    
+
     # Series인 경우 첫 번째 값 사용
     if isinstance(pkg_value, pd.Series):
         pkg_value = pkg_value.iloc[0] if len(pkg_value) > 0 else 1
-    
+
     if pd.isna(pkg_value) or pkg_value == "" or pkg_value == 0:
         return 1
     try:
@@ -3275,10 +3287,49 @@ class HVDCExcelReporterFinal:
             sqm_pivot_sheet = self.create_sqm_pivot_sheet(stats)
             sqm_pivot_sheet.to_excel(writer, sheet_name="SQM_피벗테이블", index=False)
             sample_data.to_excel(writer, sheet_name="원본_데이터_샘플", index=False)
-            #  FIX: 수정된 원본 데이터 시트들
-            hitachi_original.to_excel(writer, sheet_name="HITACHI_원본데이터_Fixed", index=False)
-            siemens_original.to_excel(writer, sheet_name="SIEMENS_원본데이터_Fixed", index=False)
-            combined_original.to_excel(writer, sheet_name="통합_원본데이터_Fixed", index=False)
+        # ✅ Stage 3 헤더명 정규화 및 표준 순서 적용
+        logger.info(" 통합_원본데이터_Fixed 시트 생성 - 유연한 헤더 검색 및 표준 순서 적용")
+
+        # HITACHI 데이터 처리
+        hitachi_normalized = normalize_header_names_for_stage3(hitachi_original)
+        hitachi_reordered = reorder_dataframe_columns(
+            hitachi_normalized, is_stage2=False, use_semantic_matching=True
+        )
+
+        # SIEMENS 데이터 처리
+        siemens_normalized = normalize_header_names_for_stage3(siemens_original)
+        siemens_reordered = reorder_dataframe_columns(
+            siemens_normalized, is_stage2=False, use_semantic_matching=True
+        )
+
+        # 통합 데이터 처리
+        combined_normalized = normalize_header_names_for_stage3(combined_original)
+        combined_reordered = reorder_dataframe_columns(
+            combined_normalized, is_stage2=False, use_semantic_matching=True
+        )
+
+        # SQM/Stack_Status 검증
+        print("\n[INFO] 통합_원본데이터_Fixed SQM/Stack 검증:")
+        validation = validate_sqm_stack_presence(combined_reordered)
+        print(f"  - SQM 계산됨: {validation['sqm_calculated_count']}개")
+        print(f"  - Stack_Status 파싱됨: {validation['stack_parsed_count']}개")
+
+        if validation["warnings"]:
+            for warning in validation["warnings"]:
+                print(f"  {warning}")
+
+        # 헤더 호환성 분석
+        compatibility = analyze_header_compatibility(combined_reordered, is_stage2=False)
+        logger.info(
+            f" 통합 데이터 헤더 매칭률: {compatibility['matching_rate']:.1f}% ({compatibility['matched_columns']}/{compatibility['total_columns']}개)"
+        )
+
+        #  FIX: 수정된 원본 데이터 시트들 (표준 헤더 순서 적용)
+        hitachi_reordered.to_excel(writer, sheet_name="HITACHI_원본데이터_Fixed", index=False)
+        siemens_reordered.to_excel(writer, sheet_name="SIEMENS_원본데이터_Fixed", index=False)
+        combined_reordered.to_excel(writer, sheet_name="통합_원본데이터_Fixed", index=False)
+
+        logger.info(f" 표준 헤더 순서 적용 완료: {len(combined_reordered.columns)}개 컬럼")
 
         # 저장 후 검증
         try:
