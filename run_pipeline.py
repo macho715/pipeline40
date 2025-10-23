@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-HVDC 파이프라인 통합 실행 스크립트 v4.0.27
-HVDC Pipeline Integrated Execution Script v4.0.27
+HVDC 파이프라인 통합 실행 스크립트 v4.0.25
+HVDC Pipeline Integrated Execution Script v4.0.25
 
 전체 파이프라인을 하나의 명령으로 실행할 수 있는 통합 스크립트입니다.
 최신 개선: 창고_월별_입출고 계산 수정, SCT Ref.No 위치 최적화, Excel 컬럼 보존
@@ -141,7 +141,7 @@ def configure_logging(pipeline_config: Dict) -> None:
 def print_banner():
     """파이프라인 시작 배너를 출력합니다."""
     print("\n" + "=" * 80)
-    print("HVDC PIPELINE v4.0.27")
+    print("HVDC PIPELINE v4.0.25")
     print("   Samsung C&T Logistics | ADNOC-DSV Partnership")
     print("=" * 80)
     print("Execution Stages:")
