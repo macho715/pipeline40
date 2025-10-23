@@ -93,6 +93,11 @@ def _check_duplicate_function(func_name: str):
 def _get_pkg(row):
     """Pkg 컬럼에서 수량을 안전하게 추출하는 헬퍼 함수"""
     pkg_value = row.get("Pkg", 1)
+    
+    # Series인 경우 첫 번째 값 사용
+    if isinstance(pkg_value, pd.Series):
+        pkg_value = pkg_value.iloc[0] if len(pkg_value) > 0 else 1
+    
     if pd.isna(pkg_value) or pkg_value == "" or pkg_value == 0:
         return 1
     try:
