@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 >nul
 echo ========================================
-echo HVDC 파이프라인 v4.0.17 - Stage 3 벡터화 최적화
+echo HVDC 파이프라인 v4.0.25
 echo Samsung C&T Logistics | ADNOC-DSV
 echo ========================================
 echo.

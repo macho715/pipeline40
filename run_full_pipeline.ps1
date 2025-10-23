@@ -9,7 +9,7 @@ param(
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "HVDC 파이프라인 v4.0.17 - Stage 3 벡터화 최적화" -ForegroundColor Cyan
+Write-Host "HVDC 파이프라인 v4.0.25" -ForegroundColor Cyan
 Write-Host "Samsung C&T Logistics | ADNOC-DSV" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""

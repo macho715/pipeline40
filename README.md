@@ -1,10 +1,67 @@
-# HVDC Pipeline v4.0.22
+# HVDC Pipeline v4.0.25
 
 **Samsung C&T Logistics | ADNOC·DSV Partnership**
 
 통합된 HVDC 파이프라인으로 데이터 동기화부터 이상치 탐지까지 전체 프로세스를 자동화합니다.
 
-## 🚀 최근 업데이트 (v4.0.22 - Stage 3 Total sqm 계산)
+## 🚀 최근 업데이트 (v4.0.25 - 창고_월별_입출고 계산 수정)
+
+### 창고_월별_입출고 시트 데이터 정상화 (2025-10-24)
+- **Problem**: 창고_월별_입출고 시트의 데이터가 대부분 0으로 표시
+  - 벡터화 입고 계산에서 Inbound_Type 필드 누락
+  - create_warehouse_monthly_sheet()에서 조건 미충족
+- **Solution**: _calculate_warehouse_inbound_vectorized()에 Inbound_Type 명시적 설정
+- **Result**: 입고 데이터 정상 표시
+  - 입고_DHL WH: 0 → 408
+  - 입고_DSV Indoor: 0 → 2,360
+  - 입고_DSV Outdoor: 0 → 2,846
+  - 입고_MOSB: 0 → 2,286
+
+**주요 기능**:
+- 벡터화 함수에 Inbound_Type="external_arrival" 명시적 설정
+- 창고별/월별 집계 정확성 확보
+- 입고 데이터 정상화로 월별 분석 가능
+
+**테스트 결과**: 10개 창고 모두 정상 입고 데이터 표시 ✅
+
+## 이전 업데이트 (v4.0.24 - SCT Ref.No 컬럼 위치 수정)
+
+### SCT Ref.No 컬럼 위치 최적화 (2025-10-23)
+- **Problem**: SCT Ref.No가 65번째 위치에 있어서 찾기 어려움
+- **Solution**: STANDARD_HEADER_ORDER에서 SCT Ref.No를 4번째 위치로 이동
+- **Result**: 
+  - 1. no.
+  - 2. Shipment Invoice No.
+  - 3. SCT Ref.No ← 이동 완료
+  - 4. Site
+
+**주요 기능**:
+- 컬럼 순서 일관성 확보
+- Stage 2와 Stage 3 헤더 순서 통일
+- 데이터 접근성 향상
+
+**검증 결과**: 66개 컬럼, SCT Ref.No 3번째 위치 ✅
+
+## 이전 업데이트 (v4.0.23 - Stage 3 Excel 컬럼 보존)
+
+### Stage 3 Excel 컬럼 누락 문제 해결 (2025-10-23)
+- **Problem**: Stage 3 실행 시 Stack_Status, Total sqm 컬럼이 DataFrame에는 존재하지만 Excel 파일에서 누락
+  - DataFrame: 66개 컬럼 (Total sqm, Stack_Status 포함)
+  - Excel 출력: 64개 컬럼 (Total sqm, Stack_Status 누락)
+  - 근본 원인: 닫힌 ExcelWriter 컨텍스트 밖에서 to_excel() 호출
+- **Solution**: 모든 시트를 단일 ExcelWriter 컨텍스트 안에서 저장
+  - scripts/stage3_report/report_generator.py 재구성
+  - SQM 관련 시트를 사전 계산 (writer 컨텍스트 밖)
+  - 모든 to_excel() 호출을 단일 with pd.ExcelWriter() 블록 안으로 이동
+
+**주요 기능**:
+- DataFrame과 Excel 파일 간 데이터 무결성 보장
+- 모든 66개 컬럼이 Excel 파일에 정상 저장
+- 창고 적재 효율 분석 가능 (Total sqm = SQM × PKG)
+
+**테스트 결과**: 66개 컬럼 모두 Excel 저장 완료 ✅
+
+## 이전 업데이트 (v4.0.22 - Stage 3 Total sqm 계산)
 
 ### 📊 Stage 3 Total sqm 계산 로직 추가 (2025-10-23)
 - **신규 컬럼 추가**: Stage 3 통합_원본데이터_Fixed 시트에 `Stack_Status`, `Total sqm` 추가
@@ -457,6 +514,6 @@ tail -f logs/pipeline.log
 
 ---
 
-**버전**: v4.0.20 (헤더 관리 통합)
-**최종 업데이트**: 2025-10-23
+**버전**: v4.0.25 (창고_월별_입출고 계산 수정)
+**최종 업데이트**: 2025-10-24
 **문의**: AI Development Team
