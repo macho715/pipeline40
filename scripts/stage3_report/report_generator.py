@@ -33,7 +33,7 @@ import pandas as pd
 import yaml
 import warnings
 
-from .utils import normalize_columns, apply_column_synonyms
+from scripts.core import HEADER_MANAGER
 
 warnings.filterwarnings("ignore")
 
@@ -272,6 +272,8 @@ class CorrectedWarehouseIOCalculator:
         self.use_vectorized = use_vectorized
         self.use_parallel = use_parallel
 
+        self.header_manager = HEADER_MANAGER
+
         pipeline_config = _load_yaml_config(PIPELINE_CONFIG_PATH)
         stage2_config = _load_yaml_config(STAGE2_CONFIG_PATH)
 
@@ -314,20 +316,9 @@ class CorrectedWarehouseIOCalculator:
         )
 
         #  수정: 창고와 현장을 명확히 분리
-        self.warehouse_columns = [
-            "DHL WH",
-            "DSV Indoor",
-            "DSV Al Markaz",
-            "Hauler Indoor",
-            "DSV Outdoor",
-            "DSV MZP",
-            "HAULER",
-            "JDN MZD",
-            "MOSB",
-            "AAA Storage",
-        ]
+        self.warehouse_columns = self.header_manager.get_canonical_locations("warehouse_location")
 
-        self.site_columns = ["AGI", "DAS", "MIR", "SHU"]
+        self.site_columns = self.header_manager.get_canonical_locations("site_location")
 
         #  수정: 위치 우선순위 (타이브레이커용)
         self.location_priority = {
@@ -497,8 +488,7 @@ class CorrectedWarehouseIOCalculator:
                 logger.info(f" HITACHI 데이터 로드: {self.hitachi_file}")
                 hitachi_data = pd.read_excel(self.hitachi_file, engine="openpyxl")
                 # [패치] 컬럼명 정규화 및 동의어 매핑
-                hitachi_data.columns = normalize_columns(hitachi_data.columns)
-                hitachi_data = apply_column_synonyms(hitachi_data)
+                hitachi_data = self.header_manager.prepare_dataframe(hitachi_data)
                 hitachi_data["Vendor"] = "HITACHI"
                 hitachi_data["Source_File"] = "HITACHI(HE)"
 
@@ -538,8 +528,7 @@ class CorrectedWarehouseIOCalculator:
                 logger.info(f" SIMENSE 데이터 로드: {self.simense_file}")
                 simense_data = pd.read_excel(self.simense_file, engine="openpyxl")
                 # [패치] 컬럼명 정규화 및 동의어 매핑
-                simense_data.columns = normalize_columns(simense_data.columns)
-                simense_data = apply_column_synonyms(simense_data)
+                simense_data = self.header_manager.prepare_dataframe(simense_data)
                 simense_data["Vendor"] = "SIMENSE"
                 simense_data["Source_File"] = "SIMENSE(SIM)"
 
@@ -576,8 +565,7 @@ class CorrectedWarehouseIOCalculator:
             if combined_dfs:
                 self.combined_data = pd.concat(combined_dfs, ignore_index=True, sort=False)
                 # [패치] 컬럼명 정규화 및 동의어 매핑 (통합 데이터)
-                self.combined_data.columns = normalize_columns(self.combined_data.columns)
-                self.combined_data = apply_column_synonyms(self.combined_data)
+                self.combined_data = self.header_manager.prepare_dataframe(self.combined_data)
                 self.total_records = len(self.combined_data)
 
                 #  FIX: 통합 후 누락 컬럼 재확인
@@ -594,6 +582,21 @@ class CorrectedWarehouseIOCalculator:
 
                 if missing_warehouses:
                     logger.warning(f" 누락된 창고 컬럼들이 빈 값으로 추가됨: {missing_warehouses}")
+
+                inferred_locations = self.header_manager.infer_location_columns(self.combined_data)
+                detected_warehouses = inferred_locations.get("warehouse", [])
+                detected_sites = inferred_locations.get("site", [])
+
+                if detected_warehouses:
+                    self.warehouse_columns = detected_warehouses
+                if detected_sites:
+                    self.site_columns = detected_sites
+
+                logger.info(
+                    " 동적 위치 컬럼 감지 결과 - 창고: %s, 현장: %s",
+                    self.warehouse_columns,
+                    self.site_columns,
+                )
 
                 logger.info(f" 데이터 결합 완료: {self.total_records}건")
             else:
@@ -2229,9 +2232,16 @@ class CorrectedWarehouseIOCalculator:
         rates = self.warehouse_sqm_rates
         wh_cols = [w for w in self.warehouse_columns if w in df.columns]
 
+        if not wh_cols:
+            logger.warning("일할 과금 계산을 위한 창고 컬럼이 없습니다.")
+            return {}
+
         # 1. Melt로 방문 기록을 long format으로 변환
-        visits = df.melt(
-            id_vars=df.index.to_series().rename("row_id"),
+        df_with_index = df.copy()
+        df_with_index["row_id"] = df_with_index.index
+
+        visits = df_with_index.melt(
+            id_vars=["row_id"],
             value_vars=wh_cols,
             var_name="loc",
             value_name="dt",
@@ -2340,11 +2350,18 @@ class CorrectedWarehouseIOCalculator:
         """청크 단위 일할 과금 처리"""
         passthrough_amounts = passthrough_amounts or {}
         rates = self.warehouse_sqm_rates
+        chunk_df = chunk_df.copy()
         wh_cols = [w for w in self.warehouse_columns if w in chunk_df.columns]
 
+        if not wh_cols:
+            logger.warning("청크 일할 과금 계산을 위한 창고 컬럼이 없습니다.")
+            return {}
+
         # 1. Melt로 방문 기록을 long format으로 변환
+        chunk_df["row_id"] = chunk_df.index
+
         visits = chunk_df.melt(
-            id_vars=chunk_df.index.to_series().rename("row_id"),
+            id_vars=["row_id"],
             value_vars=wh_cols,
             var_name="loc",
             value_name="dt",
@@ -2936,8 +2953,8 @@ class HVDCExcelReporterFinal:
             level_0 = ["입고월"]  # 첫 번째 컬럼
             level_1 = [""]
 
-            # 입고 4개 현장 (가이드 순서)
-            sites = ["AGI", "DAS", "MIR", "SHU"]
+            # 입고 현장 컬럼 (동적 감지 순서)
+            sites = list(self.calculator.site_columns)
             for site in sites:
                 level_0.append("입고")
                 level_1.append(site)

@@ -70,6 +70,7 @@ class HeaderDefinition:
     description: str = ""
     required: bool = False
     data_type: str = "str"  # str, int, float, datetime, bool
+    groups: Set[str] = field(default_factory=set)
 
     def matches_any_alias(self, normalized_name: str) -> bool:
         """
@@ -296,6 +297,7 @@ class HeaderRegistry:
                     description=desc,
                     required=False,
                     data_type="datetime",
+                    groups={"location", "warehouse_location"},
                 )
             )
 
@@ -319,6 +321,7 @@ class HeaderRegistry:
                     description=desc,
                     required=False,
                     data_type="datetime",
+                    groups={"location", "site_location"},
                 )
             )
 
@@ -625,6 +628,24 @@ class HeaderRegistry:
         """
         definition = self.get_definition(semantic_key)
         return definition.aliases
+
+    def get_definitions_by_group(self, group: str) -> List[HeaderDefinition]:
+        """지정된 그룹에 속한 헤더 정의를 반환합니다. / Return header definitions belonging to the group."""
+
+        return [definition for definition in self.definitions.values() if group in definition.groups]
+
+    def get_semantic_keys_by_group(self, group: str) -> List[str]:
+        """그룹에 속한 semantic key 목록을 제공합니다. / Provide semantic keys registered under a group."""
+
+        return [definition.semantic_key for definition in self.get_definitions_by_group(group)]
+
+    def get_preferred_alias(self, semantic_key: str) -> str:
+        """Semantic key의 대표 표기를 반환합니다. / Return the preferred alias for a semantic key."""
+
+        definition = self.get_definition(semantic_key)
+        if definition.aliases:
+            return definition.aliases[0]
+        return definition.semantic_key.replace("_", " ").title()
 
     def get_by_category(self, category: HeaderCategory) -> List[HeaderDefinition]:
         """

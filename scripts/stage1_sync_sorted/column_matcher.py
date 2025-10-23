@@ -1,70 +1,24 @@
-# -*- coding: utf-8 -*-
-"""
-컬럼명 유연한 매칭을 위한 유틸리티 모듈
-"""
+"""Stage 1 컬럼 매칭 헬퍼로 Core 헤더 매니저를 래핑합니다. / Stage 1 column matching helpers backed by the core header manager."""
 
-import re
-from typing import List, Optional
+from __future__ import annotations
+
+from typing import Iterable, Optional
+
 import pandas as pd
 
-
-def normalize_column_name(col_name: str) -> str:
-    """
-    컬럼명을 정규화하여 비교 가능한 형태로 변환
-
-    변환 규칙:
-    - 소문자로 변환
-    - 점(.), 공백, 특수문자 제거
-    - 연속된 공백을 단일 공백으로
-
-    예시:
-    "No." -> "no"
-    "No" -> "no"
-    " NO. " -> "no"
-    "Case No." -> "caseno"
-    "CASE_NO" -> "caseno"
-    """
-    # 소문자 변환
-    normalized = str(col_name).lower()
-    # 특수문자 및 공백 제거 (알파벳과 숫자만 남김)
-    normalized = re.sub(r"[^a-z0-9]", "", normalized)
-
-    # 특정 패턴 정규화
-    if normalized == "casenumber":
-        normalized = "caseno"
-    elif normalized == "estimatedarrival":
-        normalized = "eta"
-    elif normalized == "estimateddeparture":
-        normalized = "etd"
-    return normalized
+from scripts.core import HEADER_MANAGER, HeaderManager
 
 
-def find_column_flexible(df: pd.DataFrame, target_names: List[str]) -> Optional[str]:
-    """
-    DataFrame에서 target_names 중 하나와 일치하는 컬럼명을 찾음
+_MEANING_TO_SEMANTIC = {
+    "no": "item_number",
+    "caseno": "case_number",
+    "eta": "eta_ata",
+    "etd": "etd_atd",
+    "qty": "quantity",
+    "description": "description",
+}
 
-    Args:
-        df: DataFrame
-        target_names: 찾고자 하는 컬럼명 리스트 (예: ['no', 'number', 'num'])
-
-    Returns:
-        일치하는 실제 컬럼명 또는 None
-    """
-    # 타겟 컬럼명 정규화
-    normalized_targets = [normalize_column_name(name) for name in target_names]
-
-    # DataFrame의 모든 컬럼명 정규화 및 매핑
-    column_map = {normalize_column_name(col): col for col in df.columns}
-
-    # 일치하는 컬럼 찾기
-    for target in normalized_targets:
-        if target in column_map:
-            return column_map[target]
-
-    return None
-
-
-# 주요 컬럼명 매핑 테이블
+# 유지: 레거시 의미 매핑 (핫픽스 호환). / Legacy alias groups kept for backward compatibility.
 COLUMN_ALIASES = {
     "no": ["no", "num", "number", "index", "id"],
     "caseno": ["caseno", "case", "casenumber", "casenum"],
@@ -76,29 +30,57 @@ COLUMN_ALIASES = {
 }
 
 
+def _manager() -> HeaderManager:
+    """공유 헤더 매니저를 반환합니다. / Return the shared header manager."""
+
+    return HEADER_MANAGER
+
+
+def normalize_column_name(col_name: str) -> str:
+    """컬럼명을 매칭 토큰으로 정규화합니다. / Normalize a column label into a matching token."""
+
+    return _manager().normalize_token(col_name)
+
+
+def find_column_flexible(df: pd.DataFrame, target_names: Iterable[str]) -> Optional[str]:
+    """여러 후보명을 대상으로 컬럼을 찾습니다. / Find a column among multiple alias candidates."""
+
+    manager = _manager()
+    cleaned_columns = manager.clean_columns(df.columns)
+    column_map = {
+        manager.normalize_token(cleaned): original
+        for cleaned, original in zip(cleaned_columns, df.columns)
+    }
+
+    for candidate in target_names:
+        normalized_candidate = manager.normalize_token(candidate)
+        if normalized_candidate in column_map:
+            return column_map[normalized_candidate]
+    return None
+
+
 def find_column_by_meaning(df: pd.DataFrame, meaning: str) -> Optional[str]:
-    """
-    의미를 기반으로 컬럼 찾기
+    """의미 기반으로 컬럼을 탐색합니다. / Locate a column based on its semantic meaning."""
 
-    Args:
-        df: DataFrame
-        meaning: 컬럼의 의미 (예: 'no', 'caseno', 'eta')
+    manager = _manager()
+    semantic_key = _MEANING_TO_SEMANTIC.get(meaning)
 
-    Returns:
-        일치하는 실제 컬럼명 또는 None
-    """
+    if semantic_key:
+        matched = manager.find_column(df, semantic_key)
+        if matched:
+            return matched
+
     if meaning in COLUMN_ALIASES:
         return find_column_flexible(df, COLUMN_ALIASES[meaning])
+
     return find_column_flexible(df, [meaning])
 
 
 def test_column_matcher():
-    """
-    컬럼 매처 함수들의 테스트
-    """
+    """단위 테스트를 수행합니다. / Execute ad-hoc unit tests."""
+
     print("=== 컬럼명 정규화 테스트 ===")
 
-    # 테스트할 컬럼명 변형들
     test_cases = [
         ("No", "no"),
         ("No.", "no"),
@@ -118,7 +100,6 @@ def test_column_matcher():
 
     print("\n=== 컬럼 검색 테스트 ===")
 
-    # 테스트 DataFrame 생성
     test_df = pd.DataFrame(
         {
             "No": [1, 2, 3],
@@ -128,15 +109,12 @@ def test_column_matcher():
         }
     )
 
-    # NO 컬럼 찾기 테스트
     no_col = find_column_flexible(test_df, ["no", "number", "num", "index"])
     print(f"NO 컬럼 찾기: {no_col}")
 
-    # Case No. 컬럼 찾기 테스트
     case_col = find_column_by_meaning(test_df, "caseno")
     print(f"Case No. 컬럼 찾기: {case_col}")
 
-    # ETA 컬럼 찾기 테스트
     eta_col = find_column_by_meaning(test_df, "eta")
     print(f"ETA 컬럼 찾기: {eta_col}")
 

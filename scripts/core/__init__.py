@@ -17,6 +17,7 @@ from .header_detector import HeaderDetector, detect_header_row
 from .header_normalizer import HeaderNormalizer, normalize_header
 from .semantic_matcher import SemanticMatcher, find_header_by_meaning
 from .header_registry import HeaderRegistry, HVDC_HEADER_REGISTRY, HeaderCategory, HeaderDefinition
+from .header_manager import HeaderManager, HEADER_MANAGER, get_header_manager
 
 __version__ = "1.0.0"
 __all__ = [
@@ -30,4 +31,7 @@ __all__ = [
     "HVDC_HEADER_REGISTRY",
     "HeaderCategory",
     "HeaderDefinition",
+    "HeaderManager",
+    "HEADER_MANAGER",
+    "get_header_manager",
 ]
