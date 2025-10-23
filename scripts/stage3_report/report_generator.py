@@ -3335,7 +3335,7 @@ class HVDCExcelReporterFinal:
             self.report_output_dir
             / f"HVDC_입고로직_종합리포트_{self.timestamp}_v3.0-corrected.xlsx"
         )
-        
+
         # ✅ Stage 3 헤더명 정규화 및 표준 순서 적용
         logger.info(" 통합_원본데이터_Fixed 시트 생성 - 유연한 헤더 검색 및 표준 순서 적용")
 
@@ -3452,9 +3452,7 @@ class HVDCExcelReporterFinal:
             warehouse_monthly_with_headers.to_excel(
                 writer, sheet_name="창고_월별_입출고", index=True
             )
-            site_monthly_with_headers.to_excel(
-                writer, sheet_name="현장_월별_입고재고", index=True
-            )
+            site_monthly_with_headers.to_excel(writer, sheet_name="현장_월별_입고재고", index=True)
             flow_analysis.to_excel(writer, sheet_name="Flow_Code_분석", index=False)
             transaction_summary.to_excel(writer, sheet_name="전체_트랜잭션_요약", index=False)
             kpi_validation_df.to_excel(writer, sheet_name="KPI_검증_결과", index=False)
@@ -3464,12 +3462,8 @@ class HVDCExcelReporterFinal:
             sample_data.to_excel(writer, sheet_name="원본_데이터_샘플", index=False)
 
             #  FIX: 수정된 원본 데이터 시트들 (표준 헤더 순서 적용)
-            hitachi_reordered.to_excel(
-                writer, sheet_name="HITACHI_원본데이터_Fixed", index=False
-            )
-            siemens_reordered.to_excel(
-                writer, sheet_name="SIEMENS_원본데이터_Fixed", index=False
-            )
+            hitachi_reordered.to_excel(writer, sheet_name="HITACHI_원본데이터_Fixed", index=False)
+            siemens_reordered.to_excel(writer, sheet_name="SIEMENS_원본데이터_Fixed", index=False)
 
             # 🔍 디버그: combined_reordered 저장 전 최종 확인
             logger.info(f"\n[DEBUG] combined_reordered Excel 저장 직전:")
@@ -3496,24 +3490,17 @@ class HVDCExcelReporterFinal:
             # 🔍 디버그: Excel 저장 시도
             try:
                 # Excel 저장 시 컬럼 제한 확인
-                logger.info(
-                    f"[DEBUG] Excel 저장 시도: {len(combined_reordered.columns)}개 컬럼"
-                )
-                combined_reordered.to_excel(
-                    writer, sheet_name="통합_원본데이터_Fixed", index=False
-                )
+                logger.info(f"[DEBUG] Excel 저장 시도: {len(combined_reordered.columns)}개 컬럼")
+                combined_reordered.to_excel(writer, sheet_name="통합_원본데이터_Fixed", index=False)
                 logger.info("[SUCCESS] Excel 저장 완료")
             except Exception as e:
                 logger.error(f"[ERROR] Excel 저장 실패: {e}")
                 # 컬럼명 문제일 수 있으므로 컬럼명을 안전하게 변경
                 safe_df = combined_reordered.copy()
                 safe_df.columns = [
-                    str(col).replace(" ", "_").replace(".", "_")
-                    for col in safe_df.columns
+                    str(col).replace(" ", "_").replace(".", "_") for col in safe_df.columns
                 ]
-                safe_df.to_excel(
-                    writer, sheet_name="통합_원본데이터_Fixed", index=False
-                )
+                safe_df.to_excel(writer, sheet_name="통합_원본데이터_Fixed", index=False)
                 logger.info("[FALLBACK] 안전한 컬럼명으로 Excel 저장 완료")
 
         # 🔍 디버그: Excel 저장 후 검증

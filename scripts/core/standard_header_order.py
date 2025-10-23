@@ -29,6 +29,7 @@ STANDARD_HEADER_ORDER = [
     "no.",
     "Shipment Invoice No.",
     "HVDC CODE",  # Stage 3에서 추가
+    "SCT Ref.No",  # 4번째 위치로 이동
     "Site",
     "EQ No",
     "Case No.",
@@ -108,7 +109,7 @@ STANDARD_HEADER_ORDER = [
 STAGE2_HEADER_ORDER = [
     "no.",
     "Shipment Invoice No.",
-    "SCT Ref.No",  # Stage 2에만 있음
+    "SCT Ref.No",  # 3번째 위치
     "Site",
     "EQ No",
     "Case No.",
