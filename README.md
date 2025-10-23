@@ -1,10 +1,27 @@
-# HVDC Pipeline v4.0.16
+# HVDC Pipeline v4.0.20
 
 **Samsung C&T Logistics | ADNOC·DSV Partnership**
 
 통합된 HVDC 파이프라인으로 데이터 동기화부터 이상치 탐지까지 전체 프로세스를 자동화합니다.
 
-## 🚀 최근 업데이트 (v4.0.17 - Stage 3 벡터화 최적화)
+## 🚀 최근 업데이트 (v4.0.20 - 헤더 관리 통합)
+
+### 🔧 헤더 관리 로직 Core 통합 (2025-10-23)
+- **중앙 집중식 관리**: 헤더 정규화 로직을 core 모듈로 통합
+- **코드 중복 제거**: Stage별 중복 로직 완전 제거
+- **일관성 향상**: 모든 Stage에서 동일한 헤더 처리 규칙
+- **유지보수성**: 한 곳만 수정하면 모든 Stage 자동 적용
+- **DRY 원칙**: 단일 책임 원칙 준수
+
+**주요 개선사항**:
+- normalize_header_names_for_stage2/3() 함수에 중복 'no' 컬럼 제거 로직 통합
+- derived_columns_processor.py에서 중복 로직 제거 (4줄 코드 정리)
+- 모든 Stage에서 core 함수만 호출하여 일관된 헤더 처리
+
+**관련 문서**:
+- [헤더 관리 통합 보고서](docs/reports/centralized-header-management-report.md) - 상세 구현 내역
+
+### 이전 업데이트 (v4.0.17 - Stage 3 벡터화 최적화)
 
 ### ⚡ Stage 3 벡터화 최적화 (2025-10-23)
 - **🚀 82% 성능 개선**: Stage 3 실행 시간 155초 → 28초 (82% 개선)
@@ -416,6 +433,6 @@ tail -f logs/pipeline.log
 
 ---
 
-**버전**: v4.0.17 (Stage 3 벡터화 최적화)
+**버전**: v4.0.20 (헤더 관리 통합)
 **최종 업데이트**: 2025-10-23
 **문의**: AI Development Team
