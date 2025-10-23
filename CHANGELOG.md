@@ -5,6 +5,20 @@ All notable changes to the HVDC Pipeline project will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.28] - 2025-10-24
+
+### 🔄 Reverted
+
+#### PATCH3.MD 롤백 (v4.0.27 revert)
+- **Problem**: PATCH3.MD 적용 후 입고 데이터가 부정확 (6개만 집계)
+  - 입고 필터링(`Inbound_Type == "external_arrival"`)이 너무 엄격
+  - 창고 재고가 음수로 계산됨 (-268)
+- **Solution**: Git revert로 v4.0.26 상태로 복원
+- **Result**:
+  - 누계_입고: 6 → 5,517 (정상 복원)
+  - 창고 재고: -268 → 4,923 (실제 재고와 일치)
+  - 창고 월별 입출고 데이터 정확도 회복
+
 ## [4.0.26] - 2025-10-24
 
 ### 🐛 Fixed
